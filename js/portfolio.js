@@ -74,7 +74,7 @@ add_item(
 //title
 "Wireless Robot with Arm",
 //description
-"Over Christmas break last year I was bored, so I decided to make a robot! I started with metal and continuous servo motors from old robotics parts. I added a robotic arm, which I received from my uncle years ago. I controlled the electronics using an Arduino UNO, eight relays, and two battery packs. The battery packs provided power to the drive wheels and the robotic arm. To control this wirelessly, I used an XBee shield as a USB interface. I programmed the Arduino in Python using a Pygame library to read user input from a USB Playstation controller. It interpreted the data and sent serial commands via a pyFirmata library to control the Arduino. I routed the controller's axes for a tank drive setup to vary PWM motor commands. The joystick's buttons controlled movement of the robotic arm and toggled an LED. I had some difficulties with power consumption at first, but ultimately, I got it to work before Christmas break was over!\
+"Over Christmas break I was bored, so I decided to make a robot! I started with metal and continuous servo motors from old robotics parts. I added a robotic arm, which I received from my uncle years ago. I controlled the electronics using an Arduino UNO, eight relays, and two battery packs. The battery packs provided power to the drive wheels and the robotic arm. To control this wirelessly, I used an XBee shield as a USB interface. I programmed the Arduino in Python using a Pygame library to read user input from a USB Playstation controller. It interpreted the data and sent serial commands via a pyFirmata library to control the Arduino. I routed the controller's axes for a tank drive setup to vary PWM motor commands. The joystick's buttons controlled movement of the robotic arm and toggled an LED. I had some difficulties with power consumption at first, but ultimately, I got it to work before Christmas break was over!\
 <br><br>\
 I added additional metal to the frame as a cell phone holder. Placing my phone in the stand and Skyping from my computer allowed me to drive the robot beyond my field of vision.",
 //image
@@ -98,9 +98,127 @@ add_item(
 "Ethan Weber"
 );
 
+add_item(
+//title
+"Homemade Radio Controlled Boat",
+//description
+"This is a fun project I created my freshman year. I wanted to create a boat, but I didn't want it to just drift forward; I wanted to maneuver it remotely. At the time, I didn't know much about wireless communication, so I disassembled a broken radio controlled car to learn more. I ended up using the RC receiver to control the fin in the back via a motor that moved left or right depending on user input. This allowed for steering. The thrust, on the other hand, was supplied by using a fan blade on a dowel connected to the drill. This pushed the boat forward or backward, just like an actual propeller does. After completing the electronics, I fastened them onto the watertight, wooden boat that I made from scratch. For a boat made of parts found in my house, it worked very well.",
+//image
+"img/rc_boat.jpg",
+//date
+"Spring 2013",
+//creator
+"Ethan Weber"
+);
 
+add_item(
+//title
+"Breathe-Through Pillow",
+//description
+"Why can't I sleep face down at night without suffocating? I can sleep on my side or back easily, but if I want to sleep on my stomach I must crank my head to one side and endure the pain. There must be a better way. In my never-ending quest to find ways to make life better, I set out to create a breathe-through pillow. I had just learned sewing in middle school, so my grandma and I sewed a pillow with a hole in the middle. I then inserted plastic from the neck of a juice bottle into the hole. After completion, I quickly found out that this prototype was not user friendly. It was extremely uncomfortable, and furthermore, it didn't even provide a passage for air. The hole pressed directly into the mattress! What was I thinking!? I then created a second version (this time with breathing tubes), but it needed many improvements as well. Without a doubt, this project goes down as one of my top \"failures.\" At least I can keep this project in mind when I'm thinking about what NOT to do.",
+//image
+"img/breathe-through_pillow.jpg",
+//date
+"Summer 2012",
+//creator
+"Ethan Weber"
+);
 
+add_item(
+//title
+"Jet-Ski Fishing Pole Holder and Livewell",
+//description
+"I've been fishing many times with my father, and we would troll for fish, meaning we would put many lines in the water, move the boat forward slowly, and wait for fish to bite. This seemed like the ideal way to fish, but I wanted to try it by myself on a jet-ski. To do this, I needed something to hold the fishing poles and the catpured fish. My parents let me use an old cooler. I cut PVC pipes (to hold the fishing poles) and screwed them into the side of the cooler, making sure to keep it waterproof. I also added some eye hook bolts for attaching the cooler securely to the jet-ski with hook clips. The cooler was used as a livewell to hold the fish. This invention allowed me to put multiple fishing lines in the lake and troll for fish on my jet-ski. Unfortunately, the fish must not have liked the invention because I never actually caught any--but it was still fun to make!",
+//image
+"img/jet-ski_pole_holder_livewell.jpg",
+//date
+"Summer 2012",
+//creator
+"Ethan Weber"
+);
 
+add_item(
+//title
+"Automatic Dog Feeder",
+//description
+"In my family of five people, it's hard to remember whose turn it is to feed the dog. To solve this problem, I created an automatic dog feeder. In the top of the wood-constructed device, there is a hopper that can be filled with dog food. The food is routed into a funnel that extends down into a cross-section with an auger bit extending through it. I attached the auger bit with a drill (powered by a 12V power supply) to turn the auger at certain times in order to drop food into a dish below. The structure was very large (not convenient for indoor use) and it was never completely automated because I didn't have an Arduino at the time. We didn't end up using it very much. However, I proved the idea and had a working prototype that dispensed food with the flip of a switch. I'd like to create a more efficient version in the future.",
+//image
+"img/dog_feeder.jpg",
+//date
+"Summer 2011",
+//creator
+"Ethan Weber"
+);
+
+add_item(
+//title
+"Biology Timeline LED Display",
+//description
+"My biology teacher told my class to make a timeline of the Earth's history. He handed out long strips of paper, but I wanted a challenge, so I asked to do it with electronics. I was inspired to create a device similar to those at museums where you can touch a metal button, prompting a corresponding LED to light up and indicate the answer. I created a wooden, folding case with holes (for LEDs) spaced relative to Earth's history. I drilled more holes and inserted labelled tacks to create a conductive surface. Behind the scenes, I created a common ground for each LED. After lots of wiring, I got it to work in just one weekend. When the screwdriver (attached to the common ground as well) touched a labeled tack, the correct LED lit up indicating the year in the timeline. It was powered by one 9V battery. I added handles to the top of my creation, folded it up, and was ready to bring my suitcase-looking device to school. It was much more fun than doing it on paper!",
+//image
+"img/biology_timeline.jpg",
+//date
+"2012-2013",
+//creator
+"Ethan Weber"
+);
+
+add_item(
+//title
+"Infrared Remote Controlled Robot",
+//description
+"Many years ago, my uncle gave me a hexapod robot that could move with the flip of a switch. It was pretty cool at the time, but that was back in sixth grade. When I got older, I realized that I could \"hack\" it to make it better. I stripped it of its previous electronics and equipped it with an Arduino Uno, IR sensor, RGB LED, piezo buzzer, and two 9V batteries. After programming my Arduino to decode infrared signals received by an IR remote, I could control the robot movement, the LED colors, and the sounds. This project taught me valuable skills in decoding and producing infrared messages. I look forward to applying these skills in future projects.",
+//image
+"img/ir_robot.jpg",
+//date
+"2014",
+//creator
+"Ethan Weber"
+);
+
+add_item(
+//title
+"Infrared Remote Controlled Robot",
+//description
+"Because my family and I didn't enjoy sitting on cold leather chairs, we decided to cover our recliners with blankets. The blankets kept falling to the floor, so I decided to create a \"blanket stabilizer\" to hold them in place. The device was meant to hold the loose ends of the blanket that was wrapped around the chair. An adjustable cord ran underneath the chair's base to stabilize the device. I built it with two clamps, joining them together with metal strips to maximize grip area (as pictured). I then glued on a fabric cover to provide protection and to blend in with the blanket's color. My idea seemed good at the time, but upon completion, I realized it wasn't helpful; it actually made the problem worse! This project was not successful, but I still learned from it. I'm including it here to demonstrate my persistence in taking my ideas to the test without fear of \"failure.\"",
+//image
+"img/blanket_stabilizer.jpg",
+//date
+"2012",
+//creator
+"Ethan Weber"
+);
+
+add_item(
+//title
+"ROS-MultiMaster-App",
+//description
+"While doing research in an MIT robotics lab focussing on using multiple robots to accomplish \
+high-level tasks, there was need for an application that could easily synchronize ROS \
+messages across computers. Welcome the ROS-MultiMaster-App! We created the \
+ROS-MultiMaster-App as an easy-to-use web application to synchronize ROS topics and \
+services throughout multiple computers--each running their own roscore--on the same \
+network. Check it out at <a style=\"font-weight: bold\" href=\"https://github.com/ethanweber/ros-multimaster-app\">this repository</a> on my GitHub account.",
+//image
+"img/ros-multimaster-app.png",
+//date
+"2017",
+//creator
+"Ethan Weber"
+);
+
+add_item(
+//title
+"LED Matrix High School Graduation Cap",
+//description
+"This is my New Holstein High School graduation cap using a 32 x 32 RGB LED matrix controlled by a Raspberry Pi 2. Check it out on YouTube <a style=\"font-weight: bold\" href=\"https://www.youtube.com/watch?v=dShCYXGweCg\">here</a>.",
+//image
+"img/high_school_grad_cap.jpg",
+//date
+"2017",
+//creator
+"Ethan Weber"
+);
 
 
 

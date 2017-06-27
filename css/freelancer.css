@@ -238,7 +238,11 @@ section.success {
 @media (min-width: 767px) {
   #portfolio .portfolio-item {
     margin: 0 0 30px;
+    opacity: 1;
   }
+  /*#portfolio .portfolio-item .portfolio-link .caption:hover {
+    opacity: 1;
+  }*/
 }
 .floating-label-form-group {
   position: relative;

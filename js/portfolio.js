@@ -178,7 +178,7 @@ add_item(
 
 add_item(
 //title
-"Infrared Remote Controlled Robot",
+"Blanket Stabilizer",
 //description
 "Because my family and I didn't enjoy sitting on cold leather chairs, we decided to cover our recliners with blankets. The blankets kept falling to the floor, so I decided to create a \"blanket stabilizer\" to hold them in place. The device was meant to hold the loose ends of the blanket that was wrapped around the chair. An adjustable cord ran underneath the chair's base to stabilize the device. I built it with two clamps, joining them together with metal strips to maximize grip area (as pictured). I then glued on a fabric cover to provide protection and to blend in with the blanket's color. My idea seemed good at the time, but upon completion, I realized it wasn't helpful; it actually made the problem worse! This project was not successful, but I still learned from it. I'm including it here to demonstrate my persistence in taking my ideas to the test without fear of \"failure.\"",
 //image

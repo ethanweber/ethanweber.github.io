@@ -174,11 +174,12 @@ header .intro-text .skills {
   }
 }
 section {
-  padding: 100px 0;
+  padding: 50px 0;
 }
 section h2 {
   margin: 0;
   font-size: 3em;
+  margin-bottom: 15px;
 }
 section.success {
   background: #5d8aa8;
@@ -186,10 +187,10 @@ section.success {
 }
 @media (max-width: 767px) {
   section {
-    padding: 75px 0;
+    padding: 30px 0;
   }
   section.first {
-    padding-top: 75px;
+    padding-top: 30px;
   }
 }
 #portfolio .portfolio-item {
@@ -264,6 +265,15 @@ section.success {
   margin: auto;
   width: 90%;
   height: auto;
+}
+
+#contact {
+  background-color: #5d8aa8;
+  margin-bottom: 10px;
+}
+
+#contact a {
+  color: white;
 }
 
 .floating-label-form-group {

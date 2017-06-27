@@ -213,7 +213,7 @@ section.success {
   -moz-transition: all ease 0.5s;
 }
 #portfolio .portfolio-item .portfolio-link .caption:hover {
-  opacity: 1;
+  opacity: .9;
 }
 #portfolio .portfolio-item .portfolio-link .caption .caption-content {
   position: absolute;
@@ -238,11 +238,12 @@ section.success {
 @media (min-width: 767px) {
   #portfolio .portfolio-item {
     margin: 0 0 30px;
-    opacity: 1;
   }
-  /*#portfolio .portfolio-item .portfolio-link .caption:hover {
-    opacity: 1;
-  }*/
+}
+@media (max-width: 500px) {
+  #portfolio .portfolio-item .portfolio-link .caption {
+    opacity: .9;
+  }
 }
 .floating-label-form-group {
   position: relative;

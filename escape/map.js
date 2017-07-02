@@ -6,33 +6,68 @@ var info = [];
 function load_from_spreadsheet() {
   // var my_data = httpGet("https://docs.google.com/spreadsheets/d/1HCFLANKyy4zEaFinmDFI0tTmK-sdJPzZJAH4AniBnjo/pub?output=csv");
 
-  $.get("https://docs.google.com/spreadsheets/d/1HCFLANKyy4zEaFinmDFI0tTmK-sdJPzZJAH4AniBnjo/pub?output=csv", function(data, status){
-      // alert("Data: " + data + "\nStatus: " + status);
-      var my_data = data;
+  $.ajax({
+      type: "GET",
+      url: 'https://docs.google.com/spreadsheets/d/1HCFLANKyy4zEaFinmDFI0tTmK-sdJPzZJAH4AniBnjo/pub?output=csv',
+      async:true,
+      crossDomain:true,
+      success: function(data, status, xhr) {
+          // alert(data);
+          var my_data = data;
 
-      var matrix = [];
+          var matrix = [];
 
-      var columns = my_data.split('\n');
-      console.log(columns);
-      for (var i = 0; i < columns.length; i++) {
-        matrix.push(columns[i].split(','));
+          var columns = my_data.split('\n');
+          console.log(columns);
+          for (var i = 0; i < columns.length; i++) {
+            matrix.push(columns[i].split(','));
+          }
+          console.log(matrix);
+
+          //create dictionary
+          for (var i = 1; i < matrix.length; i++ ) {
+            var my_current_dictionary = {};
+            for (var j = 0; j < matrix[0].length; j++ ) {
+              var current_key = matrix[0][j];
+              console.log(current_key);
+              my_current_dictionary[current_key] = matrix[i][j];
+            }
+            info.push(my_current_dictionary);
+          }
+          console.log(info);
+
+          initMap();
+
       }
-      console.log(matrix);
-
-      //create dictionary
-      for (var i = 1; i < matrix.length; i++ ) {
-        var my_current_dictionary = {};
-        for (var j = 0; j < matrix[0].length; j++ ) {
-          var current_key = matrix[0][j];
-          console.log(current_key);
-          my_current_dictionary[current_key] = matrix[i][j];
-        }
-        info.push(my_current_dictionary);
-      }
-      console.log(info);
-
-      initMap();
   });
+
+  // $.get("https://docs.google.com/spreadsheets/d/1HCFLANKyy4zEaFinmDFI0tTmK-sdJPzZJAH4AniBnjo/pub?output=csv", function(data, status){
+  //     // alert("Data: " + data + "\nStatus: " + status);
+  //     var my_data = data;
+  //
+  //     var matrix = [];
+  //
+  //     var columns = my_data.split('\n');
+  //     console.log(columns);
+  //     for (var i = 0; i < columns.length; i++) {
+  //       matrix.push(columns[i].split(','));
+  //     }
+  //     console.log(matrix);
+  //
+  //     //create dictionary
+  //     for (var i = 1; i < matrix.length; i++ ) {
+  //       var my_current_dictionary = {};
+  //       for (var j = 0; j < matrix[0].length; j++ ) {
+  //         var current_key = matrix[0][j];
+  //         console.log(current_key);
+  //         my_current_dictionary[current_key] = matrix[i][j];
+  //       }
+  //       info.push(my_current_dictionary);
+  //     }
+  //     console.log(info);
+  //
+  //     initMap();
+  // });
 }
 
 $(document).ready(function(){

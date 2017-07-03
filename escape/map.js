@@ -4,7 +4,6 @@ var points = [];
 var info = [];
 
 function load_from_spreadsheet() {
-  // var my_data = httpGet("https://docs.google.com/spreadsheets/d/1HCFLANKyy4zEaFinmDFI0tTmK-sdJPzZJAH4AniBnjo/pub?output=csv");
 
   $.ajax({
       type: "GET",
@@ -40,34 +39,6 @@ function load_from_spreadsheet() {
 
       }
   });
-
-  // $.get("https://docs.google.com/spreadsheets/d/1HCFLANKyy4zEaFinmDFI0tTmK-sdJPzZJAH4AniBnjo/pub?output=csv", function(data, status){
-  //     // alert("Data: " + data + "\nStatus: " + status);
-  //     var my_data = data;
-  //
-  //     var matrix = [];
-  //
-  //     var columns = my_data.split('\n');
-  //     console.log(columns);
-  //     for (var i = 0; i < columns.length; i++) {
-  //       matrix.push(columns[i].split(','));
-  //     }
-  //     console.log(matrix);
-  //
-  //     //create dictionary
-  //     for (var i = 1; i < matrix.length; i++ ) {
-  //       var my_current_dictionary = {};
-  //       for (var j = 0; j < matrix[0].length; j++ ) {
-  //         var current_key = matrix[0][j];
-  //         console.log(current_key);
-  //         my_current_dictionary[current_key] = matrix[i][j];
-  //       }
-  //       info.push(my_current_dictionary);
-  //     }
-  //     console.log(info);
-  //
-  //     initMap();
-  // });
 }
 
 $(document).ready(function(){
@@ -75,8 +46,6 @@ $(document).ready(function(){
 });
 
 function initMap() {
-
-  // load_from_spreadsheet();
 
   var infowindow = new google.maps.InfoWindow();
   var markers = [];
@@ -98,10 +67,18 @@ function initMap() {
     + "<br><span id=\"header\">People:</span> " + info[i]['People']
     + "<br><span id=\"header\">Date:</span> " + info[i]['Date']
     + "</div>";
+
+    var icon = {
+       url: "locksmith.svg" // url
+      //  size: new google.maps.Size(30, 30), // size
+    };
+
     markers.push(new google.maps.Marker({
       position: {lat: Number(info[i]['Lat']), lng: Number(info[i]['Lon'])},
       map: map,
       title: info[i]['Title'],
+      icon: icon,
+      // size: size: new google.maps.Size(20, 32),
       // html: info[i]['Description']
       html: html_string
     }));
@@ -113,18 +90,7 @@ function initMap() {
   }
 }
 
-function httpGet(theUrl)
-{
-  // var xmlHttp = null;
-  // xmlHttp = new XMLHttpRequest();
-  // xmlHttp.open( "GET", theUrl, false );
-  // xmlHttp.withCredentials = true;
-  // xmlHttp.send( null );
-  // return xmlHttp.responseText;
-
-  // $.get(theUrl, function(data, status){
-  //     alert("Data: " + data + "\nStatus: " + status);
-  //     var value = data;
-  // });
-  // return value;
+function removeLock() {
+  document.getElementById('overlay_id').style.visibility='hidden';
+  document.getElementById('actual_id').style.visibility='visible';
 }

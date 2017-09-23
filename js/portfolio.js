@@ -21,7 +21,16 @@ add_item(
 //description
 "I have a desire to develop improvements that impact people. One idea of mine was to develop technology that enables the blind to navigate through an unknown area using a combination of GPS, object recognition, and vibration feedback. I was accepted into the University of Michigan's 36-hour hackathon (MHacks 6). I used this opportunity to prove the concept of object recognition and vibration feedback. A Microsoft Kinect V2 sensor, worn by a visually impaired person, would recognize objects on a table. The person would hear a verbal list of items and then give a voice command choosing the specific item they want to reach. I created an intuitive armband to vibrate in corresponding sections to direct the user's hand toward the object. We had some difficulties but ultimately proved our concept. Microsoft awarded us with \"Best Overall Use of Microsoft Technology.\"\
 <br><br>\
-This picture represents my project to help the visually impaired using object recognition via a Microsoft Kinect V2 and vibration feedback. My teammates worked with vision processing and databases, but I worked mainly on hardware. I created the vibration sleeve using a 5V Arduino Pro Micro, 8 NPN transistor switches, and 8 mini vibration motors all held within a sewn, stretchy material. Transistor switches (powered externally from a 9V battery) were used because the Arduino could not provide\ the amperage needed from its DIO pins. I wrote an algorithm for the Arduino to select motors and vibrate according to direction, and I implemented a Myo to change vibration when the wrist twists. The values from the Myo were read in C++ and sent via serial to the Arduino to manipulate the data by parsing numbers and characters. After finishing this, I began working on object recognition by using HAAR classifiers in OpenCV. We also used VOCE, a voice library for speech to text and text to\ speech.",
+This picture represents my project to help the visually impaired using object recognition via a Microsoft Kinect V2 and vibration feedback. \
+My teammates worked with vision processing and databases, but I worked mainly on hardware. I created the vibration sleeve using a 5V Arduino Pro Micro, 8 NPN transistor switches, and 8 mini vibration motors all held within a sewn, stretchy material. \
+Transistor switches (powered externally from a 9V battery) were used because the Arduino could not provide\ the amperage needed from its DIO pins. \
+I wrote an algorithm for the Arduino to select motors and vibrate according to direction, and I implemented a Myo to change vibration when the wrist twists. \
+The values from the Myo were read in C++ and sent via serial to the Arduino to manipulate the data by parsing numbers and characters. \
+After finishing this, I began working on object recognition by using HAAR classifiers in OpenCV. \
+We also used VOCE, a voice library for speech to text and text to\ speech. \
+<br><br>\
+Please check our MHacks submission <a href=\"https://devpost.com/software/innovation-insight\">here</a>.",
+
 //image
 "img/projects/innovation_insight.jpg",
 //date
@@ -66,6 +75,92 @@ add_item(
 "img/projects/hydraulic_crane.jpg",
 //date
 "Fall 2012",
+//creator
+"Ethan Weber"
+);
+
+add_item(
+//title
+"Jetslam Bot",
+//description
+"I've spent the summer in Detroit working with a company called Zenuity--a company creating the autonomous vehicle software for Volvo. While at the company, I found the perfect opportunity to use my NVIDIA Jetson. \
+The interns at Zenuity were assigned to a project called \"Park at Home\"--a project to formulate a solution to autonomously parking a car at home. \
+My summer roommate, Luke--also from MIT--and I decided that it would be best to make a replica of the autonomous car by creating a cart fitted with many sensors and hardware. \
+I believe that creating a live replica of a self-driving vehicle is the best way to rapidly develop software. \
+<br><br>\
+We had limited resources because Zenuity is a startup, so Luke and I created most of the cart with the hardware we had lying around at our apartment. \
+We bought a cart from Harbor Freight, and made it look this this! \
+​The cart is built with an NVIDIA Jetson TX1, a Raspberry Pi, an Arduino Uno, a 32x32 RGB LED matrix (which happens to be same one that I used on my high school grad cap), 3 USB cameras, the camera on-board the Jetson, an IMU with an accelerometer, and a Scanse Sweep 2D LIDAR. We named the cart the Jetslam Bot. \
+<br><br>\
+The goal of the cart was to demonstrate the computer vision algorithms (camera stitching, bird's eye view, line detection, etc.), occupancy grid (LIDAR data processing code), SLAM (Simultaneous Localization and Mapping), and LCM (the communication protocol we used). \
+We are using the Jetson as the computer to handle all the processes and facilitate the communication throughout the used devices. \
+The goal was to use the cart to have it create and localize itself within a map and act just like an autonomous car on a smaller scale! \
+It demonstrated the computer vision programs that I wrote over the summer summer! \
+The Jetson was a perfect way to bring together all of the code that Luke and I wrote.",
+//image
+"img/projects/jetslam_bot.JPG",
+//date
+"Summer 2017",
+//creator
+"Ethan Weber"
+);
+
+add_item(
+//title
+"AREALYTICS",
+//description
+"For places that have a large flow of human traffic throughout the days and nights, such as \
+universities and convention centers, it’s helpful for people running those institutions to have a good \
+idea of where people travel most and how they move in certain times of the days. There was no \
+efficient, simple way to accomplish this task until Arealytics came to life. Now we are able to \
+passively track people’s devices throughout various buildings and spaces. We can display this \
+information on a dashboard system tailored towards a customer’s needs: real-time data about \
+customers, max flow rates of walkways, location hotspots, and we are currently leveraging the \
+millions of data points available to create a predictive analytics solution. \
+<br><br>\
+How we accomplish this task is simple: we have reconfigured WiFi chips into a network of \
+microcontrollers that detect DNS Probe Requests. DNS probe requests are essentially signals that \
+WiFi devices broadcast out to the routers nearby with their MAC address saying, “Hey, I’m here! \
+Allow me to build a connection with you.” We store all of these probe requests by logging MAC \
+addresses, timestamps, signal strengths, and more. With this information, we can model the paths \
+that people took throughout the day. We will also provide vital information to businesses and \
+institutions about where to create new working spaces, where to perform construction, and where to \
+relocate sites to optimal locations. \
+<br><br>\
+Check out <a href=\"documents/Arealytics_Final_Report.pdf\">our report</a> for more information.",
+//image
+"img/projects/arealytics_state_machine.png",
+//date
+"Spring 2017",
+//creator
+"Ethan Weber"
+);
+
+add_item(
+//title
+"TravelAR",
+//description
+"Traveling is exciting - planning, not so much. \
+We thought about different ways to improve the vacation search process and found that visuals were key in selecting the perfect location. \
+Because of this, we created TravelAR, an augmented reality app that allows you to physically step into scenes of different cities, then find flight information if you have found your ideal travel destination.\
+<br><br>\
+TravelAR is an iOS travel application built using Apple's ARKit. \
+On opening the app, there is a camera view in the room. Upon tapping, there will be an augmented reality \"portal\" to another city, where you physically walk inside another \"room\" and view a gallery of AR scenes from the city. \
+If interested in travel information to the city, there is a pull-up information section where a user can find relevant flight details and prices. \
+<br><br>\
+We built TravelAR with Apple's iOS ARKit, a Flask server hosted with Microsoft Azure, and many APIs including the Amadeus Travel APIs, the Microsoft Bing Image Search API, and the WolframAlpha Simple API. \
+The iOS application submits a “GET” request to our Flask server hosted in the cloud with Microsoft Azure. \
+This Flask server takes in a city/location name, and it processes that string with many APIs to extract information—starting with the Amadeus Travel APIs. \
+We hit the Amadeus endpoints with our location to gather information on popular attractions nearby, flight statistics, and other general travel information. \
+We then port the “popular attractions” into the Microsoft Bing Image Search API to get a list of image urls that will be displayed in the iOS application. \
+Furthermore, we use the WolframAlpha API to get information on the population. \
+We combine all of the information with the AR to create a comprehensive visual display with helpful information. \
+<br><br>\
+Please check out a video of our project <a href=\"https://www.youtube.com/watch?v=ACneUIVByaY\">here</a> and our HackMIT submission <a href=\"https://devpost.com/software/travelar-g4sq6y\">here</a>.",
+//image
+"img/projects/travelar_image.jpg",
+//date
+"Fall 2017",
 //creator
 "Ethan Weber"
 );

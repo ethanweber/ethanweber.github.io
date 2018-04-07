@@ -118,7 +118,7 @@
               <h3>Plant Analysis</h3>
               <hr>
               <p>
-              To control this system, we first need to analyze the dynamics of the system. Based on the diagram, the only input we can control is $f$, the force on the cart. Now we need to determine how this input affects our states. To do this, we need to solve for the accelation of the $x$ and $y$. Instead of working out all of this math, I'll take the results again from Russ Tedrake's textbook. Because the class did not focus on deriving dynamics, I'll jump to the following equations. Lagrangian mechanics yeild the following result:
+              To control this system, we first need to analyze the dynamics of the system. Based on the diagram, the only input we can control is $f$, the force on the cart. Now we need to determine how this input affects our states. To do this, we need to solve for the accelation of the $x$ and $y$. Instead of working out all of this math, I'll take the results again from Russ Tedrake's textbook. Because the class did not focus on deriving dynamics, I'll jump to the following equations. Note that we are not including friction to make the anlaysis easier. Lagrangian mechanics yeild the following result:
               <br><br>
               $\ddot{x} = \frac{1}{m_c + m_p \sin^{2}{\theta}} [ f + m_p \sin{\theta} (l \dot{\theta}^{2} + g \cos{\theta}) ]$
               <br>
@@ -135,15 +135,22 @@
               <!-- asssuming that theta is small anyways -->
               $\phi^{2} \approx 0$
               <br><br>
-              With these approximations, we can now linearize by substituting these quantities. In our case, we only care about how the input $f$ relates to $\phi$, our angle. To simplify analsis, we will only linearize the second equation, the one that relates thata to the force. We will not worry about controlling the cart's acceleration or position. Linearizing results in the following:
+              With these approximations, we can now linearize by substituting these quantities. In our case, we only care about how the input $f$ relates to $\phi$, our angle. To simplify analsis, we will only linearize the second equation, the one that relates $\theta$ to the force $f$. Note that we can isolate this equation because we decided not to include friction in our analysis. Including friction would relate the equations to each other because then $f$ in the diagram would actually be $f - b \dot{x}$, where b is a positive coefficient of friction. Furthermore, we will not worry about controlling the cart's acceleration or position. Linearizing our equation of interest results in the following:
               <br><br>
-              $\ddot{\theta} = \frac{1}{l(m_c + m_p \phi^{2})} [ -f (-1) - m_p l (0) (-1) (-\phi) - (m_c+m_p) g (-\phi) ]$
+              $\ddot{\phi} = \frac{1}{l(m_c + m_p \phi^{2})} [ -f (-1) - m_p l (0) (-1) (-\phi) - (m_c+m_p) g (-\phi) ]$
               <br><br>
-              $\ddot{\theta} = \frac{1}{l m_c} [ f + (m_c+m_p) g \phi ]$
+              $\ddot{\phi} = \frac{1}{l m_c} [ f + (m_c+m_p) g \phi ]$
               <br><br>
-              Now that we have linearized about the upright, we can begin analysis of our plant. We can find the transfer functions by using the laplace transform. Although discrete control is used in practice, the laplace transform provides adaquate analyse when considering a very small timestep. Effectively control is continuous if the timestep is very small. In my case, I'm running my simulation about 0.001 seconds per step and about 0.002 seconds per step with the Teensy microcontroller in hardware. Taking the laplace transform yield the following:
+              Now that we have linearized about the upright, we can begin analysis of our plant. We can find the transfer functions by using the laplace transform. Although discrete control is used in practice, the laplace transform provides adaquate analyse when considering a very small timestep. Effectively control is continuous if the timestep is very small. In my case, I'm running my simulation about 0.001 seconds per step and about 0.002 seconds per step with the Teensy microcontroller in hardware. Replacing $f$ with our input force, which we will call $u$, and taking the laplace transform yield the following:
               <br><br>
-              $laplace$
+              $l m_c \ddot{\phi} = u + (m_c+m_p) g \phi$
+              <br><br>
+              $l m_c \ddot{\phi} - (m_c+m_p) g \phi = u$
+              <br><br>
+              $(l m_c) s^{2} \phi(s) - (m_c+m_p) g \phi(s) = u(s)$
+              <br><br>
+              $\frac{\phi(s)}{u(s)} = \frac{1}{(l m_c) s^{2} - (m_c+m_p) g} $
+              
             </div>
             <hr>
 

@@ -84,10 +84,11 @@
                         <h1 class="name">Cart Pole</h1>
                         <span class="skills">6.320 Feedback System Design Midterm Project</span>
                     </div>
+                    <br>
+                    <iframe src="https://www.youtube.com/embed/sBORE5H1rNM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
-
     </header>
 
     <!-- About Section -->
@@ -101,13 +102,13 @@
               <p>
               Media can be found here <a href="https://photos.app.goo.gl/bFDEBuxy2HDQqWJg1">here</a>.
               <br><br>
-              The cart pole is a very common system studied in the context of controls. The goal of the problem is to balance the inverted pendulum (mounted on the cartpole) in the upright, vertical location. This is a challenging problem because the upright fixed point is unstable. Furthmore, the way to correct for the angle position of the inverted pendulum is thorugh non-collocated control, meaning indirect control via the input force of the cart.
+              The cart pole is a very common system studied in the context of controls. The goal of the problem is to balance an inverted pendulum (mounted on the cartpole) in the upright, vertical location. This is a challenging problem because the upright fixed point is unstable. Furthmore, the only way to correct for the angle position of the inverted pendulum is thorugh non-collocated control, meaning indirect control via the input force of the cart. This presents a fun problem for control.
               <br><br>
-              Here is a diagram depicting the dynamics of the problem taken from <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-832-underactuated-robotics-spring-2009/readings/MIT6_832s09_read_ch03.pdf">Underactuated Robotics course notes</a>, thanks to Russ Tedrake:
+              Here is a diagram depicting the dynamics of the problem taken from Russ Tedrake's <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-832-underactuated-robotics-spring-2009/readings/MIT6_832s09_read_ch03.pdf">Underactuated Robotics course notes</a>:
               <br>
               <img src="cartpole/cartpole_diagram.png">
               <br>
-              From this diagram, it is clear that the pendulum is unstable. Furthemore, there are 4 states of the system. The states are $x, \dot x, \theta, \dot \theta$. We have the option to choose what we want to control, but for this problem we are choosing to control $\theta$. In particular, we wish to control for the desired $\theta$ at $\pi$.
+              From this diagram, it is clear that the pendulum is unstable. Furthemore, there are 4 states of the system. The states include the following: $x, \dot x, \theta, \dot \theta$. We have the option to choose what we want to control, but for this problem we are choosing to control $\theta$. In particular, we wish to control for the desired position where $\theta = \pi$ according to this diagram.
               </p>
             </div>
             <hr>
@@ -117,11 +118,32 @@
               <h3>Plant Analysis</h3>
               <hr>
               <p>
-              To control this system, we first need to analyze the dynamics of the system. Based on the diagram, the only input we can control is $f$, the force on the cart. Now we need to determine how this input affects our states. To do this, we need to solve for the accelation of the $x$ and $y$. Instead of working out all of this math, I'll again include an image from Russ Tedrake's notes.
-
-              With this information, we have a clear definition for how $f$, x acceleration, and theta acceleration are related. These dynamics provide sufficient information to begin our plan analysis. In our problem, since we only care about stablizing theta at pi, we can linearize the system at this point.
-
-              We can do this with a few approximations, and by defining theta in terms of a new quantity, phi. $\theta = \pi + \phi$
+              To control this system, we first need to analyze the dynamics of the system. Based on the diagram, the only input we can control is $f$, the force on the cart. Now we need to determine how this input affects our states. To do this, we need to solve for the accelation of the $x$ and $y$. Instead of working out all of this math, I'll take the results again from Russ Tedrake's textbook. Because the class did not focus on deriving dynamics, I'll jump to the following equations. Lagrangian mechanics yeild the following result:
+              <br><br>
+              $\ddot{x} = \frac{1}{m_c + m_p \sin^{2}{\theta}} [ f + m_p \sin{\theta} (l \dot{\theta}^{2} + g \cos{\theta}) ]$
+              <br>
+              $\ddot{\theta} = \frac{1}{l(m_c + m_p \sin^{2}{\theta})} [ -f \cos{\theta} - m_p l \dot{\theta}^{2} \cos{\theta} \sin{\theta} - (m_c+m_p) g \sin{\theta} ]$
+              <br><br>
+              With these equations, we now have a clear definition for how $f$, $\ddot{x}$, and $\ddot{\theta}$ are related. These dynamical equations provide sufficient information to begin our plant analysis. In our problem, since we only care about stablizing where $\theta = \pi$, we can linearize the system at this point. We can do this with a few approximations, and by defining theta in terms of a new quantity, phi. $\theta = \pi + \phi$ The approximations are the following:
+              <br><br>
+              $\cos \theta \approx -1$
+              <br>
+              $\sin \theta \approx -\phi$
+              <br>
+              $\dot{\theta}^{2} = \dot{\phi}^{2} \approx 0$
+              <br>
+              <!-- asssuming that theta is small anyways -->
+              $\phi^{2} \approx 0$
+              <br><br>
+              With these approximations, we can now linearize by substituting these quantities. In our case, we only care about how the input $f$ relates to $\phi$, our angle. To simplify analsis, we will only linearize the second equation, the one that relates thata to the force. We will not worry about controlling the cart's acceleration or position. Linearizing results in the following:
+              <br><br>
+              $\ddot{\theta} = \frac{1}{l(m_c + m_p \phi^{2})} [ -f (-1) - m_p l (0) (-1) (-\phi) - (m_c+m_p) g (-\phi) ]$
+              <br><br>
+              $\ddot{\theta} = \frac{1}{l m_c} [ f + (m_c+m_p) g \phi ]$
+              <br><br>
+              Now that we have linearized about the upright, we can begin analysis of our plant. We can find the transfer functions by using the laplace transform. Although discrete control is used in practice, the laplace transform provides adaquate analyse when considering a very small timestep. Effectively control is continuous if the timestep is very small. In my case, I'm running my simulation about 0.001 seconds per step and about 0.002 seconds per step with the Teensy microcontroller in hardware. Taking the laplace transform yield the following:
+              <br><br>
+              $laplace$
             </div>
             <hr>
 

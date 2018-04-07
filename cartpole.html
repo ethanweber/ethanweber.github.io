@@ -150,7 +150,20 @@
               $(l m_c) s^{2} \phi(s) - (m_c+m_p) g \phi(s) = u(s)$
               <br><br>
               $\frac{\phi(s)}{u(s)} = \frac{1}{(l m_c) s^{2} - (m_c+m_p) g} $
-              
+              <br><br>
+              $H(s) = \frac{\phi(s)}{u(s)} $
+              <br><br>
+              This result $H(s)$ relates the input force to the angle. This is the open loop transfer function for our modeled plant. We can also close the loop in the following way by using Black's formula, or the <a href="https://en.wikipedia.org/wiki/Closed-loop_transfer_function">"closed loop transfer function"</a>.
+              <br><br>
+              $G(s) = \frac{\phi(s)}{\phi_{desired}(s)} = \frac{H(s)}{1 + H(s)}$
+              <br><br>
+              For our analysis, let's set $l = .5 m$, $m_c = 5.0 kg$, $m_p = 1.0 kg$, and $g = 9.81 m / s^{2}$. Closing the loop with no control, we can graph the step response. Here is step response starting at $\phi = -.1$ subject to a step of amplitude .1 to target $\phi = 0$.
+              <br>
+              <img class="img-responsive" src="cartpole/closed_loop_no_control_step.png">
+              <br><br>
+              Clearly this is an unstable system. As soon as the pendulum is offset from $\phi = 0$, the amplitude of $\phi$ will "blow up", meaning it will become huge and far from our desired value of $\phi = 0$. However, we know that when $\phi$ starts at 0 and is subject to no step response we get the following:
+              <br>
+              <img class="img-responsive" src="cartpole/fixed_point_step_response.png">
             </div>
             <hr>
 
@@ -159,6 +172,13 @@
               <h3>PID Closed Loop</h3>
               <hr>
               <p>
+              Okay, now it's time to add some control to our unstable system. For our case, we will add PID control to stabilize the system around the fixed point. Let's contruct the plant and make sure things look good! The PID plant will take the following form.
+
+              <br><br>
+              Here is a graph of the step response with PID control with $k_p = 100.0$, $k_i = 0.0$, and $k_d 10.0$.
+              <img class="img-responsive" src="cartpole/pid_overshoot_step_response.png">
+              <br>
+              Notice that the system is now stable, but it has overshoot. This is a good sign because it means our PID controller has a chance! Now we can optimize by tweaking values to find the best step response.
               </p>
             </div>
             <hr>
@@ -177,6 +197,7 @@
               <h3>Hardware Build</h3>
               <hr>
               <p>
+              Note that our transfer function above was related to force. In the hardware build, we are not directly affecting our the force of the cart. However, we are inputing a PWM signal, which is linear in how it affects the torque of the motors, which is also linear in how it affects the force on the cart. Therefore, we do not need to change our anlysis because it only differs by a constant scalar. Thankfully DC motors cooporate well when relating to force.
               </p>
             </div>
             <hr>

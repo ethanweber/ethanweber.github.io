@@ -188,6 +188,14 @@
               <h3>Simulation Results</h3>
               <hr>
               <p>
+              Before tackling the problem in hardware, I decided to similate my results first. Using a tool called <a href="https://github.com/rdeits/meshcat-python">Meshcat</a>, a tool developed by my reseach supervisor, <a href-"http://blog.robindeits.com/pages/about.html">Robin Deits</a>, I was able to modify a cart pole in simulation to use a PID controller. By using the dynamics derived above, I created the similator. I then used the error based on having my target angle to be vertical. Ignoring the I gains, I obtained good results.
+              <br><br>
+              <img class="img-responsive" src="cartpole/meshcat_visual.png">
+              <br>
+              Here is the notebook file used to create the simulation. If you'd like to try the code yourself, use the file found <a href="https://github.com/ethanweber/meshcat-python/blob/fcf84efe80ed95ffe409d1916a8f25082571c362/CartPoleControl.ipynb">here</a>. This file contains the correct code to run the simulation. The only needed to change is in the first cell. The directory should be changed to the location specific to your computer. Jupyter Notebooks at this time don't play well with relative directories.
+              <br><br>
+              <img class="img-responsive" src="cartpole/meshcat_directory.png">
+              <br>
               </p>
             </div>
             <hr>
@@ -198,6 +206,8 @@
               <hr>
               <p>
               Note that our transfer function above was related to force. In the hardware build, we are not directly affecting our the force of the cart. However, we are inputing a PWM signal, which is linear in how it affects the torque of the motors, which is also linear in how it affects the force on the cart. Therefore, we do not need to change our anlysis because it only differs by a constant scalar. Thankfully DC motors cooporate well when relating to force.
+              <br><br>
+              With these assumptions, I began constructing the cart with a chassis comprised of 4 DC motors, a Teensy microcontroller, a Polulu motor driver used
               </p>
             </div>
             <hr>
@@ -207,6 +217,11 @@
               <h3>Software Implementation</h3>
               <hr>
               <p>
+              Here is pseudo code for the PID controller.
+              <br>
+              <script src="https://gist.github.com/ethanweber/9f29330b0f6b0cb056054f2cb1cf365a.js"></script>
+              <!-- <img src="cartpole/pid_psuedo_code.png"> -->
+              <br>
               </p>
             </div>
             <hr>

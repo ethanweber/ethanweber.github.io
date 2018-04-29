@@ -102,13 +102,13 @@
               <hr>
               <p>
               <br><br>
-              The cart pole is a very common system studied in the context of controls. The goal of the problem is to balance an inverted pendulum (mounted on the cartpole) in the upright, vertical location. This is a challenging problem because the upright fixed point is unstable. Furthmore, the only way to correct for the angle position of the inverted pendulum is thorugh non-collocated control, meaning indirect control via the input force of the cart. This presents a fun problem for control.
+              The cart pole is a very common system studied in the context of controls. The goal of the problem is to balance an inverted pendulum (mounted on the cartpole) in the upright, vertical location. This is a challenging problem because the upright fixed point is unstable. Furthmore, the only way to correct for the angle position of the inverted pendulum is through non-collocated control, meaning indirect control via the input force of the cart. This presents a fun problem in control theory.
               <br><br>
               Here is a diagram depicting the dynamics of the problem taken from Russ Tedrake's <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-832-underactuated-robotics-spring-2009/readings/MIT6_832s09_read_ch03.pdf">Underactuated Robotics course notes</a>:
               <br>
               <img src="cartpole/cartpole_diagram.png">
               <br>
-              From this diagram, it is clear that the pendulum is unstable. Furthemore, there are 4 states of the system. The states include the following: $x, \dot x, \theta, \dot \theta$. We have the option to choose what we want to control, but for this problem we are choosing to control $\theta$. In particular, we wish to control for the desired position where $\theta = \pi$ according to this diagram.
+              From this diagram, it is clear that the pendulum is unstable. Furthemore, there are 4 states of the system. The states include the following: $x, \dot x, \theta, \dot \theta$. We have the option to choose what we want to control, but for my case we are choosing to control $\theta$. In particular, we wish to control for the desired position where $\theta = \pi$ according to this diagram.
               </p>
             </div>
             <hr>
@@ -118,7 +118,7 @@
               <h3>Plant Analysis</h3>
               <hr>
               <p>
-              To control this system, we first need to analyze the dynamics of the system. Based on the diagram, the only input we can control is $f$, the force on the cart. Now we need to determine how this input affects our states. To do this, we need to solve for the accelation of the $x$ and $y$. Instead of working out all of this math, I'll take the results again from Russ Tedrake's textbook. Because the class did not focus on deriving dynamics, I'll jump to the following equations. Note that we are not including friction to make the anlaysis easier. Lagrangian mechanics yeild the following result:
+              To control this system, we first need to analyze the dynamics of the system. Based on the diagram, the only input we can control is $f$, the force on the cart. Now we need to determine how this input affects our states. To do this, we need to solve for the accelation of the $x$ and $y$. Instead of working out all of this math, I'll take the results again from Russ Tedrake's textbook. Because the class did not focus on deriving dynamics, I'll jump to the following equations. Note however that we are not including friction to make the anlaysis easier. Lagrangian mechanics yields the following result:
               <br><br>
               $\ddot{x} = \frac{1}{m_c + m_p \sin^{2}{\theta}} [ f + m_p \sin{\theta} (l \dot{\theta}^{2} + g \cos{\theta}) ]$
               <br>
@@ -141,7 +141,7 @@
               <br><br>
               $\ddot{\phi} = \frac{1}{l m_c} [ f + (m_c+m_p) g \phi ]$
               <br><br>
-              Now that we have linearized about the upright, we can begin analysis of our plant. We can find the transfer functions by using the laplace transform. Although discrete control is used in practice, the laplace transform provides adaquate analyse when considering a very small timestep. Effectively control is continuous if the timestep is very small. In my case, I'm running my simulation about 0.001 seconds per step and about 0.002 seconds per step with the Teensy microcontroller in hardware. Replacing $f$ with our input force, which we will call $u$, and taking the laplace transform yield the following:
+              Now that we have linearized about the upright, we can begin analysis of our plant. We can find the transfer functions by using the laplace transform. Although discrete control is used in practice, the laplace transform provides adaquate analyse when considering a very small timestep. Control is effectively continuous if the timestep is very small. In my case, I'm running my simulation about 0.001 seconds per step and about 0.002 seconds per step with the Teensy microcontroller in hardware. Replacing $f$ with our input force, which we will call $u$, and taking the laplace transform yield the following:
               <br><br>
               $l m_c \ddot{\phi} = u + (m_c+m_p) g \phi$
               <br><br>
@@ -164,21 +164,24 @@
               Clearly this is an unstable system. As soon as the pendulum is offset from $\phi = 0$, the amplitude of $\phi$ will "blow up", meaning it will become huge and far from our desired value of $\phi = 0$. However, we know that when $\phi$ starts at 0 and is subject to no step response we get the following:
               <br>
               <img class="img-responsive" src="cartpole/fixed_point_step_response.png">
+              <br><br>
+              <!-- We can also analyze the system with the bode plot, but it doesn't provide great insight. Here is the open loop bode plot showing the phase margin. Note that the phase margin is infinity and the magnitute in dB is always negative.
+              <img class="img-responsive" src="cartpole/open_loop_bode_plot_with_phase_margin.png"> -->
             </div>
             <hr>
 
             <!-- pid control discussion -->
             <div class="col-lg-12 text-center">
-              <h3>PID Closed Loop</h3>
+              <h3>PD Closed Loop</h3>
               <hr>
               <p>
-              Okay, now it's time to add some control to our unstable system. For our case, we will add PID control to stabilize the system around the fixed point. Let's contruct the plant and make sure things look good! The PID plant will take the following form.
+              Okay, now it's time to add some control to our unstable system. For our case, we will add PID control (proportional, integral, and derivative control) to stabilize the system around the fixed point. Let's contruct the plant and make sure things look good! The PID plant will take the following form.
 
               <br><br>
-              Here is a graph of the step response with PID control with $k_p = 100.0$, $k_i = 0.0$, and $k_d 10.0$.
+              Here is a graph of the step response with PID control with $k_p = 100.0$, $k_i = 0.0$, and $k_d 10.0$ (so technically PD control).
               <img class="img-responsive" src="cartpole/pid_overshoot_step_response.png">
               <br>
-              Notice that the system is now stable, but it has overshoot. This is a good sign because it means our PID controller has a chance! Now we can optimize by tweaking values to find the best step response.
+              Notice that the system is now stable, but it has overshoot. This is a good sign because it means our PID controller has a chance! Now we can optimize by tweaking values to find the best step response. Also, note that the I gain didn't turn out to be very useful, which is why $k_i = 0.0$ in the control. The integral error would not efficiently correct itself without overshooting (going past the unstable fixed point at the vertical), so this led to poor control.
               </p>
             </div>
             <hr>
@@ -192,7 +195,7 @@
               <br><br>
               <img class="img-responsive" src="cartpole/meshcat_visual.png">
               <br>
-              Here is the notebook file used to create the simulation. If you'd like to try the code yourself, use the file found <a href="https://github.com/ethanweber/meshcat-python/blob/fcf84efe80ed95ffe409d1916a8f25082571c362/CartPoleControl.ipynb">here</a>. This file contains the correct code to run the simulation. The only needed to change is in the first cell. The directory should be changed to the location specific to your computer. Jupyter Notebooks at this time don't play well with relative directories.
+              Here is the notebook file used to create the simulation. If you'd like to try the code yourself, use the file found <a href="https://github.com/ethanweber/meshcat-python/blob/fcf84efe80ed95ffe409d1916a8f25082571c362/CartPoleControl.ipynb">here</a>. This file contains the correct code to run the simulation. The only thing to change is in the first cell; the directory should be changed to the location specific to your computer. Jupyter Notebooks at this time don't play well with relative directories.
               <br><br>
               <img class="img-responsive" src="cartpole/meshcat_directory.png">
               <br>
@@ -205,9 +208,12 @@
               <h3>Hardware Build</h3>
               <hr>
               <p>
-              Note that our transfer function above was related to force. In the hardware build, we are not directly affecting our the force of the cart. However, we are inputing a PWM signal, which is linear in how it affects the torque of the motors, which is also linear in how it affects the force on the cart. Therefore, we do not need to change our anlysis because it only differs by a constant scalar. Thankfully DC motors cooporate well when relating to force.
+              Note that our transfer function above was related to force. In the hardware build, we are not directly affecting our the force of the cart. However, we are inputing a PWM signal, which is linear in how it affects the torque of the motors, which is also linear in how it affects the force on the cart. Therefore, we do not need to change our anlysis because it only differs by a constant scalar. Thankfully DC motors cooporate well when relating PWM input (voltage) to force.
               <br><br>
-              With these assumptions, I began constructing the cart with a chassis comprised of 4 DC motors, a Teensy microcontroller, a Polulu motor driver used
+              With these assumptions, I began constructing the cart with a chassis comprised of 4 DC motors, a Teensy microcontroller, a Polulu motor driver used in class, and various other parts seen in this picture:
+              <br><br>
+              <img class="img-responsive" src="cartpole/cart_build.png">
+              <br>
               </p>
             </div>
             <hr>
@@ -217,11 +223,24 @@
               <h3>Software Implementation</h3>
               <hr>
               <p>
-              Here is pseudo code for the PID controller.
+              Here is pseudo code for the PID controller used on the hardware. It worked quite well and as expected based on the plant analysis!
               <br>
               <script src="https://gist.github.com/ethanweber/9f29330b0f6b0cb056054f2cb1cf365a.js"></script>
-              <!-- <img src="cartpole/pid_psuedo_code.png"> -->
               <br>
+              All said and done, here it is! Unfortunately the cables were too short for a longer demonstration, but hey, it worked! :)
+              <br><br>
+              <iframe src="https://www.youtube.com/embed/sBORE5H1rNM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+              <br>
+              </p>
+            </div>
+            <hr>
+
+            <!-- final comments -->
+            <div class="col-lg-12 text-center">
+              <h3>Final Comments</h3>
+              <hr>
+              <p>
+              This was a very fun project! It was my midterm project for MIT's Feedback Systems (6.320) course. Huge shoutout to <a href="https://www.eecs.mit.edu/people/faculty/jacob-white">Professor Jacob White</a> for making projects like these possible with proper system analysis! He clearly loves working with and helping each and every student. Also shoutout to my partner <a href="https://github.com/sebLopezCot">Sebastian Lopez-Cot</a> for working with me on the project and creating his own simulation--with a CAD model!
               </p>
             </div>
             <hr>

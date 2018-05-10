@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Sleep Stages</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- This is for latex math -->
+    <script type="text/javascript" src="http://latex.codecogs.com/latexit.js"></script>
+    <script type="text/javascript">
+    LatexIT.add('p',true);
+    </script>
+
+    <!-- Theme CSS -->
+    <link href="css/freelancer.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Custom CSS -->
+    <link href="css/projects.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top" class="index">
+
+<div id="skipnav"><a href="#maincontent">Skip to main content</a></div>
+
+    <!-- Navigation -->
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="#page-top">Ethan Weber</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="index.html#about">About</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="index.html#portfolio">Portfolio</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="index.html#experience">Experience</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="index.html#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!-- Header -->
+    <header>
+
+        <div class="container" id="maincontent" tabindex="-1">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-text">
+                        <h1 class="name">Sleep Stage Detection</h1>
+                        <span class="skills">MAS.600 (Human 2.0) Final Project</span>
+                    </div>
+                    <br>
+                    <!-- <iframe src="https://www.youtube.com/embed/sBORE5H1rNM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
+                    <img width="50%" src="http://getdrawings.com/images/sleep-drawing-23.jpg">
+                </div>
+                <h5>More media can be found <a style="color:blue" href="https://photos.app.goo.gl/bFDEBuxy2HDQqWJg1">here</a></h5>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+
+            <!-- intro section -->
+            <div class="col-lg-12 text-center">
+              <h3>Introduction</h3>
+              <hr>
+              <p>
+              <br>
+              <a href="https://www.media.mit.edu/courses/human-2-0/">Human 2.0</a> is a class taught by Professor Hugh Herr in the MIT Media Lab. The goal of the class is to teach students about human augmentation devices and the potential for future (and current) technology. A large part of the class focus is to create a project with potential to augment and better understand the human body. Here I present the work done for my team project--a cheap setup for detecting sleep stages. My team draws inspiration from <a href="https://sleep.med.harvard.edu/people/faculty/220/robert+stickgold+phd">Professor Robert Stickgold</a> and his <a href="https://www.ncbi.nlm.nih.gov/pubmed/11902434">Nightcap</a> device for detecting sleep stages realtime with cheap sensors. This replaces the need for expensive and intrusive polysomnograph experiments.
+              <br><br>
+              In this writeup, I'll outline the work that I did on this project. I was most interested in creating a very cheap setup to detect sleep stages with low-cost equipment. I believe I have everything in place to do just this.
+
+              </p>
+            </div>
+            <hr>
+
+            <!-- hardware and sensor -->
+            <div class="col-lg-12 text-center">
+              <h3>Sleep Mask and Hardware</h3>
+              <hr>
+              <p>
+              My teammates (graduate students in <a href="https://www.media.mit.edu/groups/fluid-interfaces/overview/">Fluid Iterfaces</a> and <a href="https://www.media.mit.edu/groups/conformable-decoders/overview/">Conformable Decoders</a>) created the mask shown below, which is stretchy variable resistance sensor fabric sewn with conductive thread onto a sleep mask.
+              <br><br>
+              <img class="img-responsive" src="https://lh3.googleusercontent.com/ylOHuzHmredNRcke4yIUHMBc7zbEjL7RAhD7vCX6tJ_bUIZny98hwQoj4kEfeM4f3yUiVToBD2ylxNtkVaVFv-4dxzaHWiX-poMJ9NqKXMQWiXNFQQF-JaPffl_qCFGiSo8fj4h2bLuYJCE5SfDht0wMxfHFU9KGhktQ-_msJ9OrLKBCXACZfa67UfHdZfb0n16HvySTPWF0m0pmaPsG-EUz0EDBa2RFu9-P4Z0E7yCo_2Z_YM4U1FW-jMRxBBhH95w2MZS9xITR62xFzkRm3ZSvxkHWo8_eKsRLHqwoGPSClKGP5moXNAMg2rR5jpLPOdrCnHVdyTmF4UA5zUDgT3O9D34ZqBSl--E1WYrWrKRQAVNg5t8zshK1mAWUsyuac74SuwjRspsGhdkhizTqvkFCOIPonzTl5cXicuxCdQv_EppK0rmBJNNBMdm584aM2OWJiqS_bxK_GWDVj08lIBDOrRUIfGyPBs5cQnPNTIBNPNcrRkAS5IaGcM5vinSOw4qu0D5SQibPbKiaxqb4wC1OC0hQNJj3M2ytp7sgaw9HdAdWCGJdpMFp4F1Mvg2ouSi7IAepx0G_-eRBxgVeW3v1vDLA84l-MZ99zhyEaWuEI6KJQOXR4xiEIOc2AaHGtXQT1Qfx2XwriYrjx7-cZhlfYDm6ZYrhVg=w1680-h1260-no">
+              <br>
+              I connected these wires to a voltage divider circuit and Arduino. This allowed me to pick up on minute vibrations of the eye. Eye movements is a good indiciation of sleep stages, so this presents a very cheap way to read signals from the body. This is much more comfortable than using EEG sensors, and it is also much lower cost. Here is the circuit with reads the voltages on two analog inputs of the Arduino shown here.
+              <br><br>
+              <img class="img-responsive" src="https://lh3.googleusercontent.com/5L2jWNUEPnKv6QqW78h5DSZq7HTC9ukMjXxb-U_P_jV9iy9ecTJ1kG7tAPfYwd3uDQzm3qjCuhqe7mt_phb-H2FhIgJCp0HezCiIWqW6QTrkqiEpc3yT6I14prRPXpbHpFy9iwTuiXeXUUArzgRAZrxO_8YPFqBEmAN4YN9mzPtUUW_wgEMR84xzxOo2jr6FIyoEie8eWr8gNz3hBKB1Vf1uVF0wY9Mhbxy0xwqqoZ9UTo0KWm1bVZ-MkLh463Otnorf_oNI54kyTRqw6U0k2cz5NylxaqbSqWkm5WDi1bXzZZJtjsPZCwo9DgmMBPNcafSua6hMQ3OjwraUe1EypdfGI0rP_d4JqYXY5QzrEVJrxobJWrByLbZXbTuR8HB-aR3E2inJ_hunAggBJDGMRIGBZXnjqe9AjlWsAmllFV4QAocUjDjVz5UuLMJ-WAFBCEWXACdZe82aSFGPo7pWkH31f8AZjDp3bjiLght7NVrVgOE9bQuQvNySuB8LyoQNjS-K4qIx4nkxWVF-tdPdckUDlFU-RP7-LtMzQzNiDPq-lyLP1fq240_dPKJZntyP2kEN_4ckq2xjRkrtZT8_nyfZErQlXFysQE4PONDK=w1680-h1260-no">
+              <br><br>
+              Obviously the setup in these images does not look very comfortable to sleep with, but that's because this is the prototype to prove potential for the design. Using the rig shown above (which included scotch tape, super glue, etc. because I was working out of my dorm room supplies), I conducted a few experiments to collect data. Here are two graphs depecting eye movements of the left and right eye respectively.
+              <br><br>
+              <img src="sleep/left_eye_sensor.png">
+              <br><br>
+              <img src="sleep/right_eye_sensor.png">
+              <br><br>
+              Although the graphs lack detail, the x axis is time in hours. The graphs start at the time that I began trying to sleep. The y axis is the 10 bit analog reading of the Arduino for the particular sensor. I actually used an Arduino Uno for this experiment. This data is as I had hoped. The key takeaway is that the thick regions correspond to the rapid eye memovement (REM) stage. The large fluctuation was clearly detected by the resistive sensor pressed against my eye.
+              <br><br>
+              The large spike around 3.5 hours is when I woke up and went the restroom, so that explains the large noise. This data is with no postprocessing and purely the log. Data was recorded at 10 HZ with my software described in a later section.
+              </p>
+            </div>
+            <hr>
+
+            <!-- webcam useage -->
+            <div class="col-lg-12 text-center">
+              <h3>Body Movements with Webcam</h3>
+              <hr>
+              <p>
+              The conjecture that the thick regions (in the graph) correspond to REM sleep may be hard to grasp. For this reason, I also conducted the esperiment with some ground truth body movement data. To keep up the theme of low-cost, I used a standard webcam facing my bed for this task. Here is an image from the webcam mounted on my dresser, capturing my full bed.
+              <br><br>
+              <img class="img-responsive" src="https://lh3.googleusercontent.com/L_eKF4hZn3ATYOlH7-SLCutoNv6bHJKSl1v-OceYTonRsIt06CD0nCMOlTvdxGp8JvCeF0WVZGGbL1kjskQrkRgO26icI_1aNB_rYqKenZYjy4Mu9b43KmSvfKK891wH2C5gkfuuWJ7fVkIaJT7htna-1SbhmsR6usBvJEEBofivC-Sk-s3Ff-HjXQ3hkCYVP-NJ-xHhhCa1MlNVreAHgFgyR-odbH6w94ydxZMizDu2AxPcUw0gMyvadELAR0CfXqBGOw4r5JswxbHCpiKL1GLbFII1JDW3TENLn-5H8fipnln2Y6vMdSY2wP7fTYZeRnOXhL1ewA-mu0LUjOOzS-O9fsUnf2RqWT434Onca5LHOY9csMcAymIy32H1PrTwJljvA9OQKg_IijTndwdppgo4O5LVH3oKAhvcjXZiXettQgXR_XpIfgU6G4KwxI0YqyYV9cNODnSR_2OIeH_wlqLbbVXk0bu-svBjSfjwuigUSaFZEnMimKcDo-cck6UtieHuwbF9FfwGjhiSA9yG1BxN_eKu-ht5DkqAaFYzHPqTRKlAb7xaGYO8I-t21zjYTJfF4bjW0s_QhMFBwRAUkZvr5pHLs_5E8AWK14wC=w920-h1080-no">
+              </p>
+              <br><br>
+              Instead of tracking body movement with an IMU, I realized that webcam data would be much more precise. I could simply take an image every few seconds and compare the side-by-side frames to get a measure of movement! Super simple and robust to sensor noise! (The only downside was having the sleep with the lights on.)
+              <br><br>
+              
+            </div>
+            <hr>
+
+            <!-- hardware and sensor -->
+            <div class="col-lg-12 text-center">
+              <h3>Sleep Stage FSM Logic</h3>
+              <hr>
+              <p>
+              </p>
+            </div>
+            <hr>
+
+            <!-- codebase -->
+            <div class="col-lg-12 text-center">
+              <h3>Explaining the Codebase</h3>
+              <hr>
+              <p>
+              </p>
+            </div>
+            <hr>
+
+            <!-- dreams -->
+            <div class="col-lg-12 text-center">
+              <h3>Dream Study and Augmentation Potential</h3>
+              <hr>
+              <p>
+              </p>
+            </div>
+            <hr>
+
+            <!-- future -->
+            <div class="col-lg-12 text-center">
+              <h3>Future Work and Final Comments</h3>
+              <hr>
+              <p>
+              </p>
+            </div>
+            <hr>
+
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+     <section id="contact">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Contact Me</h2>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 text-center">
+                  <h5>I'm happy to chat, so please feel free to reach out! My contact information is located <a href="documents/Resume_EthanWeber_Sep_2017.pdf">here</a>.</h5>
+              </div>
+                <!-- <div class="col-lg-8 col-lg-offset-2"> -->
+                    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+                    <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
+                    <!-- <form name="sentMessage" id="contactForm" novalidate>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="email">Email Address</label>
+                                <input type="email" class="form-control" placeholder="Email Address" id="email" required data-validation-required-message="Please enter your email address.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" class="form-control" placeholder="Phone Number" id="phone" required data-validation-required-message="Please enter your phone number.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="message">Message</label>
+                                <textarea rows="5" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <br>
+                        <div id="success"></div>
+                        <div class="row">
+                            <div class="form-group col-xs-12">
+                                <button type="submit" class="btn btn-success btn-lg">Send</button>
+                            </div>
+                        </div>
+                    </form> -->
+                <!-- </div> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="footer-above">
+            <div class="container">
+                <div class="row">
+                    <!-- <div class="footer-col col-md-6">
+                        <h3>Location</h3>
+                        <p>MIT
+                          <br>77 Massachusetts Ave
+                            <br>Cambridge, MA 02139</p>
+                    </div> -->
+                    <div class="footer-col col-md-12">
+                        <h3>Around the Web</h3>
+                        <ul class="list-inline">
+                            <li>
+                                <a href="https://www.linkedin.com/in/ethan-weber-0901b4118" class="btn-social btn-outline"><span class="sr-only">Linked In</span><i class="fa fa-fw fa-linkedin"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/ethanweber" class="btn-social btn-outline"><span class="sr-only">GitHub</span><i class="fa fa-fw fa-github"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://www.facebook.com/eweb0124" class="btn-social btn-outline"><span class="sr-only">Facebook</span><i class="fa fa-fw fa-facebook"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://www.youtube.com/channel/UCncWyhUaIK__9707ZsxRcUg" class="btn-social btn-outline"><span class="sr-only">YouTube</span><i class="fa fa-fw fa-youtube"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://ethanweberblog.wordpress.com" class="btn-social btn-outline"><span class="sr-only">Wordpress</span><i class="fa fa-fw fa-wordpress"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        &copy; 2017 Ethan Weber | <a href="https://startbootstrap.com/template-overviews/freelancer/">Freelancer Template</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-top page-scroll hidden-sm hidden-xs hidden-lg hidden-md">
+        <a class="btn btn-primary" href="#page-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>
+
+    <!-- Portfolio Modals -->
+    <div id="portfolio_models_id"></div>
+
+    <!-- jQuery -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="js/freelancer.min.js"></script>
+
+
+    <!-- Portfolio Loader -->
+    <script src="js/portfolio.js"></script>
+
+</body>
+
+</html>

@@ -103,10 +103,9 @@
               <hr>
               <p>
               <br>
-              <a href="https://www.media.mit.edu/courses/human-2-0/">Human 2.0</a> is a class taught by Professor Hugh Herr in the MIT Media Lab. The goal of the class is to teach students about human augmentation devices and the potential for future (and current) technology. A large part of the class focus is to create a project with potential to augment and better understand the human body. Here I present the work done for my team project--a cheap setup for detecting sleep stages. My team draws inspiration from <a href="https://sleep.med.harvard.edu/people/faculty/220/robert+stickgold+phd">Professor Robert Stickgold</a> at Harvard and his <a href="https://www.ncbi.nlm.nih.gov/pubmed/11902434">Nightcap</a> device for detecting sleep stages realtime with cheap sensors. This replaces the need for expensive and intrusive polysomnograph experiments.
+              <a href="https://www.media.mit.edu/courses/human-2-0/">Human 2.0</a> is a class taught by Professor Hugh Herr in the MIT Media Lab. The goal of the class is to teach students about human augmentation devices and the potential for future (and current) related technologies. A large part of the class focus is to create a project with potential to augment and better understand the human body. Here I present my work done for my team's project--a cheap setup for detecting sleep stages. My team draws inspiration from <a href="https://sleep.med.harvard.edu/people/faculty/220/robert+stickgold+phd">Professor Robert Stickgold</a> at Harvard and his <a href="https://www.ncbi.nlm.nih.gov/pubmed/11902434">Nightcap</a> device for realtime sleep stage detection with cheap sensors. This replaces the need for expensive and intrusive polysomnograph experiments.
               <br><br>
-              In this writeup, I'll outline the work that I did on this project. I was most interested in creating a very cheap setup to detect sleep stages with low-cost equipment. I believe I have everything in place to do just this.
-
+              In this writeup, I'll outline the work that I did on this project. I was most interested in creating a very cheap setup to detect sleep stages with low-cost equipment. Using a webcam and variable resistance fabric on a sleep mask, I believe I have everything in place to do just this.
               </p>
             </div>
             <hr>
@@ -116,23 +115,29 @@
               <h3>Sleep Mask and Hardware</h3>
               <hr>
               <p>
-              My teammates (graduate students in <a href="https://www.media.mit.edu/groups/fluid-interfaces/overview/">Fluid Iterfaces</a> and <a href="https://www.media.mit.edu/groups/conformable-decoders/overview/">Conformable Decoders</a>) created the mask shown below, which is stretchy variable resistance sensor fabric sewn with conductive thread onto a sleep mask.
+              My teammates (graduate students in <a href="https://www.media.mit.edu/groups/fluid-interfaces/overview/">Fluid Iterfaces</a> and <a href="https://www.media.mit.edu/groups/conformable-decoders/overview/">Conformable Decoders</a>) created the mask shown below, which is stretchy variable resistance sensor fabric sewn with conductive thread onto a sleep mask. It's impressive for its simplicity. The resistance changes based on movement where the eyes rest.
               <br><br>
               <img width="50%" src="https://lh3.googleusercontent.com/ylOHuzHmredNRcke4yIUHMBc7zbEjL7RAhD7vCX6tJ_bUIZny98hwQoj4kEfeM4f3yUiVToBD2ylxNtkVaVFv-4dxzaHWiX-poMJ9NqKXMQWiXNFQQF-JaPffl_qCFGiSo8fj4h2bLuYJCE5SfDht0wMxfHFU9KGhktQ-_msJ9OrLKBCXACZfa67UfHdZfb0n16HvySTPWF0m0pmaPsG-EUz0EDBa2RFu9-P4Z0E7yCo_2Z_YM4U1FW-jMRxBBhH95w2MZS9xITR62xFzkRm3ZSvxkHWo8_eKsRLHqwoGPSClKGP5moXNAMg2rR5jpLPOdrCnHVdyTmF4UA5zUDgT3O9D34ZqBSl--E1WYrWrKRQAVNg5t8zshK1mAWUsyuac74SuwjRspsGhdkhizTqvkFCOIPonzTl5cXicuxCdQv_EppK0rmBJNNBMdm584aM2OWJiqS_bxK_GWDVj08lIBDOrRUIfGyPBs5cQnPNTIBNPNcrRkAS5IaGcM5vinSOw4qu0D5SQibPbKiaxqb4wC1OC0hQNJj3M2ytp7sgaw9HdAdWCGJdpMFp4F1Mvg2ouSi7IAepx0G_-eRBxgVeW3v1vDLA84l-MZ99zhyEaWuEI6KJQOXR4xiEIOc2AaHGtXQT1Qfx2XwriYrjx7-cZhlfYDm6ZYrhVg=w1680-h1260-no">
               <br>
-              I connected these wires to a voltage divider circuit and Arduino. This allowed me to pick up on minute vibrations of the eye. Eye movements is a good indiciation of sleep stages, so this presents a very cheap way to read signals from the body. This is much more comfortable than using EEG sensors, and it is also much lower cost. Here is the circuit with reads the voltages on two analog inputs of the Arduino shown here.
+              I connected these wires to a voltage divider circuit and Arduino. This allowed me to pick up on minute vibrations of the eye. To create good values, it's important to construct the voltage divider circuit with a resistor of about the same resistance as the fabric without disturbance. When not moving, the analog reading should be about half of the microcontroller operating voltage. This equation describes the output of the voltage divider. See <a href="https://learn.sparkfun.com/tutorials/voltage-dividers">this link</a> for more information about the topic.
+              <br><br>
+              $V_{input} = V_{plus}\frac{R_{passive}}{R_{passive} + R_{fabric}}$
+              <br><br>
+              Eye movements are a good indication of sleep stages, so this presents a very cheap way to read signals from the body. Furthermore, this is much more comfortable than using EEG sensors (another common technique to detect sleep stages). Here is the circuit that reads the voltages on two analog inputs of the Arduino (the Arduino Nano is shown in this image for its small form factor).
               <br><br>
               <img width="50%" src="https://lh3.googleusercontent.com/5L2jWNUEPnKv6QqW78h5DSZq7HTC9ukMjXxb-U_P_jV9iy9ecTJ1kG7tAPfYwd3uDQzm3qjCuhqe7mt_phb-H2FhIgJCp0HezCiIWqW6QTrkqiEpc3yT6I14prRPXpbHpFy9iwTuiXeXUUArzgRAZrxO_8YPFqBEmAN4YN9mzPtUUW_wgEMR84xzxOo2jr6FIyoEie8eWr8gNz3hBKB1Vf1uVF0wY9Mhbxy0xwqqoZ9UTo0KWm1bVZ-MkLh463Otnorf_oNI54kyTRqw6U0k2cz5NylxaqbSqWkm5WDi1bXzZZJtjsPZCwo9DgmMBPNcafSua6hMQ3OjwraUe1EypdfGI0rP_d4JqYXY5QzrEVJrxobJWrByLbZXbTuR8HB-aR3E2inJ_hunAggBJDGMRIGBZXnjqe9AjlWsAmllFV4QAocUjDjVz5UuLMJ-WAFBCEWXACdZe82aSFGPo7pWkH31f8AZjDp3bjiLght7NVrVgOE9bQuQvNySuB8LyoQNjS-K4qIx4nkxWVF-tdPdckUDlFU-RP7-LtMzQzNiDPq-lyLP1fq240_dPKJZntyP2kEN_4ckq2xjRkrtZT8_nyfZErQlXFysQE4PONDK=w1680-h1260-no">
               <br><br>
-              Obviously the setup in these images does not look very comfortable to sleep with, but that's because this is the prototype to prove potential for the design. Using the rig shown above (which included scotch tape, super glue, etc. because I was working out of my dorm room supplies), I conducted a few experiments to collect data. Here are two graphs depecting eye movements of the left and right eye respectively.
+              Obviously the setup in these images does not look very comfortable to sleep with, but that's only because this is the prototype to prove potential for the design. Using the rig shown above (which included scotch tape, super glue, etc. because I was working out of my dorm room supplies), I conducted a few experiments to collect data. Here are two graphs depicting eye movements of the left and right eye respectively.
               <br><br>
               <img src="sleep/left_eye_sensor.png">
               <br><br>
               <img src="sleep/right_eye_sensor.png">
               <br><br>
-              Although the graphs lack detail, the x axis is time in hours. The graphs start at the time that I began trying to sleep. The y axis is the 10 bit analog reading of the Arduino for the particular sensor. I actually used an Arduino Uno for this experiment. This data is as I had hoped. The key takeaway is that the thick regions correspond to the rapid eye memovement (REM) stage. The large fluctuation was clearly detected by the resistive sensor pressed against my eye.
+              Although the graphs lack detail, the x axis is time in hours. The graphs start at the time that I began trying to sleep. The y axis is the 10 bit analog reading (0 to 1031) of the Arduino for the particular sensor. Notice that because the reistors were chosen to be equal to the fabric passive resistance, the values hover around 500, the midpoint of the analog values. Also, I actually used an Arduino Uno for this experiment.
               <br><br>
-              The large spike around 3.5 hours is when I woke up and went the restroom, so that explains the large noise. This data is with no postprocessing and purely the log. Data was recorded at 10 HZ with my software described in a later section.
+              This data is as I had hoped. The key takeaway is that the thick regions correspond to the rapid eye movement (REM) stage. The large fluctuation was clearly detected by the resistive sensor pressed against my eye. The large spike around 3.5 hours is when I woke up and went the restroom, so that explains the large noise. This data is with no post-processing and purely the log. Data was recorded at 10 HZ with my software described in a later section.
+              <br><br>
+              Furthermore, the fluctuation steady rate of center value is likely due to the fabric bending over time, but staying in the same position as I slept. This explains the reason to interpret the thickness (rapid movement) than intensity of movement.
               </p>
             </div>
             <hr>
@@ -142,7 +147,7 @@
               <h3>Body Movements with Webcam</h3>
               <hr>
               <p>
-              The conjecture that the thick regions (in the graph) correspond to REM sleep may be hard to grasp. For this reason, I also conducted the esperiment with some ground truth body movement data. To keep up the theme of low-cost, I used a standard webcam facing my bed for this task. Here is an image from the webcam mounted on my dresser, capturing my full bed.
+              The conjecture that the thick regions (in the graph) correspond to REM sleep may be hard to grasp. For this reason, I also conducted the experiment with body movement data. To keep up the theme of low-cost, I used a standard webcam facing my bed for this task. Here is an image from the webcam mounted on my dresser, capturing my full bed (and body).
               <br><br>
               <img width="50%" src="https://lh3.googleusercontent.com/L_eKF4hZn3ATYOlH7-SLCutoNv6bHJKSl1v-OceYTonRsIt06CD0nCMOlTvdxGp8JvCeF0WVZGGbL1kjskQrkRgO26icI_1aNB_rYqKenZYjy4Mu9b43KmSvfKK891wH2C5gkfuuWJ7fVkIaJT7htna-1SbhmsR6usBvJEEBofivC-Sk-s3Ff-HjXQ3hkCYVP-NJ-xHhhCa1MlNVreAHgFgyR-odbH6w94ydxZMizDu2AxPcUw0gMyvadELAR0CfXqBGOw4r5JswxbHCpiKL1GLbFII1JDW3TENLn-5H8fipnln2Y6vMdSY2wP7fTYZeRnOXhL1ewA-mu0LUjOOzS-O9fsUnf2RqWT434Onca5LHOY9csMcAymIy32H1PrTwJljvA9OQKg_IijTndwdppgo4O5LVH3oKAhvcjXZiXettQgXR_XpIfgU6G4KwxI0YqyYV9cNODnSR_2OIeH_wlqLbbVXk0bu-svBjSfjwuigUSaFZEnMimKcDo-cck6UtieHuwbF9FfwGjhiSA9yG1BxN_eKu-ht5DkqAaFYzHPqTRKlAb7xaGYO8I-t21zjYTJfF4bjW0s_QhMFBwRAUkZvr5pHLs_5E8AWK14wC=w920-h1080-no">
               <br><br>
@@ -166,7 +171,15 @@
               <br><br>
               <img width="50%" src="sleep/stickgold_fsm.png">
               <br><br>
-              TODO: explain this diagram
+              This diagram is explaining his state machine for sleep stages. In particular, he is discretizing the sleep cycle into 3 distinct stages--wake, REM (rapid eye movement), and NREM (non-rapid eye movement). Part A. shows that each minute is classified as a body minute, eye minute, or null minute. The setup for his system could be done with signal thresholds, so if the sensors reached values above a set threshold, the minute would be classified accordingly. The second state machine (Part B) shows the transitions between stage of sleep. It takes a certain number of body minutes, eye minutes, or null minutes to make a transition.
+              <br><br>
+              Given that this state machine diagram makes intuitive sense (and had great results), I decided to implement this for current sensors. I'll be open-sourcing this code base with documentation explaining the replication. I'm currently collection sensor data over Serial and storing it in a buffer. With signal processing, I'll mark the minute classification (at each minute). This will then be fused with the sleep stage state machine code to indicate the transition.
+              <br><br>
+              This is the where the code is:
+              <br>
+              <a href="https://github.com/ethanweber/sleep_stage_detection">https://github.com/ethanweber/sleep_stage_detection</a>
+              <br><br>
+
               </p>
             </div>
             <hr>
@@ -177,7 +190,7 @@
               <hr>
               <p>
 
-              In this section I will better explain the codebase used the project. The code is able to take in multiple sensors via Serial communication. The sensor information coming in is specified in the json parameters file. This is what the file looks like.
+              In this section, I will better explain the codebase used the project. The code is able to take in multiple sensors via Serial communication. The sensor information coming in is specified in the JSON parameters file. This is what the file currently looks like.
 
               </p>
               <br>
@@ -186,9 +199,9 @@
               <br>
               <p>
 
-              It can handle an arbitary number of sensors as long as the serial side of the arduino is publishing the correct names of sensors (in the correct format). This is described more in the Github repo, but the point is that it should be able to handle multiple sensors and is not hardcoded.
+              It can handle an arbitrary number of sensors as long as the Serial side of the Arduino is publishing the correct names of sensors (in the correct format). This is described more in the Github repo, but the point is that it should be able to handle multiple sensors and is not hardcoded.
               <br><br>
-              The FSM parts of my code have not been tested yet, but they are mostly in place. It's a matter of finding the best signal preprocessing algorithms to use first, so to prepare for this I made the codebase perfect for collecting data! With the convenient json file and Serial data coming in, a CSV log will be created with accurate time and sensors readings every time main.py is run.
+              The FSM parts of my code have not been tested yet, but they are mostly in place. It's a matter of finding the best signal preprocessing algorithms to use first, so to prepare for this I made the codebase perfect for collecting data! With the convenient JSON file and Serial data coming in, a CSV log will be created with accurate time and sensors readings every time main.py is run.
               <br><br>
               The computer vision work, described early, is also baked in the Github repo. It's a python script that saves images, named by timestamp, to a specified folder. This leads to a vey clean collection of data for both an arbitrary number of sensors coming from a microcontroller over Serial and images over a webcam (using opencv).
               <br><br>
@@ -212,7 +225,9 @@
               <h3>Dream Study and Augmentation Potential</h3>
               <hr>
               <p>
-              This section explains the goals to use the system for dream augmentation.
+              Although this article describes only the means to collect high quality data (with timestamps), the code is ready to do realtime sleep stage classification after some initial work to understand the signals coming in. This will open up a lot of doors--including our understanding of dreams.
+              <br><br>
+              There have been studies showing that dreams can be augmented in the REM sleep stage.
               </p>
             </div>
             <hr>

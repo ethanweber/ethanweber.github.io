@@ -17,6 +17,46 @@ $( document ).ready(function() {
 
 add_item(
 //title
+"Inertially-Actuated Cube",
+//description
+"Please see the project <a href=\"http://ethanweber.me/cube.html\">here</a>.",
+//image
+"cube/cube.png",
+//date
+"Spring 2018",
+//creator
+"Ethan Weber"
+);
+
+add_item(
+//title
+"Sleep Stage Detection",
+//description
+"Please see the project <a href=\"http://ethanweber.me/sleepcycle.html\">here</a>.",
+//image
+"sleep/body_and_eye_movements.png",
+//date
+"Spring 2018",
+//creator
+"Ethan Weber"
+);
+
+add_item(
+//title
+"Cart Pole",
+//description
+"Please see the project <a href=\"http://ethanweber.me/cartpole.html\">here</a>.",
+//image
+"cartpole/cart_build.png",
+//date
+"Spring 2018",
+//creator
+"Ethan Weber"
+);
+
+
+add_item(
+//title
 "Innovation Insight",
 //description
 "I have a desire to develop improvements that impact people. One idea of mine was to develop technology that enables the blind to navigate through an unknown area using a combination of GPS, object recognition, and vibration feedback. I was accepted into the University of Michigan's 36-hour hackathon (MHacks 6). I used this opportunity to prove the concept of object recognition and vibration feedback. A Microsoft Kinect V2 sensor, worn by a visually impaired person, would recognize objects on a table. The person would hear a verbal list of items and then give a voice command choosing the specific item they want to reach. I created an intuitive armband to vibrate in corresponding sections to direct the user's hand toward the object. We had some difficulties but ultimately proved our concept. Microsoft awarded us with \"Best Overall Use of Microsoft Technology.\"\

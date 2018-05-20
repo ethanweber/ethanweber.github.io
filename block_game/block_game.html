@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"/> -->
+    <title>Block Maze</title>
+
+    <link rel="stylesheet" href="styles.css">
+
+    <h1>Block Maze</h1>
+
+    <!-- <script src="block.js" type="javascript"></script> -->
+    <!-- <canvas id="myCanvas" width="200" height="100" style="border:10px solid #000000;"></canvas> -->
+
+    <canvas id="myCanvas"></canvas>
+    <button onclick="reinit_starting_pos()">RESET</button>
+
+  </head>
+  <!-- <body onload="startGame()"> -->
+  <body>
+
+    <!-- <p id="info" style="text-align:center"> </p> -->
+
+    <script>
+
+      var width = window.innerWidth;
+      var height = window.innerHeight;
+
+      var canvas = document.getElementById("myCanvas");
+      var ctx = canvas.getContext("2d");
+
+      var num_game_blocks = 4;
+      var num_black = 50;
+      var num_rand_goal_gen = 250;
+
+      var row_num = 15;
+      var col_num = row_num;
+
+      window.addEventListener( "keydown", doKeyDown, false );
+
+      // document.addEventListener( "click", mousePosition );
+
+      canvas.height = height/1.5;
+      canvas.width = canvas.height;
+      // canvas.style = "border:0px solid #000000";
+
+      // create an array to hold the blocks that can't be entered
+      var restricted_area = createMatrix(col_num,col_num,0);
+
+      var colors = ["red", "blue", "green", "yellow", "orange"];
+
+      var game_blocks = []
+
+      var goal_blocks = []
+
+      for (var i = 0; i < num_game_blocks; i++) {
+        var loc = randomize_gameblock_location();
+        game_blocks.push(new block(colors[i], loc[0], loc[1]));
+      }
+
+
+      function createMatrix(numcols, numrows, initial) {
+        var arr = [];
+          for (var i = 0; i < numcols; i++){
+            var rows = [];
+            for (var j = 0; j < numrows; j++){
+                 rows[j] = initial;
+            }
+            arr[i] = rows;
+          }
+          return arr;
+        }
+
+      randomize_restricted(num_black);
+
+      drawGoals(); //this calls randomize_goals()
+
+      updateDisplay();
+
+
+      function goal(color, col, row) {
+        var obj = {};
+
+        obj.size = canvas.width/row_num;
+        obj.row = row;
+        obj.col = col;
+        obj.color = color;
+
+        obj.drawGoal = function() {
+          ctx.fillStyle = obj.color;
+          ctx.fillRect(obj.col*obj.size,obj.row*obj.size,obj.size,obj.size);
+          ctx.beginPath();
+          ctx.moveTo(obj.col*obj.size,obj.row*obj.size);
+          ctx.lineTo(obj.col*obj.size + obj.size,obj.row*obj.size + obj.size);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(obj.col*obj.size + obj.size,obj.row*obj.size);
+          ctx.lineTo(obj.col*obj.size,obj.row*obj.size + obj.size);
+          ctx.stroke();
+        }
+
+        return obj;
+
+      }
+
+      function block(color, col, row) {
+        var obj = {};
+
+        obj.size = canvas.width/row_num;
+        obj.row_start = row;
+        obj.col_start = col;
+        obj.row = row;
+        obj.col = col;
+        obj.color = color;
+
+        obj.drawRect = function() {
+          ctx.fillStyle = obj.color;
+          ctx.fillRect(obj.col*obj.size,obj.row*obj.size,obj.size,obj.size);
+        }
+
+        obj.clearRect = function() {
+          ctx.fillStyle = "white";
+          ctx.fillRect(obj.col*obj.size,obj.row*obj.size,obj.size,obj.size);
+        }
+
+        obj.setToStartPosition = function() {
+          restricted_area[obj.col][obj.row] = 0;
+          obj.col = obj.col_start;
+          obj.row = obj.row_start;
+          restricted_area[obj.col][obj.row] = 2;
+          console.log("worked");
+        }
+
+        obj.moveRight = function() {
+          if(obj.col < col_num - 1 && restricted_area[obj.col + 1][obj.row] == 0) {
+            restricted_area[obj.col][obj.row] = 0;
+            obj.col += 1;
+            restricted_area[obj.col][obj.row] = 2;
+          }
+        }
+
+        obj.moveLeft = function() {
+          if(obj.col > 0 && restricted_area[obj.col - 1][obj.row] == 0) {
+            restricted_area[obj.col][obj.row] = 0;
+            obj.col -= 1;
+            restricted_area[obj.col][obj.row] = 2;
+          }
+        }
+
+        obj.moveDown = function() {
+          if(obj.row < row_num - 1 && restricted_area[obj.col][obj.row + 1] == 0) {
+            restricted_area[obj.col][obj.row] = 0;
+            obj.row += 1;
+            restricted_area[obj.col][obj.row] = 2;
+          }
+
+        }
+
+        obj.moveUp = function() {
+          if(obj.row > 0 && restricted_area[obj.col][obj.row - 1] == 0) {
+            restricted_area[obj.col][obj.row] = 0;
+            obj.row -= 1;
+            restricted_area[obj.col][obj.row] = 2;
+          }
+        }
+
+        return obj;
+      }
+
+      // add a function that creates a grid display for blocks
+      function drawGrid() {
+
+        var i;
+
+        for (i = 0; i < canvas.width; i += canvas.width/col_num) {
+          ctx.beginPath();
+          ctx.moveTo(i, 0);
+          ctx.lineTo(i, canvas.height);
+          ctx.stroke();
+        }
+
+        for (i = 0; i < canvas.height; i += canvas.height/row_num) {
+          ctx.beginPath();
+          ctx.moveTo(0, i);
+          ctx.lineTo(canvas.width, i);
+          ctx.stroke();
+        }
+
+      }
+
+      function doKeyDown(e) {
+
+        switch(e.keyCode) {
+          // right
+          case 39:
+            move_game_blocks_right();
+            break;
+          // left
+          case 37:
+            move_game_blocks_left();
+            break;
+          // up
+          case 38:
+            move_game_blocks_up();
+            break;
+          // down
+          case 40:
+            move_game_blocks_down();
+            break;
+          // press r to restart blocks in starting position
+          case 82:
+            reinit_starting_pos();
+        }
+        updateDisplay();
+      }
+
+      function move_game_blocks_right(){
+        game_blocks.sort(function (a, b) {
+          return b.col - a.col;
+        });
+        var b
+        for (b = 0; b < game_blocks.length; b++) {
+          game_blocks[b].moveRight();
+        }
+      }
+      function move_game_blocks_left(){
+        game_blocks.sort(function (a, b) {
+          return a.col - b.col;
+        });
+        var b;
+        for (b = 0; b < game_blocks.length; b++) {
+          game_blocks[b].moveLeft();
+        }
+      }
+      function move_game_blocks_up(){
+        game_blocks.sort(function (a, b) {
+          return a.row - b.row;
+        });
+        var b;
+        for (b = 0; b < game_blocks.length; b++) {
+          game_blocks[b].moveUp();
+        }
+      }
+
+      function move_game_blocks_down(){
+        game_blocks.sort(function (a, b) {
+          return b.row - a.row;
+        });
+        var b;
+        for (b = 0; b < game_blocks.length; b++) {
+          game_blocks[b].moveDown();
+        }
+      }
+
+
+      function updateDisplay() {
+        clearCanvas();
+        for (var b = 0; b < game_blocks.length; b++) {
+          goal_blocks[b].drawGoal();
+          game_blocks[b].drawRect();
+        }
+        drawGrid();
+        updateFixedBlocks();
+      }
+
+      function clearCanvas() {
+        ctx.clearRect(0,0, canvas.width, canvas.height);
+      }
+
+      function updateFixedBlocks() {
+        for (var i = 0; i < restricted_area.length; i++) {
+          for (var j = 0; j < restricted_area[0].length; j++) {
+            if (restricted_area[i][j] == 1) {
+              new block("black", i, j).drawRect();
+            }
+          }
+        }
+      }
+
+      // function mousePosition(e) {
+      //   console.log("X Val: " + e.clientX + " Y Val: " + e.clientY);
+      //
+      //   var x = e.clientX;
+      //   var y = e.clientY;
+      //   if (x > 0 && x < canvas.width && y > 0 && y < canvas.height) {
+      //     var col = Math.floor((x/(canvas.width))*(row_num));
+      //     var row = Math.floor((y/(canvas.height))*(col_num));
+      //     // console.log(col + ", " + row);
+      //     restricted_area[col][row] = 1;
+      //     reinit_starting_pos();
+      //   }
+      //   updateDisplay();
+      // }
+
+      function randomize_gameblock_location() {
+        var rand_col = Math.floor(Math.random()*col_num);
+        var rand_row = Math.floor(Math.random()*row_num);
+        while (restricted_area[rand_col][rand_row] > 0) {
+          var rand_col = Math.floor(Math.random()*col_num);
+          var rand_row = Math.floor(Math.random()*row_num);
+        }
+        restricted_area[rand_col][rand_row] = 2;
+        return [rand_col, rand_row];
+
+      }
+
+
+      function randomize_restricted(num_blocks) {
+        for (var i = 0; i < num_blocks; i++){
+          var rand_col = Math.floor(Math.random()*col_num);
+          var rand_row = Math.floor(Math.random()*row_num);
+          while (restricted_area[rand_col][rand_row] > 0) {
+            var rand_col = Math.floor(Math.random()*col_num);
+            var rand_row = Math.floor(Math.random()*row_num);
+          }
+          restricted_area[rand_col][rand_row] = 1;
+        }
+      }
+
+      function randomize_goals() {
+        for (var i = 0; i < num_rand_goal_gen; i++) {
+          var temp = Math.floor(Math.random()*4);
+          switch(temp) {
+            case 0:
+              move_game_blocks_right();
+              break;
+            case 1:
+              move_game_blocks_left();
+              break;
+            case 2:
+              move_game_blocks_up();
+              break;
+            case 3:
+              move_game_blocks_down();
+              break;
+          }
+        }
+      }
+
+      function drawGoals(){
+
+        randomize_goals();
+
+        for (var b = 0; b < game_blocks.length; b++) {
+          goal_blocks.push(new goal(game_blocks[b].color, game_blocks[b].col, game_blocks[b].row));
+        }
+
+        // reset to origin position
+        reinit_starting_pos();
+      }
+
+      function reinit_starting_pos() {
+        for (var b = 0; b < game_blocks.length; b++) {
+          game_blocks[b].setToStartPosition();
+        }
+        updateDisplay();
+      }
+
+      // function check_if_blocked(){} //check to make sure the game block
+      // isn't locked in from the black blocks
+
+
+
+    </script>
+
+  </body>
+</html>

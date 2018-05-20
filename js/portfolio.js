@@ -350,6 +350,32 @@ add_item(
 //image
 "img/projects/high_school_grad_cap.jpg",
 //date
+"2016",
+//creator
+"Ethan Weber"
+);
+
+add_item(
+//title
+"Family Escape Room Map",
+//description
+"I made a website that maps all of the escape rooms that my family and friends have done! My family loves escape rooms! See the site <a style=\"font-weight: bold\" href=\"http://weberescape.world\">here</a>.",
+//image
+"img/projects/escape_map.png",
+//date
+"Summer 2017",
+//creator
+"Ethan Weber"
+);
+
+add_item(
+//title
+"Block Game",
+//description
+"I made a puzzle block game where you have to get colored blocks to their respective goals by using barrier to maneuver. Check it out <a style=\"font-weight: bold\" href=\"block_game/block_game.html\">here</a>. Use arrow keys to move and refresh the page for a new layout. Note that there is no signal for winning in this version. Code is located at <a style=\"font-weight: bold\" href=\"https://github.com/ethanweber/block_game\">https://github.com/ethanweber/block_game</a>. I've rewritten this Javascript applicaton in Qt for mobile use. Code for that is <a style=\"font-weight: bold\" href=\"https://github.com/ethanweber/motion_planning/tree/1f0cb9b471060b5b5dd9d5c9eb88069a2ffc7052/qt_block_game\">here</a>, and I was planning to use it for motion planning research. However, I'll update the block_game repo if more work continues on this project.",
+//image
+"img/projects/block_game.png",
+//date
 "2017",
 //creator
 "Ethan Weber"

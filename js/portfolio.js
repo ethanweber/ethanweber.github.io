@@ -17,6 +17,19 @@ $( document ).ready(function() {
 
 add_item(
 //title
+"cARd",
+//description
+"Please see the project <a href=\"https://devpost.com/software/card-a0grpe\">here</a>. Media for the project can be found <a href=\"https://photos.app.goo.gl/NxSBnUi8knA9KSYU8\">here</a>.",
+//image
+"img/projects/card.png",
+//date
+"Summer 2018",
+//creator
+"Ethan Weber"
+);
+
+add_item(
+//title
 "Inertially-Actuated Cube",
 //description
 "Please see the project <a href=\"http://ethanweber.me/cube.html\">here</a>.",
@@ -54,6 +67,18 @@ add_item(
 "Ethan Weber"
 );
 
+add_item(
+//title
+"smARtable",
+//description
+"A smart table for interacting with objects. Please see media for the project <a href=\"https://photos.app.goo.gl/8jH8kXLJ2NqdKnFt2\">here</a>.",
+//image
+"img/projects/smartable.jpg",
+//date
+"2017-2018",
+//creator
+"Ethan Weber"
+);
 
 add_item(
 //title

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <iframe id="myiframe" src="http://monday.csail.mit.edu/cgi-bin/gpu_stats.cgi"
+        style="position: absolute; top:0; left:0; right:0; bottom:0; width:100%; height:100%;">
+    </iframe>
+
+</body>
+
+<script>
+    setInterval(function () {
+        if (document.hasFocus() || document.getElementById('myiframe').contentWindow.document.hasFocus()) { // only run if focussed on browser
+            document.getElementById('myiframe').src = document.getElementById('myiframe').src;
+        }
+    }, 5000);
+</script>
+
+</html>

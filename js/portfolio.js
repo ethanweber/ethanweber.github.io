@@ -111,7 +111,7 @@ $(document).ready(function () {
         //title
         "cARd",
         //description
-        "Please see the project <a href=\"https://devpost.com/software/card-a0grpe\">here</a>. Media for the project can be found <a href=\"https://photos.app.goo.gl/NxSBnUi8knA9KSYU8\">here</a>.",
+        "Please see the cARd project <a href=\"https://devpost.com/software/card-a0grpe\">here</a>. Media for the project can be found <a href=\"https://photos.app.goo.gl/NxSBnUi8knA9KSYU8\">here</a>.",
         //image
         "img/projects/card.png",
         //date

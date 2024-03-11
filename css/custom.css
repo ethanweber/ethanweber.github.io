@@ -15,3 +15,52 @@ img.resize {
   padding: .15em;
   font-size: 2em;
 }
+
+.publication-entry {
+  display: flex;
+  align-items: center; /* Vertically centers the flex container's children */
+  justify-content: space-between;
+  flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+}
+
+.publication-text {
+  flex: 1;
+  margin-right: 20px; /* Adds some space between the text and the video */
+}
+
+.publication-media {
+  flex-basis: 250px; /* Adjust based on your video size or preference */
+  flex-shrink: 0;
+  max-width: 100%; /* Ensures the video doesn't overflow its container */
+}
+
+/* Responsive adjustment for smaller screens */
+@media (max-width: 768px) {
+  .publication-entry {
+    flex-direction: column;
+    align-items: stretch; /* Stretches children to fill the container width on small screens */
+  }
+  
+  .publication-text {
+    flex-basis: auto;
+    max-width: 90%;
+    margin: auto;
+  }
+
+  .publication-media {
+    flex-basis: auto;
+    max-width: 50%;
+    margin: auto;
+  }
+  
+  .publication-text {
+    margin-bottom: 20px; /* Adds space between the text and video on small screens */
+  }
+}
+
+.paper-title {
+  font-size: 24px; /* Adjust the size as needed */
+  font-weight: bold; /* Makes the title bold */
+  display: block; /* Makes the span behave like a block element, adding a line break after */
+  margin-bottom: 5px; /* Adds a little space below the title */
+}

@@ -34,6 +34,13 @@ img.resize {
   max-width: 100%; /* Ensures the video doesn't overflow its container */
 }
 
+.paper-title {
+  font-size: 24px; /* Adjust the size as needed */
+  font-weight: bold; /* Makes the title bold */
+  display: block; /* Makes the span behave like a block element, adding a line break after */
+  margin-bottom: 5px; /* Adds a little space below the title */
+}
+
 /* Responsive adjustment for smaller screens */
 @media (max-width: 768px) {
   .publication-entry {
@@ -56,11 +63,4 @@ img.resize {
   .publication-text {
     margin-bottom: 20px; /* Adds space between the text and video on small screens */
   }
-}
-
-.paper-title {
-  font-size: 24px; /* Adjust the size as needed */
-  font-weight: bold; /* Makes the title bold */
-  display: block; /* Makes the span behave like a block element, adding a line break after */
-  margin-bottom: 5px; /* Adds a little space below the title */
 }

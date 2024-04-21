@@ -9,7 +9,7 @@ let publications = [
         "media": "img/publications/nerfiller.mp4",
     },
     {
-        "title": "Removing Ghostly Artifacts from Casually Captured NeRFs",
+        "title": "👻 Nerfbusters 🧹: Removing Ghostly Artifacts from Casually Captured NeRFs",
         "authors": "Frederik Warburg*, <b>Ethan Weber*</b>, Matthew Tancik, Aleksander Hołyński, Angjoo Kanazawa",
         "conference": "ICCV 2023",
         "project-page": "https://ethanweber.me/nerfbusters/",

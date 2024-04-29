@@ -17,32 +17,6 @@ $(document).ready(function () {
 
     add_item(
         //title
-        "Incidents Dataset",
-        //description
-        "The ECCV 2020 paper \"Detecting natural disasters, damage, and incidents in the wild\" is at <a href=\"http://incidentsdataset.csail.mit.edu/\">http://incidentsdataset.csail.mit.edu/</a>",
-        //image
-        "img/projects/incidents_dataset.png",
-        //date
-        "Fall 2019 - Spring 2020",
-        //creator
-        "Ethan Weber"
-    );
-
-    add_item(
-        //title
-        "Building Damage",
-        //description
-        "We presented at the ICLR 2020 workshop on AI for Earth Sciences with <a href=\"https://arxiv.org/abs/2004.05525\">\"Building Disaster Damage Assessment in Satellite Imagery with Multi-Temporal Fusion\"</a> Our work also won 8th place overall in the <a href-\"https://xview2.org/\">xView2</a> competition, which was announced at CVPR 2019.",
-        //image
-        "img/projects/building_damage.png",
-        //date
-        "Fall 2019 - Spring 2020",
-        //creator
-        "Ethan Weber, Hassan Kane"
-    );
-
-    add_item(
-        //title
         "Terrace",
         //description
         "We built an app to perform 3D photo effects! Here we're demonstrating the 3D ken burns effect.",

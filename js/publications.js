@@ -1,5 +1,14 @@
 let publications = [
     {
+        "title": "Toon3D: Seeing Cartoons from a New Perspective",
+        "authors": "<b>Ethan Weber*,</b> Riley Peterlinz*, Rohan Mathur, Frederik Warburg, Alexei A. Efros, Angjoo Kanazawa",
+        "conference": "In Review",
+        "project-page": "https://toon3d.studio/",
+        // "paper": "https://arxiv.org/abs/2312.04560",
+        "code": "https://github.com/ethanweber/toon3d",
+        "media": "img/publications/toon3D.mp4",
+    },
+    {
         "title": "NeRFiller: Completing Scenes via Generative 3D Inpainting",
         "authors": "<b>Ethan Weber,</b> Aleksander Hołyński, Varun Jampani, Saurabh Saxena, Noah Snavely, Abhishek Kar, Angjoo Kanazawa",
         "conference": "CVPR 2024",

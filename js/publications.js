@@ -2,9 +2,9 @@ let publications = [
     {
         "title": "Toon3D: Seeing Cartoons from a New Perspective",
         "authors": "<b>Ethan Weber*,</b> Riley Peterlinz*, Rohan Mathur, Frederik Warburg, Alexei A. Efros, Angjoo Kanazawa",
-        "conference": "In Review",
+        "conference": "arXiv 2024",
         "project-page": "https://toon3d.studio/",
-        // "paper": "https://arxiv.org/abs/2312.04560",
+        "paper": "https://arxiv.org/abs/2405.10320",
         "code": "https://github.com/ethanweber/toon3d",
         "media": "img/publications/toon3D.mp4",
     },

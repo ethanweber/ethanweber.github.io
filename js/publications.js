@@ -141,7 +141,7 @@ function renderPublications(publications) {
       if (mediaType === "mp4") {
         mediaHTML = `
             <div class="publication-media">
-                <video autoplay muted playsinline loop style="max-width: 100%; height: auto;">
+                <video muted playsinline loop style="max-width: 100%; height: auto;">
                     <source src="${publication.media}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>

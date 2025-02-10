@@ -2,10 +2,10 @@ let publications = [
   {
     title: "Fillerbuster: Multi-View Scene Completion for Casual Captures",
     authors:
-      "<b>Ethan Weber*,</b> Norman Müller, Yash Kant, Vasu Agrawal, Michael Zollhöfer, Angjoo Kanazawa, Christian Richardt",
+      "<b>Ethan Weber,</b> Norman Müller, Yash Kant, Vasu Agrawal, Michael Zollhöfer, Angjoo Kanazawa, Christian Richardt",
     conference: "arXiv 2025",
     "project-page": "https://ethanweber.me/fillerbuster/",
-    paper: "https://ethanweber.me/fillerbuster/",
+    paper: "https://arxiv.org/abs/2502.05175",
     code: "https://github.com/facebookresearch/fillerbuster",
     media: "img/publications/fillerbuster.mp4",
   },

@@ -1,5 +1,17 @@
 let publications = [
   {
+    title:
+      "Eye, Robot: Learning to Look to Act with a BC-RL Perception-Action Loop",
+    authors:
+      "Justin Kerr, Kush Hari, Ethan Weber, Chung Min Kim, Brent Yi, Tyler Bonnen, Ken Goldberg, Angjoo Kanazawa",
+    conference: "arXiv 2025",
+    "project-page":
+      "https://www.eyerobot.net/https://ethanweber.me/fillerbuster/",
+    paper: "https://www.arxiv.org/abs/2506.10968",
+    code: "https://github.com/kerrj/eyerobot",
+    media: "img/publications/eyerobot.mp4",
+  },
+  {
     title: "Fillerbuster: Multi-View Scene Completion for Casual Captures",
     authors:
       "<b>Ethan Weber,</b> Norman Müller, Yash Kant, Vasu Agrawal, Michael Zollhöfer, Angjoo Kanazawa, Christian Richardt",

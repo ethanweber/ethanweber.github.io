@@ -4,7 +4,7 @@ let publications = [
       "Eye, Robot: Learning to Look to Act with a BC-RL Perception-Action Loop",
     authors:
       "Justin Kerr, Kush Hari, <b>Ethan Weber</b>, Chung Min Kim, Brent Yi, Tyler Bonnen, Ken Goldberg, Angjoo Kanazawa",
-    conference: "arXiv 2025",
+    conference: "CoRL 2025",
     "project-page":
       "https://www.eyerobot.net/https://ethanweber.me/fillerbuster/",
     paper: "https://www.arxiv.org/abs/2506.10968",

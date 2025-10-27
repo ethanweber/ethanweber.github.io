@@ -1,6 +1,30 @@
 let publications = [
   {
     title:
+      "MapAnything: Universal feed-forward metric 3D reconstruction",
+    authors:
+      "Nikhil Keetha, Norman Müller, Johannes Schönberger, Lorenzo Porzi, Yuchen Zhang, Tobias Fischer, Arno Knapitsch, Duncan Zauss, Ethan Weber, Nelson Antunes, Jonathon Luiten, Manuel Lopez-Antequera, Samuel Rota Bulò, Christian Richardt, Deva Ramanan, Sebastian Scherer, Peter Kontschieder",
+    conference: "arXiv 2025",
+    "project-page":
+      "https://map-anything.github.io/",
+    paper: "https://arxiv.org/abs/2509.13414",
+    code: "https://github.com/facebookresearch/map-anything",
+    media: "img/publications/mapanything.mp4",
+  },
+  {
+    title:
+      "Flow matching policy gradients",
+    authors:
+      "David McAllister, Songwei Ge, Brent Yi, Chung Min Kim, <b>Ethan Weber</b>, Hongsuk Choi, Haiwen Feng, Angjoo Kanazawa",
+    conference: "arXiv 2025",
+    "project-page":
+      "https://flowreinforce.github.io/",
+    paper: "https://arxiv.org/abs/2507.21053",
+    code: "https://github.com/akanazawa/fpo",
+    media: "img/publications/fpo.mp4",
+  },
+  {
+    title:
       "Eye, Robot: Learning to Look to Act with a BC-RL Perception-Action Loop",
     authors:
       "Justin Kerr, Kush Hari, <b>Ethan Weber</b>, Chung Min Kim, Brent Yi, Tyler Bonnen, Ken Goldberg, Angjoo Kanazawa",

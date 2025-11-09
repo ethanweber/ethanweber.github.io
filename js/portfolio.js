@@ -494,7 +494,7 @@ function add_portfolio_grid(index, title, img_source) {
                       <h3>" + title + "</h3>\
                   </div>\
               </div>\
-              <img src=\"" + img_source + "\" class=\"img-responsive resize\">\
+              <img src=\"" + img_source + "\" class=\"img-responsive resize\" loading=\"lazy\" decoding=\"async\">\
           </a>\
       </div>";
 }
@@ -515,7 +515,7 @@ function add_portfolio_model(index, title, img_source, content, creator, date) {
                       <div class=\"modal-body\">\
                           <h2>" + title + "</h2>\
                           <hr class=\"star-primary\">\
-                          <img src=\"" + img_source + "\" class=\"img-responsive img-centered resize\">\
+                          <img src=\"" + img_source + "\" class=\"img-responsive img-centered resize\" loading=\"lazy\" decoding=\"async\">\
                           <p>" + content + "</p>\
                           <ul class=\"list-inline item-details\">\
                             <li>Created By:\

@@ -190,7 +190,7 @@ function renderPublications(publications) {
       ) {
         mediaHTML = `
                     <div class="publication-media">
-                        <img src="${publication.media}" style="max-width: 100%; height: auto;">
+                        <img src="${publication.media}" style="max-width: 100%; height: auto;" loading="lazy" decoding="async">
                     </div>`;
       }
     }

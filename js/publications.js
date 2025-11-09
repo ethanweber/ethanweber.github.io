@@ -50,7 +50,7 @@ let publications = [
       "Justin Kerr, Kush Hari, <b>Ethan Weber</b>, Chung Min Kim, Brent Yi, Tyler Bonnen, Ken Goldberg, Angjoo Kanazawa",
     conference: "CoRL 2025",
     "project-page":
-      "https://www.eyerobot.net/https://ethanweber.me/fillerbuster/",
+      "https://www.eyerobot.net/",
     paper: "https://www.arxiv.org/abs/2506.10968",
     code: "https://github.com/kerrj/eyerobot",
     media: "img/publications/eyerobot.mp4",

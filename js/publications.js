@@ -4,12 +4,32 @@ let publications = [
       "MapAnything: Universal feed-forward metric 3D reconstruction",
     authors:
       "Nikhil Keetha, Norman Müller, Johannes Schönberger, Lorenzo Porzi, Yuchen Zhang, Tobias Fischer, Arno Knapitsch, Duncan Zauss, <b>Ethan Weber</b>, Nelson Antunes, Jonathon Luiten, Manuel Lopez-Antequera, Samuel Rota Bulò, Christian Richardt, Deva Ramanan, Sebastian Scherer, Peter Kontschieder",
-    conference: "arXiv 2025",
+    conference: "3DV 2026",
     "project-page":
       "https://map-anything.github.io/",
     paper: "https://arxiv.org/abs/2509.13414",
     code: "https://github.com/facebookresearch/map-anything",
     media: "img/publications/mapanything.mp4",
+  },
+  {
+    title: "Fillerbuster: Multi-View Scene Completion for Casual Captures",
+    authors:
+      "<b>Ethan Weber,</b> Norman Müller, Yash Kant, Vasu Agrawal, Michael Zollhöfer, Angjoo Kanazawa, Christian Richardt",
+    conference: "3DV 2026",
+    "project-page": "https://ethanweber.me/fillerbuster/",
+    paper: "https://arxiv.org/abs/2502.05175",
+    code: "https://github.com/facebookresearch/fillerbuster",
+    media: "img/publications/fillerbuster.mp4",
+  },
+  {
+    title: "Toon3D: Seeing Cartoons from a New Perspective",
+    authors:
+      "<b>Ethan Weber*,</b> Riley Peterlinz*, Rohan Mathur, Frederik Warburg, Alexei A. Efros, Angjoo Kanazawa",
+    conference: "3DV 2026",
+    "project-page": "https://toon3d.studio/",
+    paper: "https://arxiv.org/abs/2405.10320",
+    code: "https://github.com/ethanweber/toon3d",
+    media: "img/publications/toon3D.mp4",
   },
   {
     title:
@@ -36,34 +56,14 @@ let publications = [
     media: "img/publications/eyerobot.mp4",
   },
   {
-    title: "Fillerbuster: Multi-View Scene Completion for Casual Captures",
-    authors:
-      "<b>Ethan Weber,</b> Norman Müller, Yash Kant, Vasu Agrawal, Michael Zollhöfer, Angjoo Kanazawa, Christian Richardt",
-    conference: "arXiv 2025",
-    "project-page": "https://ethanweber.me/fillerbuster/",
-    paper: "https://arxiv.org/abs/2502.05175",
-    code: "https://github.com/facebookresearch/fillerbuster",
-    media: "img/publications/fillerbuster.mp4",
-  },
-  {
     title: "Pippo: High-Resolution Multi-View Humans from a Single Image",
     authors:
       "Yash Kant, <b>Ethan Weber</b>, Jin Kyu Kim, Rawal Khirodkar, Zhaoen Su, Julieta Martinez, Igor Gilitschenski, Shunsuke Saito, Timur Bagautdinov",
-    conference: "arXiv 2025",
+    conference: "CVPR 2025",
     "project-page": "https://yashkant.github.io/pippo/",
     paper: "https://yashkant.github.io/pippo/",
     code: "https://github.com/facebookresearch/pippo",
     media: "img/publications/pippo.mp4",
-  },
-  {
-    title: "Toon3D: Seeing Cartoons from a New Perspective",
-    authors:
-      "<b>Ethan Weber*,</b> Riley Peterlinz*, Rohan Mathur, Frederik Warburg, Alexei A. Efros, Angjoo Kanazawa",
-    conference: "arXiv 2024",
-    "project-page": "https://toon3d.studio/",
-    paper: "https://arxiv.org/abs/2405.10320",
-    code: "https://github.com/ethanweber/toon3d",
-    media: "img/publications/toon3D.mp4",
   },
   {
     title: "NeRFiller: Completing Scenes via Generative 3D Inpainting",
@@ -177,10 +177,11 @@ function renderPublications(publications) {
       if (mediaType === "mp4") {
         mediaHTML = `
             <div class="publication-media">
-                <video controls style="max-width: 100%; height: auto;">
+                <video class="publication-video" muted playsinline preload="metadata" loop style="max-width: 100%; height: auto;">
                     <source src="${publication.media}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
+                <button class="play-overlay" aria-label="Play video" type="button">▶</button>
             </div>`;
       } else if (
         (mediaType === "png") |
@@ -194,8 +195,34 @@ function renderPublications(publications) {
       }
     }
 
+    // Build links without leading/trailing separator
+    const links = [];
+    if (publication["project-page"]) {
+      links.push(
+        '<a href="' + publication["project-page"] + '">Project Page</a>'
+      );
+    }
+    if (publication.paper) {
+      links.push('<a href="' + publication.paper + '">Paper</a>');
+    }
+    if (publication.code) {
+      links.push('<a href="' + publication.code + '">Code</a>');
+    }
+    if (publication.presentation) {
+      links.push(
+        '<a href="' + publication.presentation + '">Presentation</a>'
+      );
+    }
+    if (publication["thesis-page"]) {
+      links.push(
+        '<a href="' + publication["thesis-page"] + '">Thesis Page</a>'
+      );
+    }
+    const linksHTML = links.join(" | ");
+
     let publicationHTML = `
             <div class="publication-entry">
+                ${mediaHTML}
                 <div class="publication-text">
                     <p>
                         <span class="paper-title">${
@@ -210,42 +237,10 @@ function renderPublications(publications) {
                             ? publication.conference + " "
                             : ""
                         }<br>
-                        ${
-                          publication["project-page"]
-                            ? '| <a href="' +
-                              publication["project-page"] +
-                              '">Project Page</a>'
-                            : ""
-                        }
-                        ${
-                          publication.paper
-                            ? '| <a href="' + publication.paper + '">Paper</a>'
-                            : ""
-                        }
-                        ${
-                          publication.code
-                            ? '| <a href="' + publication.code + '">Code</a>'
-                            : ""
-                        }
-                        ${
-                          publication.presentation
-                            ? '| <a href="' +
-                              publication.presentation +
-                              '">Presentation</a>'
-                            : ""
-                        }
-                        ${
-                          publication["thesis-page"]
-                            ? '| <a href="' +
-                              publication["thesis-page"] +
-                              '">Thesis Page</a>'
-                            : ""
-                        }
-                        ${"|"}
+                        ${linksHTML}
                     </p>
                 </div>
-                ${mediaHTML}
-            </div><br>`;
+            </div>`;
 
     publicationsRow.innerHTML += publicationHTML;
   });
@@ -253,3 +248,107 @@ function renderPublications(publications) {
 
 // Call the function with the publications array
 renderPublications(publications);
+
+// Add hover/click interactions for publication videos
+function setupPublicationVideos() {
+  const videos = document.querySelectorAll(".publication-video");
+  const supportsHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  videos.forEach((video) => {
+    const container = video.closest(".publication-media");
+    const overlay = container ? container.querySelector(".play-overlay") : null;
+
+    const syncOverlay = () => {
+      if (!container) return;
+      if (video.paused) {
+        container.classList.remove("playing");
+      } else {
+        container.classList.add("playing");
+      }
+    };
+
+    if (supportsHover) {
+      video.addEventListener("mouseenter", () => {
+        video.play().catch(() => {});
+      });
+      video.addEventListener("mouseleave", () => {
+        video.pause();
+        video.currentTime = 0;
+        syncOverlay();
+      });
+    } else {
+      // Mobile/touch: tap to toggle play/pause
+      video.addEventListener(
+        "click",
+        () => {
+          if (video.paused) {
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+            video.currentTime = 0;
+          }
+          syncOverlay();
+        },
+        { passive: true }
+      );
+      if (overlay) {
+        overlay.addEventListener(
+          "click",
+          () => {
+            if (video.paused) {
+              video.play().catch(() => {});
+            } else {
+              video.pause();
+              video.currentTime = 0;
+            }
+            syncOverlay();
+          },
+          { passive: true }
+        );
+      }
+    }
+
+    video.addEventListener("play", syncOverlay);
+    video.addEventListener("pause", syncOverlay);
+    syncOverlay();
+  });
+
+  // Desktop: play/pause when hovering anywhere over the publication row
+  if (supportsHover) {
+    const rows = document.querySelectorAll(".publication-entry");
+    rows.forEach((row) => {
+      const rowVideo = row.querySelector(".publication-video");
+      if (!rowVideo) return;
+      row.addEventListener("mouseenter", () => {
+        rowVideo.play().catch(() => {});
+      });
+      row.addEventListener("mouseleave", () => {
+        rowVideo.pause();
+        rowVideo.currentTime = 0;
+        const c = rowVideo.closest(".publication-media");
+        if (c) c.classList.remove("playing");
+      });
+    });
+  }
+
+  // Pause/reset when offscreen to save resources
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(({ isIntersecting, target }) => {
+          const v = target;
+          if (!isIntersecting && !v.paused) {
+            v.pause();
+            v.currentTime = 0;
+            const c = v.closest(".publication-media");
+            if (c) c.classList.remove("playing");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    videos.forEach((v) => observer.observe(v));
+  }
+}
+
+setupPublicationVideos();

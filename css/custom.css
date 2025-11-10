@@ -38,6 +38,9 @@ img.resize {
   flex-shrink: 0;
   max-width: 100%; /* Ensures the video doesn't overflow its container */
   position: relative; /* for overlay positioning */
+  background-color: #f4f6f8; /* pleasant placeholder when video poster not shown */
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .publication-entry:hover {
@@ -67,9 +70,10 @@ img.resize {
 
   .publication-media {
     flex-basis: auto;
-    max-width: 50%;
+    max-width: 90%;
     margin: auto;
     margin-bottom: 20px; /* Space between video (top) and text (below) on small screens */
+    aspect-ratio: 16 / 9; /* keep a stable shape for nicer preview */
   }
   
   .publication-text { margin-bottom: 0; }

@@ -254,6 +254,18 @@ function setupPublicationVideos() {
   const videos = document.querySelectorAll(".publication-video");
   const supportsHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
+  // Ensure first frame is visible on mobile by priming when in view
+  const primeVideo = (video) => {
+    if (video.dataset.primed === "1") return;
+    const onLoaded = () => {
+      video.dataset.primed = "1";
+    };
+    video.addEventListener("loadeddata", onLoaded, { once: true });
+    try {
+      video.load();
+    } catch (e) {}
+  };
+
   videos.forEach((video) => {
     const container = video.closest(".publication-media");
     const overlay = container ? container.querySelector(".play-overlay") : null;
@@ -311,6 +323,10 @@ function setupPublicationVideos() {
     video.addEventListener("play", syncOverlay);
     video.addEventListener("pause", syncOverlay);
     syncOverlay();
+    // Prime above-the-fold videos immediately
+    if (!supportsHover) {
+      primeVideo(video);
+    }
   });
 
   // Desktop: play/pause when hovering anywhere over the publication row
@@ -333,6 +349,17 @@ function setupPublicationVideos() {
 
   // Pause/reset when offscreen to save resources
   if ("IntersectionObserver" in window) {
+    // Prime first frame when coming into view (mobile and desktop)
+    const primeObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(({ isIntersecting, target }) => {
+          if (isIntersecting) {
+            primeVideo(target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach(({ isIntersecting, target }) => {
@@ -347,7 +374,10 @@ function setupPublicationVideos() {
       },
       { threshold: 0.1 }
     );
-    videos.forEach((v) => observer.observe(v));
+    videos.forEach((v) => {
+      primeObserver.observe(v);
+      observer.observe(v);
+    });
   }
 }
 

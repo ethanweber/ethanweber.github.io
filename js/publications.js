@@ -177,11 +177,10 @@ function renderPublications(publications) {
       if (mediaType === "mp4") {
         mediaHTML = `
             <div class="publication-media">
-                <video class="publication-video" muted playsinline preload="metadata" loop style="max-width: 100%; height: auto;">
+                <video class="publication-video" muted playsinline autoplay preload="metadata" loop style="max-width: 100%; height: auto;">
                     <source src="${publication.media}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                <button class="play-overlay" aria-label="Play video" type="button">▶</button>
             </div>`;
       } else if (
         (mediaType === "png") |
@@ -249,136 +248,4 @@ function renderPublications(publications) {
 // Call the function with the publications array
 renderPublications(publications);
 
-// Add hover/click interactions for publication videos
-function setupPublicationVideos() {
-  const videos = document.querySelectorAll(".publication-video");
-  const supportsHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-
-  // Ensure first frame is visible on mobile by priming when in view
-  const primeVideo = (video) => {
-    if (video.dataset.primed === "1") return;
-    const onLoaded = () => {
-      video.dataset.primed = "1";
-    };
-    video.addEventListener("loadeddata", onLoaded, { once: true });
-    try {
-      video.load();
-    } catch (e) {}
-  };
-
-  videos.forEach((video) => {
-    const container = video.closest(".publication-media");
-    const overlay = container ? container.querySelector(".play-overlay") : null;
-
-    const syncOverlay = () => {
-      if (!container) return;
-      if (video.paused) {
-        container.classList.remove("playing");
-      } else {
-        container.classList.add("playing");
-      }
-    };
-
-    if (supportsHover) {
-      video.addEventListener("mouseenter", () => {
-        video.play().catch(() => {});
-      });
-      video.addEventListener("mouseleave", () => {
-        video.pause();
-        video.currentTime = 0;
-        syncOverlay();
-      });
-    } else {
-      // Mobile/touch: tap to toggle play/pause
-      video.addEventListener(
-        "click",
-        () => {
-          if (video.paused) {
-            video.play().catch(() => {});
-          } else {
-            video.pause();
-            video.currentTime = 0;
-          }
-          syncOverlay();
-        },
-        { passive: true }
-      );
-      if (overlay) {
-        overlay.addEventListener(
-          "click",
-          () => {
-            if (video.paused) {
-              video.play().catch(() => {});
-            } else {
-              video.pause();
-              video.currentTime = 0;
-            }
-            syncOverlay();
-          },
-          { passive: true }
-        );
-      }
-    }
-
-    video.addEventListener("play", syncOverlay);
-    video.addEventListener("pause", syncOverlay);
-    syncOverlay();
-    // Prime above-the-fold videos immediately
-    if (!supportsHover) {
-      primeVideo(video);
-    }
-  });
-
-  // Desktop: play/pause when hovering anywhere over the publication row
-  if (supportsHover) {
-    const rows = document.querySelectorAll(".publication-entry");
-    rows.forEach((row) => {
-      const rowVideo = row.querySelector(".publication-video");
-      if (!rowVideo) return;
-      row.addEventListener("mouseenter", () => {
-        rowVideo.play().catch(() => {});
-      });
-      row.addEventListener("mouseleave", () => {
-        rowVideo.pause();
-        rowVideo.currentTime = 0;
-        const c = rowVideo.closest(".publication-media");
-        if (c) c.classList.remove("playing");
-      });
-    });
-  }
-
-  // Pause/reset when offscreen to save resources
-  if ("IntersectionObserver" in window) {
-    // Prime first frame when coming into view (mobile and desktop)
-    const primeObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(({ isIntersecting, target }) => {
-          if (isIntersecting) {
-            primeVideo(target);
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(({ isIntersecting, target }) => {
-          const v = target;
-          if (!isIntersecting && !v.paused) {
-            v.pause();
-            v.currentTime = 0;
-            const c = v.closest(".publication-media");
-            if (c) c.classList.remove("playing");
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    videos.forEach((v) => {
-      primeObserver.observe(v);
-      observer.observe(v);
-    });
-  }
-}
-
-setupPublicationVideos();
+// Simple behavior: videos autoplay muted/loop inline; no extra JS needed.

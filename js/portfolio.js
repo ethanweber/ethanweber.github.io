@@ -21,7 +21,7 @@ $(document).ready(function () {
         //description
         "We built an app to perform 3D photo effects! Here we're demonstrating the 3D ken burns effect.",
         //image
-        "img/projects/terrace_3d_ken_burns.gif",
+        "img/projects/terrace_3d_ken_burns.mp4",
         //date
         "January 2020",
         //creator
@@ -48,7 +48,7 @@ $(document).ready(function () {
         //description
         "",
         //image
-        "img/projects/sparkey.gif",
+        "img/projects/sparkey.mp4",
         //date
         "Fall 2018 - Spring 2019",
         //creator
@@ -74,7 +74,7 @@ $(document).ready(function () {
         //description
         "Please see <a href=\"https://medium.com/@ethanjohnweber/atenta-fixing-posture-and-improving-health-with-laptop-webcams-897c75ded2c6\">this write-up</a> for a project description.",
         //image
-        "img/projects/atenta.gif",
+        "img/projects/atenta.mp4",
         //date
         "2018",
         //creator
@@ -510,10 +510,14 @@ function add_item(title, description, image, date, creator, favorite) {
 function add_portfolio_grid(index, title, img_source, date, favorite) {
     var favClass = favorite ? ' project-favorite' : '';
     var favTitle = favorite ? ' title="\u2B50 Personal favorite"' : '';
+    var isVideo = img_source.split('.').pop() === 'mp4';
+    var mediaTag = isVideo
+        ? '<video src="' + img_source + '" muted playsinline loop autoplay preload="metadata"></video>'
+        : '<img src="' + img_source + '" loading="lazy" decoding="async" alt="' + title + '">';
     portfolio_grid.innerHTML += '\
     <a href="#portfolioModal' + index + '" class="project-card' + favClass + '"' + favTitle + ' data-toggle="modal">\
         <div class="project-card-img">\
-            <img src="' + img_source + '" loading="lazy" decoding="async" alt="' + title + '">\
+            ' + mediaTag + '\
         </div>\
         <div class="project-card-title">' + title + '</div>\
         <div class="project-card-date">' + date + '</div>\
@@ -521,6 +525,10 @@ function add_portfolio_grid(index, title, img_source, date, favorite) {
 }
 
 function add_portfolio_model(index, title, img_source, content, creator, date) {
+    var isVideo = img_source.split('.').pop() === 'mp4';
+    var modalMedia = isVideo
+        ? '<video src="' + img_source + '" class="project-modal-img" muted playsinline loop autoplay></video>'
+        : '<img src="' + img_source + '" class="project-modal-img" loading="lazy" decoding="async">';
     portfolio_models.innerHTML += '\
   <div class="modal fade project-modal" id="portfolioModal' + index + '" tabindex="-1" role="dialog" aria-hidden="true">\
       <div class="modal-dialog modal-lg">\
@@ -530,7 +538,7 @@ function add_portfolio_model(index, title, img_source, content, creator, date) {
               </button>\
               <div class="project-modal-body">\
                   <h3 class="project-modal-title">' + title + '</h3>\
-                  <img src="' + img_source + '" class="project-modal-img" loading="lazy" decoding="async">\
+                  ' + modalMedia + '\
                   <p>' + content + '</p>\
                   <div class="project-modal-meta">\
                       <span>' + creator + '</span>\

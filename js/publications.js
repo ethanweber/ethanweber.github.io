@@ -187,7 +187,7 @@ function renderPublications(publications) {
 
   const heading = document.querySelector("#publications h2");
   if (heading) {
-    heading.innerHTML = `Publications <span class="pub-count">(${publications.length})</span>`;
+    heading.innerHTML = `Publications`;
   }
 
   const filterHTML = `

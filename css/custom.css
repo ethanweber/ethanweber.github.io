@@ -199,7 +199,7 @@ img.resize {
   max-width: 100%;
   position: relative;
   border-radius: 6px;
-  aspect-ratio: 16/10;
+  overflow: hidden;
 }
 
 .publication-entry:hover {

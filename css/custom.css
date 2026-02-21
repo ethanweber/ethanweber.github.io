@@ -347,9 +347,8 @@ img.resize {
 
   .publication-media {
     flex-basis: auto;
-    max-width: 100%;
-    margin: auto;
-    margin-bottom: 14px;
+    max-width: 220px;
+    margin: 0 auto 14px;
   }
   
   .publication-text { margin-bottom: 0; }

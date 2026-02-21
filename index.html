@@ -262,7 +262,12 @@
           <h2>Publications</h2>
         </div>
       </div>
-      <div class="row" id="publications_row"></div>
+      <div class="row" id="publications_row">
+        <div class="skeleton-pub"><div class="skeleton skeleton-pub-media"></div><div class="skeleton-pub-text"><div class="skeleton skeleton-pub-line"></div><div class="skeleton skeleton-pub-line"></div><div class="skeleton skeleton-pub-line"></div></div></div>
+        <div class="skeleton-pub"><div class="skeleton skeleton-pub-media"></div><div class="skeleton-pub-text"><div class="skeleton skeleton-pub-line"></div><div class="skeleton skeleton-pub-line"></div><div class="skeleton skeleton-pub-line"></div></div></div>
+        <div class="skeleton-pub"><div class="skeleton skeleton-pub-media"></div><div class="skeleton-pub-text"><div class="skeleton skeleton-pub-line"></div><div class="skeleton skeleton-pub-line"></div><div class="skeleton skeleton-pub-line"></div></div></div>
+        <div class="skeleton-pub"><div class="skeleton skeleton-pub-media"></div><div class="skeleton-pub-text"><div class="skeleton skeleton-pub-line"></div><div class="skeleton skeleton-pub-line"></div><div class="skeleton skeleton-pub-line"></div></div></div>
+      </div>
     </div>
   </section>
 
@@ -280,7 +285,14 @@
         <button class="pub-filter-btn active" data-filter="all" data-target="project">📚 All</button>
         <button class="pub-filter-btn" data-filter="favorites" data-target="project">⭐ My Favorites</button>
       </div>
-      <div id="portfolio_grid_id" class="project-grid"></div>
+      <div id="portfolio_grid_id" class="project-grid">
+        <div class="skeleton-proj"><div class="skeleton skeleton-proj-img"></div><div class="skeleton skeleton-proj-title"></div><div class="skeleton skeleton-proj-date"></div></div>
+        <div class="skeleton-proj"><div class="skeleton skeleton-proj-img"></div><div class="skeleton skeleton-proj-title"></div><div class="skeleton skeleton-proj-date"></div></div>
+        <div class="skeleton-proj"><div class="skeleton skeleton-proj-img"></div><div class="skeleton skeleton-proj-title"></div><div class="skeleton skeleton-proj-date"></div></div>
+        <div class="skeleton-proj"><div class="skeleton skeleton-proj-img"></div><div class="skeleton skeleton-proj-title"></div><div class="skeleton skeleton-proj-date"></div></div>
+        <div class="skeleton-proj"><div class="skeleton skeleton-proj-img"></div><div class="skeleton skeleton-proj-title"></div><div class="skeleton skeleton-proj-date"></div></div>
+        <div class="skeleton-proj"><div class="skeleton skeleton-proj-img"></div><div class="skeleton skeleton-proj-title"></div><div class="skeleton skeleton-proj-date"></div></div>
+      </div>
     </div>
   </section>
 
@@ -476,6 +488,36 @@
   <script defer src="js/portfolio.js"></script>
 
   <script defer src="js/publications.js"></script>
+
+  <!-- Shared scroll-reveal utility + section-level reveal -->
+  <script>
+  window.initReveal = function(elements, staggerMod, staggerDelay) {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    var els = elements.forEach ? elements : Array.prototype.slice.call(elements);
+    els.forEach(function(el, i) {
+      var rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight) {
+        el.classList.add('reveal', 'visible');
+      } else {
+        el.classList.add('reveal');
+        if (staggerMod && staggerDelay) {
+          el.style.transitionDelay = (i % staggerMod) * staggerDelay + 's';
+        }
+        observer.observe(el);
+      }
+    });
+  };
+
+  window.initReveal(document.querySelectorAll('section, .news-bar'));
+  </script>
 </body>
 
 </html>

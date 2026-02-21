@@ -199,6 +199,7 @@ img.resize {
   max-width: 100%;
   position: relative;
   border-radius: 6px;
+  aspect-ratio: 16/10;
 }
 
 .publication-entry:hover {
@@ -655,4 +656,117 @@ video.project-modal-img {
   width: 1em;
   height: 1em;
   vertical-align: -0.125em;
+}
+
+/* ---- Skeleton loading placeholders ---- */
+
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #eee 25%, #e0e0e0 37%, #eee 63%);
+  background-size: 800px 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+  border-radius: 6px;
+}
+
+#portfolio .skeleton {
+  background: linear-gradient(90deg, rgba(255,255,255,0.08) 25%, rgba(255,255,255,0.15) 37%, rgba(255,255,255,0.08) 63%);
+  background-size: 800px 100%;
+}
+
+.skeleton-pub {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.skeleton-pub-media {
+  flex-shrink: 0;
+  width: 170px;
+  height: 96px;
+}
+
+.skeleton-pub-text {
+  flex: 1;
+  margin-left: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeleton-pub-line {
+  height: 12px;
+}
+
+.skeleton-pub-line:first-child {
+  width: 70%;
+  height: 16px;
+}
+
+.skeleton-pub-line:nth-child(2) { width: 90%; }
+.skeleton-pub-line:nth-child(3) { width: 50%; }
+
+.skeleton-proj {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.skeleton-proj-img {
+  aspect-ratio: 4/3;
+}
+
+.skeleton-proj-title {
+  height: 10px;
+  margin: 10px 20px 4px;
+}
+
+.skeleton-proj-date {
+  height: 8px;
+  width: 50%;
+  margin: 0 auto 10px;
+}
+
+@media (max-width: 768px) {
+  .skeleton-pub {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .skeleton-pub-media {
+    width: 100%;
+    max-width: 220px;
+    margin: 0 auto 10px;
+  }
+  .skeleton-pub-text {
+    margin-left: 0;
+  }
+}
+
+/* ---- Scroll reveal animations ---- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  will-change: opacity, transform;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+  will-change: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
 }

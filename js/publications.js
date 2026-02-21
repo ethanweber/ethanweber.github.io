@@ -195,7 +195,7 @@ function renderPublications(publications) {
       <button class="pub-filter-btn active" data-filter="all">📚 All</button>
       <button class="pub-filter-btn" data-filter="favorites">⭐ My Favorites</button>
     </div>`;
-  publicationsRow.innerHTML = filterHTML;
+  const parts = [filterHTML];
 
   publications.forEach((publication) => {
     let mediaHTML = "";
@@ -204,72 +204,57 @@ function renderPublications(publications) {
       if (mediaType === "mp4") {
         mediaHTML = `
             <div class="publication-media">
-                <video class="publication-video" muted playsinline loop preload="none" style="max-width: 100%; height: auto;">
-                    <source data-src="${publication.media}" type="video/mp4">
-                    Your browser does not support the video tag.
+                <video class="publication-video" muted playsinline loop preload="none" data-src="${publication.media}">
                 </video>
             </div>`;
       } else if (
-        (mediaType === "png") |
-        (mediaType === "jpg") |
-        (mediaType === "jpeg")
+        mediaType === "png" ||
+        mediaType === "jpg" ||
+        mediaType === "jpeg"
       ) {
         mediaHTML = `
-                    <div class="publication-media">
-                        <img src="${publication.media}" style="max-width: 100%; height: auto;" loading="lazy" decoding="async">
-                    </div>`;
+            <div class="publication-media">
+                <img src="${publication.media}" loading="lazy" decoding="async">
+            </div>`;
       }
     }
 
     const links = [];
     if (publication["project-page"]) {
-      links.push(
-        '<a href="' + publication["project-page"] + '">Project Page</a>'
-      );
+      links.push(`<a href="${publication["project-page"]}">Project Page</a>`);
     }
     if (publication.paper) {
-      links.push('<a href="' + publication.paper + '">Paper</a>');
+      links.push(`<a href="${publication.paper}">Paper</a>`);
     }
     if (publication.code) {
-      links.push('<a href="' + publication.code + '">Code</a>');
+      links.push(`<a href="${publication.code}">Code</a>`);
     }
     if (publication.presentation) {
-      links.push(
-        '<a href="' + publication.presentation + '">Presentation</a>'
-      );
+      links.push(`<a href="${publication.presentation}">Presentation</a>`);
     }
     if (publication["thesis-page"]) {
-      links.push(
-        '<a href="' + publication["thesis-page"] + '">Thesis Page</a>'
-      );
+      links.push(`<a href="${publication["thesis-page"]}">Thesis Page</a>`);
     }
     const linksHTML = links.join(" | ");
 
     const favClass = publication.favorite ? ' publication-favorite' : '';
     const favTitle = publication.favorite ? ' title="\u2B50 Personal favorite"' : '';
 
-    let publicationHTML = `
+    parts.push(`
             <div class="publication-entry${favClass}"${favTitle}>
                 ${mediaHTML}
                 <div class="publication-text">
                     <p>
                         <span class="paper-title">${publication.title}</span>
-                        ${publication.authors.replace(
-                          /, (?=[^,]*$)/,
-                          ", and "
-                        )}.<br>
-                        ${
-                          publication.conference
-                            ? publication.conference + " "
-                            : ""
-                        }<br>
+                        ${publication.authors.replace(/, (?=[^,]*$)/, ", and ")}.<br>
+                        ${publication.conference ? publication.conference + " " : ""}<br>
                         ${linksHTML}
                     </p>
                 </div>
-            </div>`;
-
-    publicationsRow.innerHTML += publicationHTML;
+            </div>`);
   });
+
+  publicationsRow.innerHTML = parts.join('');
 
   document.querySelectorAll("#publications .pub-filter-btn").forEach((btn) => {
     btn.addEventListener("click", (e) => {
@@ -292,24 +277,39 @@ function renderPublications(publications) {
     });
   });
 
-  const observer = new IntersectionObserver((entries) => {
+  // Phase 1: load metadata (first frame) when video is approaching viewport
+  const preloadObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      const video = entry.target;
-      if (entry.isIntersecting) {
-        const source = video.querySelector("source[data-src]");
-        if (source) {
-          source.src = source.dataset.src;
-          source.removeAttribute("data-src");
-          video.load();
-        }
-        video.play().catch(() => {});
-      } else {
-        video.pause();
+      if (entry.isIntersecting && entry.target.dataset.src) {
+        entry.target.src = entry.target.dataset.src;
+        entry.target.preload = "metadata";
+        delete entry.target.dataset.src;
+        entry.target.load();
+        preloadObserver.unobserve(entry.target);
       }
     });
-  }, { rootMargin: "200px" });
+  }, { rootMargin: "600px" });
 
-  document.querySelectorAll(".publication-video").forEach((v) => observer.observe(v));
+  // Phase 2: play/pause when actually in viewport
+  const playObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.play().catch(() => {});
+      } else {
+        entry.target.pause();
+      }
+    });
+  }, { rootMargin: "50px" });
+
+  document.querySelectorAll(".publication-video").forEach((v) => {
+    preloadObserver.observe(v);
+    playObserver.observe(v);
+  });
+
+  // Scroll reveal (uses shared utility defined in index.html)
+  if (window.initReveal) {
+    window.initReveal(document.querySelectorAll(".publication-entry"), 3, 0.08);
+  }
 }
 
 renderPublications(publications);

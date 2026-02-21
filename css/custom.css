@@ -29,6 +29,14 @@ img.resize {
   max-width: 520px;
 }
 
+.header-info .tagline {
+  display: block;
+  font-size: 1.35em;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 6px;
+}
+
 .header-info .skills {
   display: block;
   margin-top: 10px;

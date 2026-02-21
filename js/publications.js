@@ -1,5 +1,26 @@
 let publications = [
   {
+    title: "LuxRemix: Lighting Decomposition and Remixing for Indoor Scenes",
+    authors:
+      "Ruofan Liang, Norman Müller, <b>Ethan Weber</b>, Duncan Zauss, Nandita Vijaykumar, Peter Kontschieder, Christian Richardt",
+    conference: "CVPR 2026",
+    "project-page": "https://luxremix.github.io/",
+    paper: "https://arxiv.org/abs/2601.15283",
+    media: "img/publications/luxremix.mp4",
+  },
+  {
+    title:
+      "Flow matching policy gradients",
+    authors:
+      "David McAllister, Songwei Ge, Brent Yi, Chung Min Kim, <b>Ethan Weber</b>, Hongsuk Choi, Haiwen Feng, Angjoo Kanazawa",
+    conference: "ICLR 2026",
+    "project-page":
+      "https://flowreinforce.github.io/",
+    paper: "https://arxiv.org/abs/2507.21053",
+    code: "https://github.com/akanazawa/fpo",
+    media: "img/publications/fpo.mp4",
+  },
+  {
     title:
       "MapAnything: Universal feed-forward metric 3D reconstruction",
     authors:
@@ -10,6 +31,7 @@ let publications = [
     paper: "https://arxiv.org/abs/2509.13414",
     code: "https://github.com/facebookresearch/map-anything",
     media: "img/publications/mapanything.mp4",
+    favorite: true,
   },
   {
     title: "Fillerbuster: Multi-View Scene Completion for Casual Captures",
@@ -30,18 +52,7 @@ let publications = [
     paper: "https://arxiv.org/abs/2405.10320",
     code: "https://github.com/ethanweber/toon3d",
     media: "img/publications/toon3D.mp4",
-  },
-  {
-    title:
-      "Flow matching policy gradients",
-    authors:
-      "David McAllister, Songwei Ge, Brent Yi, Chung Min Kim, <b>Ethan Weber</b>, Hongsuk Choi, Haiwen Feng, Angjoo Kanazawa",
-    conference: "arXiv 2025",
-    "project-page":
-      "https://flowreinforce.github.io/",
-    paper: "https://arxiv.org/abs/2507.21053",
-    code: "https://github.com/akanazawa/fpo",
-    media: "img/publications/fpo.mp4",
+    favorite: true,
   },
   {
     title:
@@ -54,6 +65,7 @@ let publications = [
     paper: "https://www.arxiv.org/abs/2506.10968",
     code: "https://github.com/kerrj/eyerobot",
     media: "img/publications/eyerobot.mp4",
+    favorite: true,
   },
   {
     title: "Pippo: High-Resolution Multi-View Humans from a Single Image",
@@ -87,7 +99,8 @@ let publications = [
     media: "img/publications/nerfbusters.mp4",
   },
   {
-    title: "Nerfstudio: A Framework for Neural Radiance Field Development",
+    title: "Nerfstudio: A Modular Framework for Neural Radiance Field Development",
+    favorite: true,
     authors:
       "Matthew Tancik*, <b>Ethan Weber*</b>, Evonne Ng*, Ruilong Li, Brent Yi, Justin Kerr, Terrance Wang, Alexander Kristoffersen, Jake Austin, Kamyar Salahi, Abhik Ahuja, David McAllister, Angjoo Kanazawa",
     conference: "SIGGRAPH 2023",
@@ -106,6 +119,7 @@ let publications = [
     paper: "https://arxiv.org/abs/2207.14279",
     code: "https://github.com/ethanweber/sitcoms3D",
     media: "img/publications/sitcoms3D.mp4",
+    favorite: true,
   },
   {
     title: "Studying Bias in GANs through the Lens of Race",
@@ -170,6 +184,19 @@ let publications = [
 
 function renderPublications(publications) {
   const publicationsRow = document.getElementById("publications_row");
+
+  const heading = document.querySelector("#publications h2");
+  if (heading) {
+    heading.innerHTML = `Publications <span class="pub-count">(${publications.length})</span>`;
+  }
+
+  const filterHTML = `
+    <div class="pub-filters">
+      <button class="pub-filter-btn active" data-filter="all">📚 All</button>
+      <button class="pub-filter-btn" data-filter="favorites">⭐ My Favorites</button>
+    </div>`;
+  publicationsRow.innerHTML = filterHTML;
+
   publications.forEach((publication) => {
     let mediaHTML = "";
     if (publication.media) {
@@ -177,8 +204,8 @@ function renderPublications(publications) {
       if (mediaType === "mp4") {
         mediaHTML = `
             <div class="publication-media">
-                <video class="publication-video" muted playsinline autoplay preload="metadata" loop style="max-width: 100%; height: auto;">
-                    <source src="${publication.media}" type="video/mp4">
+                <video class="publication-video" muted playsinline loop preload="none" style="max-width: 100%; height: auto;">
+                    <source data-src="${publication.media}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>`;
@@ -194,7 +221,6 @@ function renderPublications(publications) {
       }
     }
 
-    // Build links without leading/trailing separator
     const links = [];
     if (publication["project-page"]) {
       links.push(
@@ -219,18 +245,19 @@ function renderPublications(publications) {
     }
     const linksHTML = links.join(" | ");
 
+    const favClass = publication.favorite ? ' publication-favorite' : '';
+    const favTitle = publication.favorite ? ' title="\u2B50 Personal favorite"' : '';
+
     let publicationHTML = `
-            <div class="publication-entry">
+            <div class="publication-entry${favClass}"${favTitle}>
                 ${mediaHTML}
                 <div class="publication-text">
                     <p>
-                        <span class="paper-title">${
-                          publication.title
-                        }</span><br>
+                        <span class="paper-title">${publication.title}</span>
                         ${publication.authors.replace(
                           /, (?=[^,]*$)/,
                           ", and "
-                        )}.<br><br>
+                        )}.<br>
                         ${
                           publication.conference
                             ? publication.conference + " "
@@ -243,9 +270,46 @@ function renderPublications(publications) {
 
     publicationsRow.innerHTML += publicationHTML;
   });
+
+  document.querySelectorAll("#publications .pub-filter-btn").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const btnTop = btn.getBoundingClientRect().top;
+
+      document.querySelectorAll("#publications .pub-filter-btn").forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      const filter = btn.dataset.filter;
+      document.querySelectorAll(".publication-entry").forEach((entry) => {
+        if (filter === "all") {
+          entry.classList.remove("pub-hidden");
+        } else {
+          entry.classList.toggle("pub-hidden", !entry.classList.contains("publication-favorite"));
+        }
+      });
+
+      const newBtnTop = btn.getBoundingClientRect().top;
+      window.scrollBy(0, newBtnTop - btnTop);
+    });
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const video = entry.target;
+      if (entry.isIntersecting) {
+        const source = video.querySelector("source[data-src]");
+        if (source) {
+          source.src = source.dataset.src;
+          source.removeAttribute("data-src");
+          video.load();
+        }
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+  }, { rootMargin: "200px" });
+
+  document.querySelectorAll(".publication-video").forEach((v) => observer.observe(v));
 }
 
-// Call the function with the publications array
 renderPublications(publications);
-
-// Simple behavior: videos autoplay muted/loop inline; no extra JS needed.

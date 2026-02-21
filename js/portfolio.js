@@ -38,35 +38,9 @@ $(document).ready(function () {
         //date
         "Fall 2019",
         //creator
-        "Ethan Weber"
+        "Ethan Weber",
+        true
     );
-
-    add_item(
-        //title
-        "Atenta",
-        //description
-        "Please see <a href=\"https://medium.com/@ethanjohnweber/atenta-fixing-posture-and-improving-health-with-laptop-webcams-897c75ded2c6\">this write-up</a> for a project description.",
-        //image
-        "img/projects/atenta.gif",
-        //date
-        "Spring 2018 - current",
-        //creator
-        "Ethan Weber"
-    );
-
-    // TODO(ethan): add this!
-    // add_item(
-    //     //title
-    //     "Tracne",
-    //     //description
-    //     "",
-    //     //image
-    //     "",
-    //     //date
-    //     "August 2019",
-    //     //creator
-    //     "Ethan Weber"
-    // );
 
     add_item(
         //title
@@ -90,6 +64,46 @@ $(document).ready(function () {
         "img/projects/card.png",
         //date
         "Summer 2018",
+        //creator
+        "Ethan Weber"
+    );
+
+    add_item(
+        //title
+        "Atenta",
+        //description
+        "Please see <a href=\"https://medium.com/@ethanjohnweber/atenta-fixing-posture-and-improving-health-with-laptop-webcams-897c75ded2c6\">this write-up</a> for a project description.",
+        //image
+        "img/projects/atenta.gif",
+        //date
+        "2018",
+        //creator
+        "Ethan Weber"
+    );
+
+    // TODO(ethan): add this!
+    // add_item(
+    //     //title
+    //     "Tracne",
+    //     //description
+    //     "",
+    //     //image
+    //     "",
+    //     //date
+    //     "August 2019",
+    //     //creator
+    //     "Ethan Weber"
+    // );
+
+    add_item(
+        //title
+        "smARtable",
+        //description
+        "A smart table for interacting with objects. Please see media for the project <a href=\"https://photos.app.goo.gl/8jH8kXLJ2NqdKnFt2\">here</a>.",
+        //image
+        "img/projects/smartable.jpg",
+        //date
+        "2017-2018",
         //creator
         "Ethan Weber"
     );
@@ -135,77 +149,29 @@ $(document).ready(function () {
 
     add_item(
         //title
-        "smARtable",
+        "TravelAR",
         //description
-        "A smart table for interacting with objects. Please see media for the project <a href=\"https://photos.app.goo.gl/8jH8kXLJ2NqdKnFt2\">here</a>.",
-        //image
-        "img/projects/smartable.jpg",
-        //date
-        "2017-2018",
-        //creator
-        "Ethan Weber"
-    );
-
-    add_item(
-        //title
-        "Innovation Insight",
-        //description
-        "I have a desire to develop improvements that impact people. One idea of mine was to develop technology that enables the blind to navigate through an unknown area using a combination of GPS, object recognition, and vibration feedback. I was accepted into the University of Michigan's 36-hour hackathon (MHacks 6). I used this opportunity to prove the concept of object recognition and vibration feedback. A Microsoft Kinect V2 sensor, worn by a visually impaired person, would recognize objects on a table. The person would hear a verbal list of items and then give a voice command choosing the specific item they want to reach. I created an intuitive armband to vibrate in corresponding sections to direct the user's hand toward the object. We had some difficulties but ultimately proved our concept. Microsoft awarded us with \"Best Overall Use of Microsoft Technology.\"\
+        "Traveling is exciting - planning, not so much. \
+We thought about different ways to improve the vacation search process and found that visuals were key in selecting the perfect location. \
+Because of this, we created TravelAR, an augmented reality app that allows you to physically step into scenes of different cities, then find flight information if you have found your ideal travel destination.\
 <br><br>\
-This picture represents my project to help the visually impaired using object recognition via a Microsoft Kinect V2 and vibration feedback. \
-My teammates worked with vision processing and databases, but I worked mainly on hardware. I created the vibration sleeve using a 5V Arduino Pro Micro, 8 NPN transistor switches, and 8 mini vibration motors all held within a sewn, stretchy material. \
-Transistor switches (powered externally from a 9V battery) were used because the Arduino could not provide\ the amperage needed from its DIO pins. \
-I wrote an algorithm for the Arduino to select motors and vibrate according to direction, and I implemented a Myo to change vibration when the wrist twists. \
-The values from the Myo were read in C++ and sent via serial to the Arduino to manipulate the data by parsing numbers and characters. \
-After finishing this, I began working on object recognition by using HAAR classifiers in OpenCV. \
-We also used VOCE, a voice library for speech to text and text to\ speech. \
+TravelAR is an iOS travel application built using Apple's ARKit. \
+On opening the app, there is a camera view in the room. Upon tapping, there will be an augmented reality \"portal\" to another city, where you physically walk inside another \"room\" and view a gallery of AR scenes from the city. \
+If interested in travel information to the city, there is a pull-up information section where a user can find relevant flight details and prices. \
 <br><br>\
-Please check our MHacks submission <a href=\"https://devpost.com/software/innovation-insight\">here</a>.",
-
+We built TravelAR with Apple's iOS ARKit, a Flask server hosted with Microsoft Azure, and many APIs including the Amadeus Travel APIs, the Microsoft Bing Image Search API, and the WolframAlpha Simple API. \
+The iOS application submits a “GET” request to our Flask server hosted in the cloud with Microsoft Azure. \
+This Flask server takes in a city/location name, and it processes that string with many APIs to extract information—starting with the Amadeus Travel APIs. \
+We hit the Amadeus endpoints with our location to gather information on popular attractions nearby, flight statistics, and other general travel information. \
+We then port the “popular attractions” into the Microsoft Bing Image Search API to get a list of image urls that will be displayed in the iOS application. \
+Furthermore, we use the WolframAlpha API to get information on the population. \
+We combine all of the information with the AR to create a comprehensive visual display with helpful information. \
+<br><br>\
+Please check out a video of our project <a href=\"https://www.youtube.com/watch?v=ACneUIVByaY\">here</a> and our HackMIT submission <a href=\"https://devpost.com/software/travelar-g4sq6y\">here</a>.",
         //image
-        "img/projects/innovation_insight.jpg",
+        "img/projects/travelar_image.jpg",
         //date
-        "September 2015",
-        //creator
-        "Ethan Weber"
-    );
-
-
-    add_item(
-        //title
-        "Hovercraft",
-        //description
-        "In eighth grade, I had the idea to build a hovercraft. My brother bet me ten dollars I couldn't do it, but I decided to prove him wrong. I began by harvesting material from my grandparents' farm, starting with an 8'x4' piece of plywood. I constructed a skirt with rip-stop nylon and my grandma's sewing guidance. I attached a squirrel cage fan to a 12HP engine with two pulleys and a belt to provide the lift. At this point, I tested it around my lawn, and it effortlessly floated above the ground! I then constructed a seat from wood scraps. To provide forward thrust, I found another engine (11HP) and equipped it to a fan I found in an old tractor. Behind this fan is a fin to direct the airflow and steer the craft. This project occupied my garage for about one month, and during this time, I made frequent trips to the hardware store (luckily it's a block from home). It was a very rewarding project . . . not to mention the fact that I also won ten bucks from my brother!",
-        //image
-        "img/projects/hovercraft.jpg",
-        //date
-        "Spring 2012",
-        //creator
-        "Ethan Weber"
-    );
-
-    add_item(
-        //title
-        "Quadcopter",
-        //description
-        "This is a summer project that I constructed to learn more about programming in a fun way! I started by purchasing supplies including the framework and electronics. It is controlled by an Arduino Mega 2560 with a sensor shield attached to the top. I had to solder every component onto this shield, as well as the power harness, motor leads, and bullet connectors (to make it easy to swap ESCs with one another very quickly). The sensors featured on the quadcopter include: a barometer, ultrasonic sensor, magnetometer, gyroscope, accelerometer, and GPS. Everything is powered by a 12V LiPo battery, and it is controlled with a Turnigy 9x transmitter/receiver combination. I had to do a lot of debugging to add/fix flight software. I programmed a custom failsafe for my RC controller and fixed an auto-landing function. It will land itself if it gets out of range or if I flip a switch. I look forward to adding more features in the future.",
-        //image
-        "img/projects/quadcopter.jpg",
-        //date
-        "Summer 2014",
-        //creator
-        "Ethan Weber"
-    );
-
-    add_item(
-        //title
-        "Hydraulic Crane",
-        //description
-        "In my freshman shop class, we had to make a simple crane using water hydraulics. I decided to make a simple one for class and this complex one on my own. I set up a workshop in my garage and began making trips to my grandparents' farm and the hardware store to find supplies. The base is a piece of plywood. The rotating platform for the crane consists of a swivel plate from a boat seat. I sandwiched a sprocket on top of it in order to hold a chain and ran it to a 12V motor. The motor is operated with a large 12V motorcycle battery using a 2-way switch. The crane is equipped with eight syringes, multiple joints, and a claw I formed by bending steel. I used two syringes at each rotating point to make it very stable and to reduce friction. Upon completion, my teacher encouraged me to bring in my complex crane to demonstrate for the class. I was happy to share!",
-        //image
-        "img/projects/hydraulic_crane.jpg",
-        //date
-        "Fall 2012",
+        "Fall 2017",
         //creator
         "Ethan Weber"
     );
@@ -232,6 +198,50 @@ The Jetson was a perfect way to bring together all of the code that Luke and I w
         "img/projects/jetslam_bot.JPG",
         //date
         "Summer 2017",
+        //creator
+        "Ethan Weber"
+    );
+
+    add_item(
+        //title
+        "Family Escape Room Map",
+        //description
+        "I made a website that maps all of the escape rooms that my family and friends have done! My family loves escape rooms! See the site <a style=\"font-weight: bold\" href=\"http://weberescape.world\">here</a>.",
+        //image
+        "img/projects/escape_map.png",
+        //date
+        "Summer 2017",
+        //creator
+        "Ethan Weber"
+    );
+
+    add_item(
+        //title
+        "ROS-MultiMaster-App",
+        //description
+        "While doing research in an MIT robotics lab focussing on using multiple robots to accomplish \
+high-level tasks, there was need for an application that could easily synchronize ROS \
+messages across computers. Welcome the ROS-MultiMaster-App! We created the \
+ROS-MultiMaster-App as an easy-to-use web application to synchronize ROS topics and \
+services throughout multiple computers--each running their own roscore--on the same \
+network. Check it out at <a style=\"font-weight: bold\" href=\"https://github.com/ethanweber/ros-multimaster-app\">this repository</a> on my GitHub account.",
+        //image
+        "img/projects/ros-multimaster-app.png",
+        //date
+        "2017",
+        //creator
+        "Ethan Weber"
+    );
+
+    add_item(
+        //title
+        "Block Game",
+        //description
+        "I made a puzzle block game where you have to get colored blocks to their respective goals by using barrier to maneuver. Check it out <a style=\"font-weight: bold\" href=\"block_game/block_game.html\">here</a>. Use arrow keys to move and refresh the page for a new layout. Note that there is no signal for winning in this version. Code is located at <a style=\"font-weight: bold\" href=\"https://github.com/ethanweber/block_game\">https://github.com/ethanweber/block_game</a>. I've rewritten this Javascript applicaton in Qt for mobile use. Code for that is <a style=\"font-weight: bold\" href=\"https://github.com/ethanweber/motion_planning/tree/1f0cb9b471060b5b5dd9d5c9eb88069a2ffc7052/qt_block_game\">here</a>, and I was planning to use it for motion planning research. However, I'll update the block_game repo if more work continues on this project.",
+        //image
+        "img/projects/block_game.png",
+        //date
+        "2017",
         //creator
         "Ethan Weber"
     );
@@ -269,31 +279,55 @@ Check out <a href=\"documents/Arealytics_Final_Report.pdf\">our report</a> for m
 
     add_item(
         //title
-        "TravelAR",
+        "LED Matrix High School Graduation Cap",
         //description
-        "Traveling is exciting - planning, not so much. \
-We thought about different ways to improve the vacation search process and found that visuals were key in selecting the perfect location. \
-Because of this, we created TravelAR, an augmented reality app that allows you to physically step into scenes of different cities, then find flight information if you have found your ideal travel destination.\
-<br><br>\
-TravelAR is an iOS travel application built using Apple's ARKit. \
-On opening the app, there is a camera view in the room. Upon tapping, there will be an augmented reality \"portal\" to another city, where you physically walk inside another \"room\" and view a gallery of AR scenes from the city. \
-If interested in travel information to the city, there is a pull-up information section where a user can find relevant flight details and prices. \
-<br><br>\
-We built TravelAR with Apple's iOS ARKit, a Flask server hosted with Microsoft Azure, and many APIs including the Amadeus Travel APIs, the Microsoft Bing Image Search API, and the WolframAlpha Simple API. \
-The iOS application submits a “GET” request to our Flask server hosted in the cloud with Microsoft Azure. \
-This Flask server takes in a city/location name, and it processes that string with many APIs to extract information—starting with the Amadeus Travel APIs. \
-We hit the Amadeus endpoints with our location to gather information on popular attractions nearby, flight statistics, and other general travel information. \
-We then port the “popular attractions” into the Microsoft Bing Image Search API to get a list of image urls that will be displayed in the iOS application. \
-Furthermore, we use the WolframAlpha API to get information on the population. \
-We combine all of the information with the AR to create a comprehensive visual display with helpful information. \
-<br><br>\
-Please check out a video of our project <a href=\"https://www.youtube.com/watch?v=ACneUIVByaY\">here</a> and our HackMIT submission <a href=\"https://devpost.com/software/travelar-g4sq6y\">here</a>.",
+        "This is my New Holstein High School graduation cap using a 32 x 32 RGB LED matrix controlled by a Raspberry Pi 2. Check it out on YouTube <a style=\"font-weight: bold\" href=\"https://www.youtube.com/watch?v=dShCYXGweCg\">here</a>.",
         //image
-        "img/projects/travelar_image.jpg",
+        "img/projects/high_school_grad_cap.jpg",
         //date
-        "Fall 2017",
+        "2016",
         //creator
-        "Ethan Weber"
+        "Ethan Weber",
+        true
+    );
+
+    add_item(
+        //title
+        "Innovation Insight",
+        //description
+        "I have a desire to develop improvements that impact people. One idea of mine was to develop technology that enables the blind to navigate through an unknown area using a combination of GPS, object recognition, and vibration feedback. I was accepted into the University of Michigan's 36-hour hackathon (MHacks 6). I used this opportunity to prove the concept of object recognition and vibration feedback. A Microsoft Kinect V2 sensor, worn by a visually impaired person, would recognize objects on a table. The person would hear a verbal list of items and then give a voice command choosing the specific item they want to reach. I created an intuitive armband to vibrate in corresponding sections to direct the user's hand toward the object. We had some difficulties but ultimately proved our concept. Microsoft awarded us with \"Best Overall Use of Microsoft Technology.\"\
+<br><br>\
+This picture represents my project to help the visually impaired using object recognition via a Microsoft Kinect V2 and vibration feedback. \
+My teammates worked with vision processing and databases, but I worked mainly on hardware. I created the vibration sleeve using a 5V Arduino Pro Micro, 8 NPN transistor switches, and 8 mini vibration motors all held within a sewn, stretchy material. \
+Transistor switches (powered externally from a 9V battery) were used because the Arduino could not provide\ the amperage needed from its DIO pins. \
+I wrote an algorithm for the Arduino to select motors and vibrate according to direction, and I implemented a Myo to change vibration when the wrist twists. \
+The values from the Myo were read in C++ and sent via serial to the Arduino to manipulate the data by parsing numbers and characters. \
+After finishing this, I began working on object recognition by using HAAR classifiers in OpenCV. \
+We also used VOCE, a voice library for speech to text and text to\ speech. \
+<br><br>\
+Please check our MHacks submission <a href=\"https://devpost.com/software/innovation-insight\">here</a>.",
+
+        //image
+        "img/projects/innovation_insight.jpg",
+        //date
+        "September 2015",
+        //creator
+        "Ethan Weber",
+        true
+    );
+
+    add_item(
+        //title
+        "Soccer Cart",
+        //description
+        "The task of carrying bags of soccer balls and two five-gallon water jugs to practice each day was a tiresome, tedious process. As a freshman, it was my grade's job to perform these duties. After the season, I went home and decided there must be a better way. I designed and constructed a cart with angle iron, large wheels, convenient shelving, and netting to hold the soccer balls. Two water jugs fit in the front. Various items can fit into the other shelving areas. The ball compartment is open on the top and the side, making it easy to place balls in and get balls out. During this project, my father taught me to weld. It was a lot of fun, and afterward, a local company painted it my school colors. The following season, I wheeled it to practice and saved the freshmen from the difficult task of carrying equipment. Currently, the cart is in great shape, saving both time and energy.",
+        //image
+        "img/projects/soccer_cart.jpg",
+        //date
+        "Summer 2015",
+        //creator
+        "Ethan Weber",
+        true
     );
 
     add_item(
@@ -313,13 +347,39 @@ I added additional metal to the frame as a cell phone holder. Placing my phone i
 
     add_item(
         //title
-        "Soccer Cart",
+        "Quadcopter",
         //description
-        "The task of carrying bags of soccer balls and two five-gallon water jugs to practice each day was a tiresome, tedious process. As a freshman, it was my grade's job to perform these duties. After the season, I went home and decided there must be a better way. I designed and constructed a cart with angle iron, large wheels, convenient shelving, and netting to hold the soccer balls. Two water jugs fit in the front. Various items can fit into the other shelving areas. The ball compartment is open on the top and the side, making it easy to place balls in and get balls out. During this project, my father taught me to weld. It was a lot of fun, and afterward, a local company painted it my school colors. The following season, I wheeled it to practice and saved the freshmen from the difficult task of carrying equipment. Currently, the cart is in great shape, saving both time and energy.",
+        "This is a summer project that I constructed to learn more about programming in a fun way! I started by purchasing supplies including the framework and electronics. It is controlled by an Arduino Mega 2560 with a sensor shield attached to the top. I had to solder every component onto this shield, as well as the power harness, motor leads, and bullet connectors (to make it easy to swap ESCs with one another very quickly). The sensors featured on the quadcopter include: a barometer, ultrasonic sensor, magnetometer, gyroscope, accelerometer, and GPS. Everything is powered by a 12V LiPo battery, and it is controlled with a Turnigy 9x transmitter/receiver combination. I had to do a lot of debugging to add/fix flight software. I programmed a custom failsafe for my RC controller and fixed an auto-landing function. It will land itself if it gets out of range or if I flip a switch. I look forward to adding more features in the future.",
         //image
-        "img/projects/soccer_cart.jpg",
+        "img/projects/quadcopter.jpg",
         //date
-        "Summer 2015",
+        "Summer 2014",
+        //creator
+        "Ethan Weber"
+    );
+
+    add_item(
+        //title
+        "Infrared Remote Controlled Robot",
+        //description
+        "Many years ago, my uncle gave me a hexapod robot that could move with the flip of a switch. It was pretty cool at the time, but that was back in sixth grade. When I got older, I realized that I could \"hack\" it to make it better. I stripped it of its previous electronics and equipped it with an Arduino Uno, IR sensor, RGB LED, piezo buzzer, and two 9V batteries. After programming my Arduino to decode infrared signals received by an IR remote, I could control the robot movement, the LED colors, and the sounds. This project taught me valuable skills in decoding and producing infrared messages. I look forward to applying these skills in future projects.",
+        //image
+        "img/projects/ir_robot.jpg",
+        //date
+        "2014",
+        //creator
+        "Ethan Weber"
+    );
+
+    add_item(
+        //title
+        "Biology Timeline LED Display",
+        //description
+        "My biology teacher told my class to make a timeline of the Earth's history. He handed out long strips of paper, but I wanted a challenge, so I asked to do it with electronics. I was inspired to create a device similar to those at museums where you can touch a metal button, prompting a corresponding LED to light up and indicate the answer. I created a wooden, folding case with holes (for LEDs) spaced relative to Earth's history. I drilled more holes and inserted labelled tacks to create a conductive surface. Behind the scenes, I created a common ground for each LED. After lots of wiring, I got it to work in just one weekend. When the screwdriver (attached to the common ground as well) touched a labeled tack, the correct LED lit up indicating the year in the timeline. It was powered by one 9V battery. I added handles to the top of my creation, folded it up, and was ready to bring my suitcase-looking device to school. It was much more fun than doing it on paper!",
+        //image
+        "img/projects/biology_timeline.jpg",
+        //date
+        "2012-2013",
         //creator
         "Ethan Weber"
     );
@@ -335,6 +395,20 @@ I added additional metal to the frame as a cell phone holder. Placing my phone i
         "Spring 2013",
         //creator
         "Ethan Weber"
+    );
+
+    add_item(
+        //title
+        "Hydraulic Crane",
+        //description
+        "In my freshman shop class, we had to make a simple crane using water hydraulics. I decided to make a simple one for class and this complex one on my own. I set up a workshop in my garage and began making trips to my grandparents' farm and the hardware store to find supplies. The base is a piece of plywood. The rotating platform for the crane consists of a swivel plate from a boat seat. I sandwiched a sprocket on top of it in order to hold a chain and ran it to a 12V motor. The motor is operated with a large 12V motorcycle battery using a 2-way switch. The crane is equipped with eight syringes, multiple joints, and a claw I formed by bending steel. I used two syringes at each rotating point to make it very stable and to reduce friction. Upon completion, my teacher encouraged me to bring in my complex crane to demonstrate for the class. I was happy to share!",
+        //image
+        "img/projects/hydraulic_crane.jpg",
+        //date
+        "Fall 2012",
+        //creator
+        "Ethan Weber",
+        true
     );
 
     add_item(
@@ -365,45 +439,6 @@ I added additional metal to the frame as a cell phone holder. Placing my phone i
 
     add_item(
         //title
-        "Automatic Dog Feeder",
-        //description
-        "In my family of five people, it's hard to remember whose turn it is to feed the dog. To solve this problem, I created an automatic dog feeder. In the top of the wood-constructed device, there is a hopper that can be filled with dog food. The food is routed into a funnel that extends down into a cross-section with an auger bit extending through it. I attached the auger bit with a drill (powered by a 12V power supply) to turn the auger at certain times in order to drop food into a dish below. The structure was very large (not convenient for indoor use) and it was never completely automated because I didn't have an Arduino at the time. We didn't end up using it very much. However, I proved the idea and had a working prototype that dispensed food with the flip of a switch. I'd like to create a more efficient version in the future.",
-        //image
-        "img/projects/dog_feeder.jpg",
-        //date
-        "Summer 2011",
-        //creator
-        "Ethan Weber"
-    );
-
-    add_item(
-        //title
-        "Biology Timeline LED Display",
-        //description
-        "My biology teacher told my class to make a timeline of the Earth's history. He handed out long strips of paper, but I wanted a challenge, so I asked to do it with electronics. I was inspired to create a device similar to those at museums where you can touch a metal button, prompting a corresponding LED to light up and indicate the answer. I created a wooden, folding case with holes (for LEDs) spaced relative to Earth's history. I drilled more holes and inserted labelled tacks to create a conductive surface. Behind the scenes, I created a common ground for each LED. After lots of wiring, I got it to work in just one weekend. When the screwdriver (attached to the common ground as well) touched a labeled tack, the correct LED lit up indicating the year in the timeline. It was powered by one 9V battery. I added handles to the top of my creation, folded it up, and was ready to bring my suitcase-looking device to school. It was much more fun than doing it on paper!",
-        //image
-        "img/projects/biology_timeline.jpg",
-        //date
-        "2012-2013",
-        //creator
-        "Ethan Weber"
-    );
-
-    add_item(
-        //title
-        "Infrared Remote Controlled Robot",
-        //description
-        "Many years ago, my uncle gave me a hexapod robot that could move with the flip of a switch. It was pretty cool at the time, but that was back in sixth grade. When I got older, I realized that I could \"hack\" it to make it better. I stripped it of its previous electronics and equipped it with an Arduino Uno, IR sensor, RGB LED, piezo buzzer, and two 9V batteries. After programming my Arduino to decode infrared signals received by an IR remote, I could control the robot movement, the LED colors, and the sounds. This project taught me valuable skills in decoding and producing infrared messages. I look forward to applying these skills in future projects.",
-        //image
-        "img/projects/ir_robot.jpg",
-        //date
-        "2014",
-        //creator
-        "Ethan Weber"
-    );
-
-    add_item(
-        //title
         "Blanket Stabilizer",
         //description
         "Because my family and I didn't enjoy sitting on cold leather chairs, we decided to cover our recliners with blankets. The blankets kept falling to the floor, so I decided to create a \"blanket stabilizer\" to hold them in place. The device was meant to hold the loose ends of the blanket that was wrapped around the chair. An adjustable cord ran underneath the chair's base to stabilize the device. I built it with two clamps, joining them together with metal strips to maximize grip area (as pictured). I then glued on a fabric cover to provide protection and to blend in with the blanket's color. My idea seemed good at the time, but upon completion, I realized it wasn't helpful; it actually made the problem worse! This project was not successful, but I still learned from it. I'm including it here to demonstrate my persistence in taking my ideas to the test without fear of \"failure.\"",
@@ -417,119 +452,92 @@ I added additional metal to the frame as a cell phone holder. Placing my phone i
 
     add_item(
         //title
-        "ROS-MultiMaster-App",
+        "Hovercraft",
         //description
-        "While doing research in an MIT robotics lab focussing on using multiple robots to accomplish \
-high-level tasks, there was need for an application that could easily synchronize ROS \
-messages across computers. Welcome the ROS-MultiMaster-App! We created the \
-ROS-MultiMaster-App as an easy-to-use web application to synchronize ROS topics and \
-services throughout multiple computers--each running their own roscore--on the same \
-network. Check it out at <a style=\"font-weight: bold\" href=\"https://github.com/ethanweber/ros-multimaster-app\">this repository</a> on my GitHub account.",
+        "In eighth grade, I had the idea to build a hovercraft. My brother bet me ten dollars I couldn't do it, but I decided to prove him wrong. I began by harvesting material from my grandparents' farm, starting with an 8'x4' piece of plywood. I constructed a skirt with rip-stop nylon and my grandma's sewing guidance. I attached a squirrel cage fan to a 12HP engine with two pulleys and a belt to provide the lift. At this point, I tested it around my lawn, and it effortlessly floated above the ground! I then constructed a seat from wood scraps. To provide forward thrust, I found another engine (11HP) and equipped it to a fan I found in an old tractor. Behind this fan is a fin to direct the airflow and steer the craft. This project occupied my garage for about one month, and during this time, I made frequent trips to the hardware store (luckily it's a block from home). It was a very rewarding project . . . not to mention the fact that I also won ten bucks from my brother!",
         //image
-        "img/projects/ros-multimaster-app.png",
+        "img/projects/hovercraft.jpg",
         //date
-        "2017",
+        "Spring 2012",
         //creator
-        "Ethan Weber"
+        "Ethan Weber",
+        true
     );
 
     add_item(
         //title
-        "LED Matrix High School Graduation Cap",
+        "Automatic Dog Feeder",
         //description
-        "This is my New Holstein High School graduation cap using a 32 x 32 RGB LED matrix controlled by a Raspberry Pi 2. Check it out on YouTube <a style=\"font-weight: bold\" href=\"https://www.youtube.com/watch?v=dShCYXGweCg\">here</a>.",
+        "In my family of five people, it's hard to remember whose turn it is to feed the dog. To solve this problem, I created an automatic dog feeder. In the top of the wood-constructed device, there is a hopper that can be filled with dog food. The food is routed into a funnel that extends down into a cross-section with an auger bit extending through it. I attached the auger bit with a drill (powered by a 12V power supply) to turn the auger at certain times in order to drop food into a dish below. The structure was very large (not convenient for indoor use) and it was never completely automated because I didn't have an Arduino at the time. We didn't end up using it very much. However, I proved the idea and had a working prototype that dispensed food with the flip of a switch. I'd like to create a more efficient version in the future.",
         //image
-        "img/projects/high_school_grad_cap.jpg",
+        "img/projects/dog_feeder.jpg",
         //date
-        "2016",
+        "Summer 2011",
         //creator
         "Ethan Weber"
     );
 
-    add_item(
-        //title
-        "Family Escape Room Map",
-        //description
-        "I made a website that maps all of the escape rooms that my family and friends have done! My family loves escape rooms! See the site <a style=\"font-weight: bold\" href=\"http://weberescape.world\">here</a>.",
-        //image
-        "img/projects/escape_map.png",
-        //date
-        "Summer 2017",
-        //creator
-        "Ethan Weber"
-    );
+  document.querySelectorAll('.project-filters .pub-filter-btn').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      var btnTop = btn.getBoundingClientRect().top;
 
-    add_item(
-        //title
-        "Block Game",
-        //description
-        "I made a puzzle block game where you have to get colored blocks to their respective goals by using barrier to maneuver. Check it out <a style=\"font-weight: bold\" href=\"block_game/block_game.html\">here</a>. Use arrow keys to move and refresh the page for a new layout. Note that there is no signal for winning in this version. Code is located at <a style=\"font-weight: bold\" href=\"https://github.com/ethanweber/block_game\">https://github.com/ethanweber/block_game</a>. I've rewritten this Javascript applicaton in Qt for mobile use. Code for that is <a style=\"font-weight: bold\" href=\"https://github.com/ethanweber/motion_planning/tree/1f0cb9b471060b5b5dd9d5c9eb88069a2ffc7052/qt_block_game\">here</a>, and I was planning to use it for motion planning research. However, I'll update the block_game repo if more work continues on this project.",
-        //image
-        "img/projects/block_game.png",
-        //date
-        "2017",
-        //creator
-        "Ethan Weber"
-    );
+      document.querySelectorAll('.project-filters .pub-filter-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var filter = btn.dataset.filter;
+      document.querySelectorAll('.project-card').forEach(function(card) {
+        if (filter === 'all') {
+          card.classList.remove('proj-hidden');
+        } else {
+          card.classList.toggle('proj-hidden', !card.classList.contains('project-favorite'));
+        }
+      });
 
-
-
+      var newBtnTop = btn.getBoundingClientRect().top;
+      window.scrollBy(0, newBtnTop - btnTop);
+    });
+  });
 
 });
 
 
-function add_item(title, description, image, date, creator) {
-    add_portfolio_grid(index, title, image);
+function add_item(title, description, image, date, creator, favorite) {
+    add_portfolio_grid(index, title, image, date, favorite);
     add_portfolio_model(index, title, image, description, creator, date);
     index += 1;
 }
 
-function add_portfolio_grid(index, title, img_source) {
-    portfolio_grid.innerHTML += "\
-    <div class=\"col-sm-4 portfolio-item\">\
-          <a href=\"#portfolioModal" + index + "\" class=\"portfolio-link\" data-toggle=\"modal\">\
-              <div class=\"caption\">\
-                  <div class=\"caption-content\">\
-                      <i class=\"fa fa-search-plus fa-3x\"></i>\
-                      <h3>" + title + "</h3>\
-                  </div>\
-              </div>\
-              <img src=\"" + img_source + "\" class=\"img-responsive resize\" loading=\"lazy\" decoding=\"async\">\
-          </a>\
-      </div>";
+function add_portfolio_grid(index, title, img_source, date, favorite) {
+    var favClass = favorite ? ' project-favorite' : '';
+    var favTitle = favorite ? ' title="\u2B50 Personal favorite"' : '';
+    portfolio_grid.innerHTML += '\
+    <a href="#portfolioModal' + index + '" class="project-card' + favClass + '"' + favTitle + ' data-toggle="modal">\
+        <div class="project-card-img">\
+            <img src="' + img_source + '" loading="lazy" decoding="async" alt="' + title + '">\
+        </div>\
+        <div class="project-card-title">' + title + '</div>\
+        <div class="project-card-date">' + date + '</div>\
+    </a>';
 }
 
 function add_portfolio_model(index, title, img_source, content, creator, date) {
-    portfolio_models.innerHTML += "\
-  <div class=\"portfolio-modal modal fade\" id=\"portfolioModal" + index + "\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\
-      <div class=\"modal-content\">\
-          <div class=\"close-modal\" data-dismiss=\"modal\">\
-              <div class=\"lr\">\
-                  <div class=\"rl\">\
-                  </div>\
-              </div>\
-          </div>\
-          <div class=\"container\">\
-              <div class=\"row\">\
-                  <div class=\"col-lg-8 col-lg-offset-2\">\
-                      <div class=\"modal-body\">\
-                          <h2>" + title + "</h2>\
-                          <hr class=\"star-primary\">\
-                          <img src=\"" + img_source + "\" class=\"img-responsive img-centered resize\" loading=\"lazy\" decoding=\"async\">\
-                          <p>" + content + "</p>\
-                          <ul class=\"list-inline item-details\">\
-                            <li>Created By:\
-                                <strong>" + creator + "</strong>\
-                            </li>\
-                            <li>Date:\
-                                <strong>" + date + "</strong>\
-                            </li>\
-                          </ul>\
-                          <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\"><i class=\"fa fa-times\"></i> Close</button>\
-                      </div>\
+    portfolio_models.innerHTML += '\
+  <div class="modal fade project-modal" id="portfolioModal' + index + '" tabindex="-1" role="dialog" aria-hidden="true">\
+      <div class="modal-dialog modal-lg">\
+          <div class="modal-content">\
+              <button type="button" class="project-modal-close" data-dismiss="modal" aria-label="Close">\
+                  <i class="fa fa-times"></i>\
+              </button>\
+              <div class="project-modal-body">\
+                  <h3 class="project-modal-title">' + title + '</h3>\
+                  <img src="' + img_source + '" class="project-modal-img" loading="lazy" decoding="async">\
+                  <p>' + content + '</p>\
+                  <div class="project-modal-meta">\
+                      <span>' + creator + '</span>\
+                      <span>' + date + '</span>\
                   </div>\
               </div>\
           </div>\
       </div>\
-  </div>";
+  </div>';
 }

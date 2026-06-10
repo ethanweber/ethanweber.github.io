@@ -1,3 +1,13 @@
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 img.resize {
   width:100%;
   height:100%;
@@ -769,4 +779,163 @@ video.project-modal-img {
     transition: none;
     will-change: auto;
   }
+}
+
+/* ---- Research timeline milestone markers ---- */
+
+.research-milestone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 22px auto;
+  max-width: 800px;
+  padding: 0 12px;
+  font-size: 0.95em;
+  color: #777;
+  font-style: italic;
+  text-align: center;
+}
+
+.research-milestone::before,
+.research-milestone::after {
+  content: '';
+  flex: 1;
+  max-width: 120px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #d0d0d0, transparent);
+}
+
+.research-milestone-icon {
+  font-style: normal;
+  font-size: 1.1em;
+}
+
+.research-milestone-date {
+  font-weight: 600;
+  color: #555;
+  font-style: normal;
+}
+
+.research-milestone-sep {
+  color: #b5b5b5;
+  font-style: normal;
+}
+
+.research-milestone-text a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 0, 0, 0.25);
+}
+
+.research-milestone-text a:hover {
+  color: #333;
+}
+
+@media (max-width: 600px) {
+  .research-milestone {
+    flex-wrap: wrap;
+    font-size: 0.88em;
+    gap: 6px;
+  }
+  .research-milestone::before,
+  .research-milestone::after {
+    display: none;
+  }
+}
+
+/* ---- Research timeline highlight (centered media strip) ---- */
+
+.research-highlight {
+  margin: 26px auto;
+  max-width: 1100px;
+  padding: 0 12px;
+  text-align: center;
+  scroll-margin-top: 80px;
+}
+
+.research-highlight-strip {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+  width: 100%;
+}
+
+.research-highlight-video {
+  position: relative;
+  display: inline-flex;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.research-highlight-video video {
+  height: clamp(72px, 11vw, 110px);
+  width: auto;
+  max-width: 100%;
+  background: #000;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  flex-shrink: 1;
+  min-width: 0;
+  display: block;
+}
+
+.research-highlight-video::after {
+  content: attr(data-label);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 0.78em;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.research-highlight-video[data-label]:hover::after {
+  opacity: 1;
+}
+
+.research-highlight-caption {
+  position: relative;
+  margin: 14px auto 0;
+  padding-top: 14px;
+  max-width: 640px;
+  font-size: 0.92em;
+  color: #6a6a6a;
+  font-style: italic;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+}
+
+.research-highlight-caption::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #c8c8c8, transparent);
+}
+
+.research-highlight-caption a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 0, 0, 0.25);
+}
+
+.research-highlight-caption a:hover {
+  color: #333;
 }

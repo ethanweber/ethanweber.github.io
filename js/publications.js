@@ -1,5 +1,38 @@
 let publications = [
   {
+    type: "milestone",
+    icon: "✨",
+    date: "2026",
+    text: "Joined Meta Superintelligence Labs (MSL), Menlo Park",
+  },
+  {
+    type: "highlight",
+    id: "reality-labs-snippets",
+    media: [
+      "realitylabs/1.mp4",
+      "realitylabs/2.mp4",
+      "realitylabs/3.mp4",
+      "realitylabs/4.mp4",
+      "realitylabs/5.mp4",
+    ],
+    labels: [
+      { span: 2, text: "Sparse Images to Video" },
+      { span: 1, text: "Image to Video" },
+      { span: 1, text: "Text to 360 Video" },
+      { span: 1, text: "Image to Sparse Images" },
+    ],
+    caption: "Glimpses from the model I TL'd at Meta Reality Labs before moving to MSL. The same flexible model does all of these tasks (and more). See my teammate <a href=\"https://x.com/Nik__V__/status/2061929833584533801\">Nikhil Keetha's X post</a> for context, or DM me for more details.",
+  },
+  {
+    title: "Free-Range Gaussians: Non-Grid-Aligned Generative 3D Gaussian Reconstruction",
+    authors:
+      "Ahan Shabanov, Peter Hedman, <b>Ethan Weber</b>, Zhengqin Li, Denis Rozumny, Gael Le Lan, Naina Dhingra, Lei Luo, Andrea Vedaldi, Christian Richardt, Andrea Tagliasacchi, Bo Zhu, Numair Khan",
+    conference: "arXiv 2026",
+    "project-page": "https://free-range-gaussians.github.io/",
+    paper: "https://arxiv.org/abs/2604.04874",
+    media: "img/publications/free-range-gaussians.mp4",
+  },
+  {
     title: "LuxRemix: Lighting Decomposition and Remixing for Indoor Scenes",
     authors:
       "Ruofan Liang, Norman Müller, <b>Ethan Weber</b>, Duncan Zauss, Nandita Vijaykumar, Peter Kontschieder, Christian Richardt",
@@ -55,6 +88,12 @@ let publications = [
     favorite: true,
   },
   {
+    type: "milestone",
+    icon: "📌",
+    date: "Oct 2025",
+    text: "Organized <a href=\"https://scenecomp.github.io/\">SceneComp @ ICCV 2025</a> workshop on generative scene completion",
+  },
+  {
     title:
       "Eye, Robot: Learning to Look to Act with a BC-RL Perception-Action Loop",
     authors:
@@ -76,6 +115,12 @@ let publications = [
     paper: "https://yashkant.github.io/pippo/",
     code: "https://github.com/facebookresearch/pippo",
     media: "img/publications/pippo.mp4",
+  },
+  {
+    type: "milestone",
+    icon: "🔬",
+    date: "2025",
+    text: "Joined Meta Reality Labs, Zurich",
   },
   {
     title: "NeRFiller: Completing Scenes via Generative 3D Inpainting",
@@ -187,7 +232,7 @@ function renderPublications(publications) {
 
   const heading = document.querySelector("#publications h2");
   if (heading) {
-    heading.innerHTML = `Publications`;
+    heading.innerHTML = `Research`;
   }
 
   const filterHTML = `
@@ -198,6 +243,38 @@ function renderPublications(publications) {
   const parts = [filterHTML];
 
   publications.forEach((publication) => {
+    if (publication.type === "milestone") {
+      parts.push(`
+            <div class="research-milestone">
+                <span class="research-milestone-icon">${publication.icon || ""}</span>
+                <span class="research-milestone-date">${publication.date}</span>
+                <span class="research-milestone-sep">·</span>
+                <span class="research-milestone-text">${publication.text}</span>
+            </div>`);
+      return;
+    }
+
+    if (publication.type === "highlight") {
+      const idAttr = publication.id ? ` id="${publication.id}"` : "";
+      const expandedLabels = [];
+      (publication.labels || []).forEach((l) => {
+        for (let i = 0; i < (l.span || 1); i++) expandedLabels.push(l.text);
+      });
+      const videos = (publication.media || [])
+        .map((src, i) => {
+          const label = expandedLabels[i] || "";
+          const labelAttr = label ? ` data-label="${label.replace(/"/g, "&quot;")}"` : "";
+          return `<div class="research-highlight-video"${labelAttr}><video src="${src}" muted playsinline loop autoplay preload="metadata" controlslist="nofullscreen nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false;"></video></div>`;
+        })
+        .join("");
+      parts.push(`
+            <div class="research-highlight"${idAttr}>
+                <div class="research-highlight-strip">${videos}</div>
+                ${publication.caption ? `<p class="research-highlight-caption">${publication.caption}</p>` : ""}
+            </div>`);
+      return;
+    }
+
     let mediaHTML = "";
     if (publication.media) {
       const mediaType = publication.media.split(".").pop();
@@ -270,6 +347,9 @@ function renderPublications(publications) {
         } else {
           entry.classList.toggle("pub-hidden", !entry.classList.contains("publication-favorite"));
         }
+      });
+      document.querySelectorAll(".research-milestone, .research-highlight").forEach((m) => {
+        m.classList.toggle("pub-hidden", filter !== "all");
       });
 
       const newBtnTop = btn.getBoundingClientRect().top;

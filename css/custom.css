@@ -224,6 +224,102 @@ img.resize {
   margin-bottom: 3px;
 }
 
+.publication-release .release-media-trigger {
+  display: block;
+  position: relative;
+  cursor: zoom-in;
+}
+
+.release-media-trigger:hover,
+.release-media-trigger:focus {
+  text-decoration: none;
+}
+
+.release-media-hint {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 120ms ease;
+  pointer-events: none;
+}
+
+.release-media-trigger:hover .release-media-hint,
+.release-media-trigger:focus .release-media-hint {
+  opacity: 1;
+}
+
+.release-modal .modal-dialog {
+  max-width: min(960px, 92vw);
+  margin: 40px auto;
+}
+
+.release-modal .modal-content {
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  padding: 0;
+  position: relative;
+}
+
+.release-modal video.project-modal-img {
+  background: #000;
+  max-height: 75vh;
+  object-fit: contain;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+.release-modal-subtitle {
+  color: #6a6a6a;
+  font-size: 13px;
+  letter-spacing: 0.01em;
+  margin-bottom: 8px;
+}
+
+.release-modal-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 18px;
+  margin: 8px 0 0;
+}
+
+.release-modal-links a {
+  font-size: 15px;
+}
+
+.release-subtitle {
+  display: block;
+  font-size: 13px;
+  color: #6a6a6a;
+  margin: 2px 0 10px;
+  letter-spacing: 0.01em;
+}
+
+/* Plain text link matching the paper-entry links (theme color #5d8aa8); the arrow
+   still slides on hover for a bit of "read more" affordance. */
+.release-cta {
+  display: inline-block;
+  font-size: 15px;
+  color: #5d8aa8;
+  text-decoration: none;
+}
+
+.release-cta:hover,
+.release-cta:focus {
+  color: #5d8aa8;
+  text-decoration: underline;
+}
+
 .pub-filters {
   display: flex;
   gap: 8px;
@@ -847,20 +943,62 @@ video.project-modal-img {
 /* ---- Research timeline highlight (centered media strip) ---- */
 
 .research-highlight {
-  margin: 26px auto;
-  max-width: 1100px;
-  padding: 0 12px;
-  text-align: center;
+  margin: 0 0 10px;
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  background: transparent;
   scroll-margin-top: 80px;
+  transition: border-color 120ms ease, background-color 120ms ease;
+}
+
+/* Match the gold favorite border used by .publication-entry favorites (this
+   rule needs the extra specificity to beat the .research-highlight border above). */
+.research-highlight.publication-favorite {
+  border-color: #e8b730;
+  border-width: 2px;
+}
+
+.research-highlight:hover {
+  border-color: rgba(0, 0, 0, 0.18);
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.research-highlight-header {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.research-highlight-header .paper-title {
+  margin-bottom: 2px;
+}
+
+.research-highlight-header .release-subtitle {
+  margin: 0 0 6px;
+}
+
+.research-highlight-title {
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0 0 4px;
+  letter-spacing: 0.01em;
+}
+
+.research-highlight-subtitle {
+  font-size: 13px;
+  color: #6a6a6a;
+  margin: 0 0 12px;
+  letter-spacing: 0.01em;
 }
 
 .research-highlight-strip {
   display: flex;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 6px;
-  margin-bottom: 14px;
+  margin-bottom: 8px;
   width: 100%;
 }
 
@@ -872,10 +1010,11 @@ video.project-modal-img {
 }
 
 .research-highlight-video video {
-  height: clamp(72px, 11vw, 110px);
+  height: clamp(90px, 13.5vw, 156px);
   width: auto;
   max-width: 100%;
   background: #000;
+  object-fit: cover;
   pointer-events: none;
   user-select: none;
   -webkit-user-select: none;
@@ -909,25 +1048,25 @@ video.project-modal-img {
 
 .research-highlight-caption {
   position: relative;
-  margin: 14px auto 0;
-  padding-top: 14px;
-  max-width: 640px;
-  font-size: 0.92em;
+  margin: 12px 0 0;
+  padding-top: 12px;
+  max-width: 820px;
+  font-size: 0.9em;
   color: #6a6a6a;
   font-style: italic;
   line-height: 1.6;
   letter-spacing: 0.01em;
+  text-align: left;
 }
 
 .research-highlight-caption::before {
   content: '';
   position: absolute;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
   width: 60px;
   height: 1px;
-  background: linear-gradient(to right, transparent, #c8c8c8, transparent);
+  background: linear-gradient(to right, #c8c8c8, transparent);
 }
 
 .research-highlight-caption a {
@@ -938,4 +1077,24 @@ video.project-modal-img {
 
 .research-highlight-caption a:hover {
   color: #333;
+}
+
+/* On phones the 5-clip strip can't fit side-by-side, so let it scroll
+   horizontally (clips keep their aspect instead of squishing/cropping). */
+@media (max-width: 768px) {
+  .research-highlight-strip {
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    padding-bottom: 6px;
+  }
+  .research-highlight-video {
+    flex-shrink: 0;
+    scroll-snap-align: start;
+  }
+  .research-highlight-video video {
+    height: 96px;
+    object-fit: contain;
+  }
 }

@@ -516,6 +516,25 @@
 
   window.initReveal(document.querySelectorAll('section, .news-bar'));
   </script>
+
+  <!-- Open external links in a new tab so visitors don't get pushed off the site.
+       In-page anchors, modal/collapse triggers, and same-site links are left alone. -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('a[href]').forEach(function (a) {
+      var href = a.getAttribute('href') || '';
+      if (href.charAt(0) === '#') return;          // in-page anchors (nav, modal open)
+      if (a.hasAttribute('data-toggle')) return;   // bootstrap toggles
+      if (a.hasAttribute('target')) return;        // already explicit
+      var url;
+      try { url = new URL(a.href, location.href); } catch (e) { return; }
+      if (url.protocol !== 'http:' && url.protocol !== 'https:') return; // mailto/tel/etc.
+      if (url.hostname === location.hostname) return; // same-site page/pdf
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+    });
+  });
+  </script>
 </body>
 
 </html>

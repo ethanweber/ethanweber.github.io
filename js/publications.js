@@ -1,5 +1,16 @@
 let publications = [
   {
+    type: "release",
+    title: "Muse Image and Muse Video",
+    subtitle: "Meta Superintelligence Labs · 2026",
+    link: "https://ai.meta.com/blog/introducing-muse-image-muse-video-msl/",
+    linkLabel: "Research Blog",
+    media: "msl/muse_image_and_video.mp4",
+    mediaFull: "msl/muse_image_and_video_full.mp4",
+    mediaOriginal: "msl/muse_image_and_video_original.mp4",
+    favorite: true,
+  },
+  {
     type: "milestone",
     icon: "✨",
     date: "2026",
@@ -8,6 +19,9 @@ let publications = [
   {
     type: "highlight",
     id: "reality-labs-snippets",
+    favorite: true,
+    title: "Multi-Perspective Generative Model",
+    subtitle: "Meta Reality Labs · 2026",
     media: [
       "realitylabs/1.mp4",
       "realitylabs/2.mp4",
@@ -27,7 +41,7 @@ let publications = [
     title: "Free-Range Gaussians: Non-Grid-Aligned Generative 3D Gaussian Reconstruction",
     authors:
       "Ahan Shabanov, Peter Hedman, <b>Ethan Weber</b>, Zhengqin Li, Denis Rozumny, Gael Le Lan, Naina Dhingra, Lei Luo, Andrea Vedaldi, Christian Richardt, Andrea Tagliasacchi, Bo Zhu, Numair Khan",
-    conference: "arXiv 2026",
+    conference: "ECCV 2026",
     "project-page": "https://free-range-gaussians.github.io/",
     paper: "https://arxiv.org/abs/2604.04874",
     media: "img/publications/free-range-gaussians.mp4",
@@ -254,8 +268,61 @@ function renderPublications(publications) {
       return;
     }
 
+    if (publication.type === "release") {
+      const modalId = `releaseModal_${(publication.title || 'release').replace(/[^a-z0-9]/gi, '_')}`;
+      let mediaHTML = "";
+      if (publication.media) {
+        const mediaType = publication.media.split(".").pop();
+        if (mediaType === "mp4") {
+          mediaHTML = `
+            <a class="publication-media release-media-trigger" href="#${modalId}" data-toggle="modal" aria-label="Open ${publication.title} video">
+                <video class="publication-video" muted playsinline loop preload="none" data-src="${publication.media}"></video>
+                <span class="release-media-hint" aria-hidden="true"><i class="fa fa-expand"></i></span>
+            </a>`;
+        } else {
+          mediaHTML = `
+            <div class="publication-media">
+                <img src="${publication.media}" loading="lazy" decoding="async">
+            </div>`;
+        }
+      }
+      const favClass = publication.favorite ? ' publication-favorite' : '';
+      const linkLabel = publication.linkLabel || 'Read the announcement';
+      parts.push(`
+            <div class="publication-entry publication-release${favClass}">
+                ${mediaHTML}
+                <div class="publication-text">
+                    <span class="paper-title">${publication.title}</span>
+                    ${publication.subtitle ? `<span class="release-subtitle">${publication.subtitle}</span>` : ""}
+                    ${publication.link ? `<a class="release-cta" href="${publication.link}">${linkLabel}</a>` : ""}
+                </div>
+            </div>`);
+      if (publication.media && publication.media.endsWith('.mp4')) {
+        parts.push(`
+            <div class="modal fade release-modal" id="${modalId}" tabindex="-1" role="dialog" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <button type="button" class="project-modal-close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
+                  <div class="project-modal-body">
+                    <h3 class="project-modal-title">${publication.title}</h3>
+                    <video class="project-modal-img" controls loop playsinline preload="none" data-src="${publication.mediaFull || publication.media}"></video>
+                    ${publication.subtitle ? `<p class="release-modal-subtitle">${publication.subtitle}</p>` : ''}
+                    <p class="release-modal-links">
+                      ${publication.link ? `<a href="${publication.link}">${linkLabel}</a>` : ''}
+                      ${publication.mediaOriginal ? `<a href="${publication.mediaOriginal}" target="_blank" rel="noopener noreferrer">Original Video</a>` : ''}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>`);
+      }
+      return;
+    }
+
     if (publication.type === "highlight") {
       const idAttr = publication.id ? ` id="${publication.id}"` : "";
+      const favClass = publication.favorite ? ' publication-favorite' : '';
+      const favTitle = publication.favorite ? ' title="⭐ Personal favorite"' : '';
       const expandedLabels = [];
       (publication.labels || []).forEach((l) => {
         for (let i = 0; i < (l.span || 1); i++) expandedLabels.push(l.text);
@@ -268,7 +335,11 @@ function renderPublications(publications) {
         })
         .join("");
       parts.push(`
-            <div class="research-highlight"${idAttr}>
+            <div class="research-highlight${favClass}"${idAttr}${favTitle}>
+                <div class="research-highlight-header">
+                    ${publication.title ? `<span class="paper-title">${publication.title}</span>` : ""}
+                    ${publication.subtitle ? `<span class="release-subtitle">${publication.subtitle}</span>` : ""}
+                </div>
                 <div class="research-highlight-strip">${videos}</div>
                 ${publication.caption ? `<p class="research-highlight-caption">${publication.caption}</p>` : ""}
             </div>`);
@@ -279,9 +350,10 @@ function renderPublications(publications) {
     if (publication.media) {
       const mediaType = publication.media.split(".").pop();
       if (mediaType === "mp4") {
+        const controlsAttr = publication.controls ? " controls" : "";
         mediaHTML = `
             <div class="publication-media">
-                <video class="publication-video" muted playsinline loop preload="none" data-src="${publication.media}">
+                <video class="publication-video" muted playsinline loop preload="none" data-src="${publication.media}"${controlsAttr}>
                 </video>
             </div>`;
       } else if (
@@ -323,7 +395,7 @@ function renderPublications(publications) {
                 <div class="publication-text">
                     <p>
                         <span class="paper-title">${publication.title}</span>
-                        ${publication.authors.replace(/, (?=[^,]*$)/, ", and ")}.<br>
+                        ${publication.authors ? publication.authors.replace(/, (?=[^,]*$)/, ", and ") + ".<br>" : ""}
                         ${publication.conference ? publication.conference + " " : ""}<br>
                         ${linksHTML}
                     </p>
@@ -332,6 +404,12 @@ function renderPublications(publications) {
   });
 
   publicationsRow.innerHTML = parts.join('');
+
+  // Move modals from #publications_row to <body> so Bootstrap dismiss (X, backdrop,
+  // ESC) isn't trapped by parent stacking contexts / layout constraints.
+  publicationsRow.querySelectorAll('.modal.release-modal').forEach((m) => {
+    document.body.appendChild(m);
+  });
 
   document.querySelectorAll("#publications .pub-filter-btn").forEach((btn) => {
     btn.addEventListener("click", (e) => {
@@ -348,8 +426,15 @@ function renderPublications(publications) {
           entry.classList.toggle("pub-hidden", !entry.classList.contains("publication-favorite"));
         }
       });
-      document.querySelectorAll(".research-milestone, .research-highlight").forEach((m) => {
+      document.querySelectorAll(".research-milestone").forEach((m) => {
         m.classList.toggle("pub-hidden", filter !== "all");
+      });
+      document.querySelectorAll(".research-highlight").forEach((m) => {
+        if (filter === "all") {
+          m.classList.remove("pub-hidden");
+        } else {
+          m.classList.toggle("pub-hidden", !m.classList.contains("publication-favorite"));
+        }
       });
 
       const newBtnTop = btn.getBoundingClientRect().top;
@@ -389,6 +474,33 @@ function renderPublications(publications) {
   // Scroll reveal (uses shared utility defined in index.html)
   if (window.initReveal) {
     window.initReveal(document.querySelectorAll(".publication-entry"), 3, 0.08);
+  }
+
+  // Release modal: lazy-load the video on first open, and always restart it from
+  // the beginning whenever the popup is shown; pause when it closes.
+  if (window.jQuery) {
+    $(document).on("shown.bs.modal", ".release-modal", function () {
+      const video = this.querySelector("video");
+      if (!video) return;
+      if (video.dataset.src) {
+        video.src = video.dataset.src;
+        delete video.dataset.src;
+        video.load();
+      }
+      const startFromBeginning = () => {
+        try { video.currentTime = 0; } catch (e) {}
+        video.play().catch(() => {});
+      };
+      if (video.readyState >= 1) {
+        startFromBeginning();
+      } else {
+        video.addEventListener("loadedmetadata", startFromBeginning, { once: true });
+      }
+    });
+    $(document).on("hidden.bs.modal", ".release-modal", function () {
+      const video = this.querySelector("video");
+      if (video) video.pause();
+    });
   }
 }
 

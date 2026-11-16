@@ -18,7 +18,6 @@ let publications = [
   },
   {
     type: "highlight",
-    id: "reality-labs-snippets",
     favorite: true,
     title: "Multi-Perspective Generative Model",
     subtitle: "Meta Reality Labs · 2026",
@@ -241,6 +240,21 @@ let publications = [
   },
 ];
 
+// Turn a title into a URL-friendly anchor id, e.g.
+// "Multi-Perspective Generative Model" -> "multi-perspective-generative-model".
+function slugify(title) {
+  return (title || "")
+    .toLowerCase()
+    .replace(/<[^>]*>/g, "")
+    .normalize("NFKD")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function entryAnchorHTML(slug) {
+  return `<a class="entry-anchor" href="#${slug}" aria-label="Link to this entry" title="Link to this entry"><i class="fa fa-link"></i></a>`;
+}
+
 function renderPublications(publications) {
   const publicationsRow = document.getElementById("publications_row");
 
@@ -288,11 +302,12 @@ function renderPublications(publications) {
       }
       const favClass = publication.favorite ? ' publication-favorite' : '';
       const linkLabel = publication.linkLabel || 'Read the announcement';
+      const releaseSlug = publication.id || slugify(publication.title);
       parts.push(`
-            <div class="publication-entry publication-release${favClass}">
+            <div class="publication-entry publication-release${favClass}" id="${releaseSlug}">
                 ${mediaHTML}
                 <div class="publication-text">
-                    <span class="paper-title">${publication.title}</span>
+                    <span class="paper-title">${publication.title}${entryAnchorHTML(releaseSlug)}</span>
                     ${publication.subtitle ? `<span class="release-subtitle">${publication.subtitle}</span>` : ""}
                     ${publication.link ? `<a class="release-cta" href="${publication.link}">${linkLabel}</a>` : ""}
                 </div>
@@ -320,7 +335,8 @@ function renderPublications(publications) {
     }
 
     if (publication.type === "highlight") {
-      const idAttr = publication.id ? ` id="${publication.id}"` : "";
+      const highlightSlug = publication.id || slugify(publication.title);
+      const idAttr = highlightSlug ? ` id="${highlightSlug}"` : "";
       const favClass = publication.favorite ? ' publication-favorite' : '';
       const favTitle = publication.favorite ? ' title="⭐ Personal favorite"' : '';
       const expandedLabels = [];
@@ -337,7 +353,7 @@ function renderPublications(publications) {
       parts.push(`
             <div class="research-highlight${favClass}"${idAttr}${favTitle}>
                 <div class="research-highlight-header">
-                    ${publication.title ? `<span class="paper-title">${publication.title}</span>` : ""}
+                    ${publication.title ? `<span class="paper-title">${publication.title}${entryAnchorHTML(highlightSlug)}</span>` : ""}
                     ${publication.subtitle ? `<span class="release-subtitle">${publication.subtitle}</span>` : ""}
                 </div>
                 <div class="research-highlight-strip">${videos}</div>
@@ -388,13 +404,14 @@ function renderPublications(publications) {
 
     const favClass = publication.favorite ? ' publication-favorite' : '';
     const favTitle = publication.favorite ? ' title="\u2B50 Personal favorite"' : '';
+    const slug = publication.id || slugify(publication.title);
 
     parts.push(`
-            <div class="publication-entry${favClass}"${favTitle}>
+            <div class="publication-entry${favClass}"${favTitle} id="${slug}">
                 ${mediaHTML}
                 <div class="publication-text">
                     <p>
-                        <span class="paper-title">${publication.title}</span>
+                        <span class="paper-title">${publication.title}${entryAnchorHTML(slug)}</span>
                         ${publication.authors ? publication.authors.replace(/, (?=[^,]*$)/, ", and ") + ".<br>" : ""}
                         ${publication.conference ? publication.conference + " " : ""}<br>
                         ${linksHTML}
@@ -474,6 +491,36 @@ function renderPublications(publications) {
   // Scroll reveal (uses shared utility defined in index.html)
   if (window.initReveal) {
     window.initReveal(document.querySelectorAll(".publication-entry"), 3, 0.08);
+  }
+
+  // Deep links: entries render after the browser's initial jump to #hash, so
+  // scroll to the target ourselves once it exists. Lazy-loaded media above the
+  // target keeps growing the layout for a while, so re-align on size changes
+  // until things settle — but stop the moment the visitor scrolls themselves.
+  const hashAliases = {
+    "reality-labs-snippets": "multi-perspective-generative-model",
+  };
+  const rawHash = decodeURIComponent(window.location.hash.slice(1));
+  const targetId = hashAliases[rawHash] || rawHash;
+  const target = targetId && document.getElementById(targetId);
+  if (target && publicationsRow.contains(target)) {
+    target.scrollIntoView();
+    let resizeObserver = null;
+    const stop = () => {
+      if (resizeObserver) resizeObserver.disconnect();
+      resizeObserver = null;
+      ["wheel", "touchstart", "keydown"].forEach((ev) =>
+        window.removeEventListener(ev, stop)
+      );
+    };
+    resizeObserver = new ResizeObserver(() => {
+      if (resizeObserver) target.scrollIntoView();
+    });
+    resizeObserver.observe(document.body);
+    ["wheel", "touchstart", "keydown"].forEach((ev) =>
+      window.addEventListener(ev, stop, { passive: true })
+    );
+    setTimeout(stop, 2500);
   }
 
   // Release modal: lazy-load the video on first open, and always restart it from

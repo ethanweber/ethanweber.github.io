@@ -224,6 +224,33 @@ img.resize {
   margin-bottom: 3px;
 }
 
+/* Every entry gets an id derived from its title; keep anchored entries clear
+   of the fixed navbar when a deep link scrolls to them. */
+.publication-entry {
+  scroll-margin-top: 80px;
+}
+
+/* Hover-reveal link icon next to each title for copying a direct link. */
+.entry-anchor {
+  margin-left: 8px;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+
+.publication-entry:hover .entry-anchor,
+.research-highlight:hover .entry-anchor,
+.entry-anchor:focus {
+  opacity: 1;
+}
+
+.entry-anchor:hover,
+.entry-anchor:focus {
+  color: #18bc9c;
+  text-decoration: none;
+}
+
 .publication-release .release-media-trigger {
   display: block;
   position: relative;
